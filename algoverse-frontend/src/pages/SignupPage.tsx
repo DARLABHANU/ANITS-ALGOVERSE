@@ -1,7 +1,6 @@
-
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/Navbar"; // Assuming these paths are correct for your project
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -9,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { User, Mail, Lock, EyeOff, Eye, AlertCircle } from "lucide-react";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/components/ui/use-toast"; // Assuming you have shadcn/ui toast set up
 
 const SignupPage: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -24,49 +23,119 @@ const SignupPage: React.FC = () => {
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
-    
+
     if (!name.trim()) {
       newErrors.name = "Name is required";
     }
-    
+
     if (!email.trim()) {
       newErrors.email = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(email)) {
       newErrors.email = "Email is invalid";
     }
-    
+
     if (!password) {
       newErrors.password = "Password is required";
     } else if (password.length < 8) {
       newErrors.password = "Password must be at least 8 characters";
     }
-    
+
     if (password !== confirmPassword) {
       newErrors.confirmPassword = "Passwords do not match";
     }
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => { // Added 'async' keyword here
     e.preventDefault();
-    
+
     if (validateForm()) {
-      // In a real app, you'd register the user here
-      console.log("Registration data:", { name, email, password });
-      
-      // Show success message
-      toast({
-        title: "Account created!",
-        description: "You have successfully signed up.",
-        duration: 5000,
-      });
-      
-      // Navigate to login page
-      setTimeout(() => {
-        navigate("/login");
-      }, 2000);
+      try {
+        const response = await fetch("http://localhost:5000/api/auth/signup", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ name, email, password }),
+        });
+
+        const data = await response.json(); // Parse the JSON response
+
+        if (response.ok) {
+          // If response status is 2xx (e.g., 200, 201)
+          toast({
+            title: "Account created!",
+            description: data.msg || "You have successfully signed up.", // Use message from backend if available
+            duration: 5000,
+          });
+
+          setTimeout(() => {
+            navigate("/login");
+          }, 2000);
+        } else {
+          // If response status is 4xx or 5xx
+          let errorMessage = "An unexpected error occurred during signup.";
+          if (data.errors && data.errors.length > 0) {
+            // Backend validation errors (from express-validator)
+            const fieldErrors: Record<string, string> = {};
+            data.errors.forEach((err: { msg: string; param?: string }) => {
+                if (err.param) {
+                    fieldErrors[err.param] = err.msg;
+                } else {
+                    errorMessage = err.msg; // General error not tied to a specific field
+                }
+            });
+            setErrors(fieldErrors); // Update frontend validation errors
+            if (Object.keys(fieldErrors).length === 0) { // If there were errors but not field-specific
+                toast({
+                    title: "Signup Failed",
+                    description: errorMessage,
+                    variant: "destructive",
+                    duration: 5000,
+                });
+            } else {
+                // If there are field-specific errors, the input components will show them.
+                // We might still want a general toast for context.
+                 toast({
+                    title: "Validation Error",
+                    description: "Please check your input for errors.",
+                    variant: "destructive",
+                    duration: 5000,
+                });
+            }
+          } else if (data.msg) {
+            // Other errors from backend (e.g., "User already exists")
+            errorMessage = data.msg;
+            toast({
+                title: "Signup Failed",
+                description: errorMessage,
+                variant: "destructive",
+                duration: 5000,
+            });
+            // If "User already exists" set it as an email error
+            if (errorMessage.includes("User already exists")) {
+                setErrors(prev => ({ ...prev, email: errorMessage }));
+            }
+          } else {
+            toast({
+                title: "Signup Failed",
+                description: errorMessage,
+                variant: "destructive",
+                duration: 5000,
+            });
+          }
+        }
+      } catch (error) {
+        console.error("Error during signup:", error);
+        toast({
+          title: "Network Error",
+          description: "Could not connect to the server. Please try again later.",
+          variant: "destructive",
+          duration: 5000,
+        });
+      }
     }
   };
 
@@ -108,7 +177,7 @@ const SignupPage: React.FC = () => {
                       </p>
                     )}
                   </div>
-                  
+
                   <div className="space-y-2">
                     <Label htmlFor="email">Email</Label>
                     <div className="relative">
@@ -128,7 +197,7 @@ const SignupPage: React.FC = () => {
                       </p>
                     )}
                   </div>
-                  
+
                   <div className="space-y-2">
                     <Label htmlFor="password">Password</Label>
                     <div className="relative">
@@ -155,7 +224,7 @@ const SignupPage: React.FC = () => {
                       </p>
                     )}
                   </div>
-                  
+
                   <div className="space-y-2">
                     <Label htmlFor="confirmPassword">Confirm Password</Label>
                     <div className="relative">
@@ -182,11 +251,11 @@ const SignupPage: React.FC = () => {
                       </p>
                     )}
                   </div>
-                  
+
                   <div className="flex items-center space-x-2">
-                    <input 
-                      type="checkbox" 
-                      id="terms" 
+                    <input
+                      type="checkbox"
+                      id="terms"
                       className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
                       required
                     />
@@ -194,10 +263,10 @@ const SignupPage: React.FC = () => {
                       I agree to the <Link to="/terms" className="text-primary hover:underline">Terms of Service</Link> and <Link to="/privacy" className="text-primary hover:underline">Privacy Policy</Link>
                     </Label>
                   </div>
-                  
+
                   <Button type="submit" className="w-full">Create Account</Button>
                 </form>
-                
+
                 <div className="relative my-6">
                   <div className="absolute inset-0 flex items-center">
                     <div className="w-full border-t border-border"></div>
@@ -206,7 +275,7 @@ const SignupPage: React.FC = () => {
                     <span className="bg-card px-2 text-muted-foreground">Or continue with</span>
                   </div>
                 </div>
-                
+
                 <div className="grid grid-cols-2 gap-4">
                   <Button variant="outline" className="w-full">
                     <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
