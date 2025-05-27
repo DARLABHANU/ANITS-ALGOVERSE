@@ -13,6 +13,7 @@ import Algorithms from "./components/Algorithms";
 import LinearSearch from "./datastructures/LinearSearch";
 import AlgoCode from "./components/AlgoCode";
 import Contact from "./components/Contact";
+import About from "./components/About";
 
 const queryClient = new QueryClient();
 
@@ -32,6 +33,7 @@ const App = () => (
           <Route path="/LinearSearch" element={<LinearSearch />} />
           <Route path="/AlgoCode" element={<AlgoCode />} />
           <Route path="/Contact" element={<Contact/>} />
+          <Route path="/About" element={<About/>} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
