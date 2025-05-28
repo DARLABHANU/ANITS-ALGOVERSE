@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Link, useLocation } from "react-router-dom";
-import { Moon, Sun, Menu, X } from "lucide-react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Moon, Sun, Menu, X, LogOut, User as UserIcon } from "lucide-react";
 import { Slider } from "@/components/ui/slider";
+import { useToast } from "@/components/ui/use-toast";
 
-// Define an interface for the props the Navbar component can receive
 interface NavbarProps {
-  /**
-   * If true, the "Sign Up" button will be hidden from the Navbar.
-   * @default false
-   */
   hideSignUpButton?: boolean;
 }
 
@@ -17,12 +13,29 @@ const Navbar: React.FC<NavbarProps> = ({ hideSignUpButton = false }) => {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [sliderValue, setSliderValue] = useState([0]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState("");
   const location = useLocation();
+  const navigate = useNavigate();
+  const { toast } = useToast();
 
+  // Check auth status on component mount and when location changes
   useEffect(() => {
-    // Check if user has already set a preference in localStorage
+    const token = localStorage.getItem("token");
+    const storedUsername = localStorage.getItem("username");
+    
+    if (token) {
+      setIsLoggedIn(true);
+      if (storedUsername) {
+        setUsername(storedUsername);
+      }
+    } else {
+      setIsLoggedIn(false);
+      setUsername("");
+    }
+
+    // Theme setup (existing code)
     const savedTheme = localStorage.getItem("theme");
-    // Check system preference if no saved theme
     const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 
     if (savedTheme === "dark" || (savedTheme === null && prefersDark)) {
@@ -30,25 +43,35 @@ const Navbar: React.FC<NavbarProps> = ({ hideSignUpButton = false }) => {
       setSliderValue([100]);
       document.documentElement.classList.add("dark");
     } else {
-      // Ensure light theme is applied if no theme or light theme is saved
       setIsDarkTheme(false);
       setSliderValue([0]);
       document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light"); // Added from the conflicting branch
+      localStorage.setItem("theme", "light");
     }
-  }, []);
+  }, [location]);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+    setIsLoggedIn(false);
+    setUsername("");
+    toast({
+      title: "Logged out successfully",
+      description: "You have been logged out of your account",
+      duration: 3000,
+    });
+    navigate("/");
+  };
 
   const handleThemeChange = (value: number[]) => {
     const isDark = value[0] === 100;
     setIsDarkTheme(isDark);
-    setSliderValue(value); // Added from the conflicting branch
+    setSliderValue(value);
 
     if (isDark) {
-      // Switch to dark mode
       document.documentElement.classList.add("dark");
       localStorage.setItem("theme", "dark");
     } else {
-      // Switch to light mode
       document.documentElement.classList.remove("dark");
       localStorage.setItem("theme", "light");
     }
@@ -58,17 +81,11 @@ const Navbar: React.FC<NavbarProps> = ({ hideSignUpButton = false }) => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  // Close mobile menu when route changes
-  useEffect(() => {
-    setIsMenuOpen(false);
-  }, [location]);
-
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/70 backdrop-blur-lg py-4 border-b border-border/30">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center space-x-2">
-            {/* Added a subtle text-shadow for "AlgoVerse" if gradient-text styling allows */}
             <span className="text-2xl font-extrabold gradient-text leading-none tracking-tight">AlgoVerse</span>
           </Link>
 
@@ -109,16 +126,33 @@ const Navbar: React.FC<NavbarProps> = ({ hideSignUpButton = false }) => {
               <Moon className="h-4 w-4 text-indigo-400" />
             </div>
 
-            {/* Desktop Auth Buttons */}
+            {/* Desktop Auth Buttons - Updated for logged in state */}
             <div className="hidden sm:flex items-center space-x-3">
-              {!hideSignUpButton && ( // Kept the hideSignUpButton prop logic
-                <Link to="/signup">
-                  <Button variant="outline" size="sm" className="rounded-full border-primary/50 hover:border-primary hover:bg-primary/10">
-                    Sign Up
+              {isLoggedIn ? (
+                <div className="flex items-center space-x-4">
+                  <span className="text-sm font-medium flex items-center">
+                    <UserIcon className="h-4 w-4 mr-1" />
+                    Welcome, {username}
+                  </span>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="rounded-full border-red-500/50 hover:border-red-500 hover:bg-red-500/10"
+                    onClick={handleLogout}
+                  >
+                    <LogOut className="h-4 w-4 mr-1" />
+                    Logout
                   </Button>
-                </Link>
+                </div>
+              ) : (
+                !hideSignUpButton && (
+                  <Link to="/signup">
+                    <Button variant="outline" size="sm" className="rounded-full border-primary/50 hover:border-primary hover:bg-primary/10">
+                      Sign Up
+                    </Button>
+                  </Link>
+                )
               )}
-              {/* Removed the Login button from here */}
             </div>
 
             {/* Mobile Menu Button */}
@@ -131,7 +165,7 @@ const Navbar: React.FC<NavbarProps> = ({ hideSignUpButton = false }) => {
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu - Updated for logged in state */}
         {isMenuOpen && (
           <div className="md:hidden pt-4 pb-3 px-2 space-y-3 border-t border-border/30 mt-4">
             <Link
@@ -153,12 +187,28 @@ const Navbar: React.FC<NavbarProps> = ({ hideSignUpButton = false }) => {
               Contact
             </Link>
             <div className="flex space-x-3 mt-4 pt-4 border-t border-border/30">
-              {!hideSignUpButton && ( // Kept the hideSignUpButton prop logic for mobile too
-                <Link to="/signup" className="flex-1">
-                  <Button variant="outline" className="w-full">Sign Up</Button>
-                </Link>
+              {isLoggedIn ? (
+                <>
+                  <div className="flex-1 flex items-center justify-center text-sm font-medium">
+                    <UserIcon className="h-4 w-4 mr-1" />
+                    Welcome, {username}
+                  </div>
+                  <Button
+                    variant="outline"
+                    className="w-full"
+                    onClick={handleLogout}
+                  >
+                    <LogOut className="h-4 w-4 mr-1" />
+                    Logout
+                  </Button>
+                </>
+              ) : (
+                !hideSignUpButton && (
+                  <Link to="/signup" className="flex-1">
+                    <Button variant="outline" className="w-full">Sign Up</Button>
+                  </Link>
+                )
               )}
-              {/* Removed the Login button from here */}
             </div>
           </div>
         )}

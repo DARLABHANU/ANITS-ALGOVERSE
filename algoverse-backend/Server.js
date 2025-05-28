@@ -1,4 +1,4 @@
-// server.js (Consolidated Backend Code with Signup and Login)
+// server.js (Updated Backend Code with Enhanced Authentication)
 
 const express = require('express');
 const mongoose = require('mongoose');
@@ -6,14 +6,14 @@ const bcrypt = require('bcryptjs');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const { check, validationResult } = require('express-validator');
-const jwt = require('jsonwebtoken'); // Needed for generating tokens on login/signup
+const jwt = require('jsonwebtoken');
 
 // Load environment variables from .env file
 dotenv.config();
 
 // For debugging: Check if MONGO_URI and JWT_SECRET are loaded
-console.log('Backend DEBUG: MONGO_URI loaded:', !!process.env.MONGO_URI); // Check if it exists, don't print full URI
-console.log('Backend DEBUG: JWT_SECRET loaded:', !!process.env.JWT_SECRET); // Check if it exists
+console.log('Backend DEBUG: MONGO_URI loaded:', !!process.env.MONGO_URI);
+console.log('Backend DEBUG: JWT_SECRET loaded:', !!process.env.JWT_SECRET);
 
 const app = express();
 
@@ -24,7 +24,7 @@ const connectDB = async () => {
         console.log('Backend DEBUG: MongoDB Connected...');
     } catch (err) {
         console.error('Backend ERROR: MongoDB connection error:', err.message);
-        process.exit(1); // Exit process with failure
+        process.exit(1);
     }
 };
 
@@ -32,19 +32,16 @@ const connectDB = async () => {
 connectDB();
 
 // --- Middleware ---
-// Body parser: Allows us to get data in req.body
 app.use(express.json({ extended: false }));
 
 // --- CORS Configuration ---
-// IMPORTANT: Set this to the exact URL where your Vite frontend is running.
-// Based on your Vite output, it's http://localhost:8080
 const FRONTEND_URL = 'http://localhost:8080';
 
 const corsOptions = {
-    origin: FRONTEND_URL, // Only allow requests from your frontend's origin
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Explicitly allow necessary HTTP methods
-    credentials: true, // Allow cookies/authorization headers to be sent with requests
-    optionsSuccessStatus: 204 // For preflight requests
+    origin: FRONTEND_URL,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    credentials: true,
+    optionsSuccessStatus: 204
 };
 app.use(cors(corsOptions));
 console.log(`Backend DEBUG: CORS enabled for origin: ${FRONTEND_URL}`);
@@ -53,12 +50,15 @@ console.log(`Backend DEBUG: CORS enabled for origin: ${FRONTEND_URL}`);
 const UserSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true
+        required: true,
+        trim: true // Added trim to remove whitespace
     },
     email: {
         type: String,
         required: true,
-        unique: true // Ensures email addresses are unique in the database
+        unique: true,
+        trim: true,
+        lowercase: true // Store emails in lowercase
     },
     password: {
         type: String,
@@ -72,13 +72,12 @@ const UserSchema = new mongoose.Schema({
 
 // Pre-save hook to hash password before saving a new user
 UserSchema.pre('save', async function(next) {
-    // console.log('Backend DEBUG: Pre-save hook - checking password modification.');
-    if (!this.isModified('password')) { // Only hash if password was modified (or is new)
-        return next(); // Use return to exit early
+    if (!this.isModified('password')) {
+        return next();
     }
     console.log('Backend DEBUG: Hashing new/modified password.');
-    const salt = await bcrypt.genSalt(10); // Generate a salt
-    this.password = await bcrypt.hash(this.password, salt); // Hash the password with the salt
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
     next();
 });
 
@@ -90,6 +89,26 @@ UserSchema.methods.matchPassword = async function(enteredPassword) {
 
 const User = mongoose.model('User', UserSchema);
 
+// --- Helper Middleware for JWT Verification ---
+const authMiddleware = async (req, res, next) => {
+    // Get token from header
+    const token = req.header('x-auth-token');
+
+    // Check if no token
+    if (!token) {
+        return res.status(401).json({ msg: 'No token, authorization denied' });
+    }
+
+    // Verify token
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        req.user = decoded.user;
+        next();
+    } catch (err) {
+        res.status(401).json({ msg: 'Token is not valid' });
+    }
+};
+
 // --- API Routes ---
 
 // @route   GET /
@@ -100,26 +119,37 @@ app.get('/', (req, res) => {
     res.send('API is running...');
 });
 
+// @route   GET /api/auth/user
+// @desc    Get authenticated user data
+// @access  Private
+app.get('/api/auth/user', authMiddleware, async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id).select('-password');
+        if (!user) {
+            return res.status(404).json({ msg: 'User not found' });
+        }
+        res.json(user);
+    } catch (err) {
+        console.error('Backend ERROR: User route handler error:', err.message);
+        res.status(500).json({ msg: 'Server error' });
+    }
+});
+
 // @route   POST /api/auth/signup
 // @desc    Register a new user
 // @access  Public
 app.post(
     '/api/auth/signup',
     [
-        // Input validation using express-validator
         check('name', 'Name is required').not().isEmpty(),
         check('email', 'Please include a valid email').isEmail(),
-        check(
-            'password',
-            'Please enter a password with 8 or more characters'
-        ).isLength({ min: 8 })
+        check('password', 'Please enter a password with 8 or more characters').isLength({ min: 8 })
     ],
     async (req, res) => {
-        console.log('Backend DEBUG: Signup request received:', req.body.email); // Log email for easy tracking
+        console.log('Backend DEBUG: Signup request received:', req.body.email);
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             console.log('Backend DEBUG: Signup validation errors:', errors.array());
-            // Return validation errors if any
             const formattedErrors = errors.array().map(error => ({ msg: error.msg, param: error.param }));
             return res.status(400).json({ errors: formattedErrors });
         }
@@ -127,53 +157,54 @@ app.post(
         const { name, email, password } = req.body;
 
         try {
-            // Check if user already exists
             let user = await User.findOne({ email });
             if (user) {
                 console.log('Backend DEBUG: Signup failed - User already exists for email:', email);
                 return res.status(400).json({ errors: [{ msg: 'User already exists', param: 'email' }] });
             }
 
-            // Create new user instance
             user = new User({
                 name,
                 email,
-                password // Password will be hashed by the pre-save hook
+                password
             });
 
-            // Save user to database
             await user.save();
             console.log('Backend DEBUG: New user saved to DB:', user.email);
 
-            // Create and return JSON Web Token (JWT)
+            // Create JWT payload with username included
             const payload = {
                 user: {
-                    id: user.id // MongoDB's automatically generated _id for the user
+                    id: user.id,
+                    name: user.name // Include name in the token payload
                 }
             };
 
             jwt.sign(
                 payload,
-                process.env.JWT_SECRET, // Secret key from .env
-                { expiresIn: '1h' }, // Token expiration time (e.g., 1 hour)
+                process.env.JWT_SECRET,
+                { expiresIn: '1h' },
                 (err, token) => {
                     if (err) {
                         console.error('Backend ERROR: JWT sign error for signup:', err.message);
-                        throw err; // Propagate error to outer catch
+                        throw err;
                     }
                     console.log('Backend DEBUG: JWT generated for signup. Token length:', token.length);
-                    // Send success message and the token
-                    res.status(201).json({ msg: 'User registered successfully', token });
+                    // Return token, username, and success message
+                    res.status(201).json({ 
+                        msg: 'User registered successfully', 
+                        token,
+                        username: user.name 
+                    });
                 }
             );
 
         } catch (err) {
             console.error('Backend ERROR: Signup route handler error:', err.message);
-            // Check for Mongoose duplicate key error (code 11000) for better error message
             if (err.code === 11000 && err.keyPattern && err.keyPattern.email) {
                 return res.status(400).json({ errors: [{ msg: 'User with this email already exists', param: 'email' }] });
             }
-            res.status(500).json({ msg: 'Server error' }); // Send JSON error
+            res.status(500).json({ msg: 'Server error' });
         }
     }
 );
@@ -184,7 +215,6 @@ app.post(
 app.post(
     '/api/auth/login',
     [
-        // Input validation for login
         check('email', 'Please include a valid email').isEmail(),
         check('password', 'Password is required').exists()
     ],
@@ -193,7 +223,6 @@ app.post(
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             console.log('Backend DEBUG: Login validation errors:', errors.array());
-            // Return validation errors
             const formattedErrors = errors.array().map(error => ({ msg: error.msg, param: error.param }));
             return res.status(400).json({ errors: formattedErrors });
         }
@@ -201,26 +230,23 @@ app.post(
         const { email, password } = req.body;
 
         try {
-            // Check if user exists by email
             let user = await User.findOne({ email });
             if (!user) {
                 console.log('Backend DEBUG: Login failed - User not found for email:', email);
-                // Return generic "Invalid Credentials" for security
                 return res.status(400).json({ errors: [{ msg: 'Invalid Credentials' }] });
             }
 
-            // Compare provided password with hashed password
             const isMatch = await user.matchPassword(password);
             if (!isMatch) {
                 console.log('Backend DEBUG: Login failed - Password mismatch for email:', email);
-                // Return generic "Invalid Credentials"
                 return res.status(400).json({ errors: [{ msg: 'Invalid Credentials' }] });
             }
 
-            // User is authenticated, create and return JWT
+            // Create JWT payload with username included
             const payload = {
                 user: {
-                    id: user.id
+                    id: user.id,
+                    name: user.name // Include name in the token payload
                 }
             };
 
@@ -231,29 +257,40 @@ app.post(
                 (err, token) => {
                     if (err) {
                         console.error('Backend ERROR: JWT sign error for login:', err.message);
-                        throw err; // Propagate error to outer catch
+                        throw err;
                     }
                     console.log('Backend DEBUG: JWT generated for login. Token length:', token.length);
-                    // Send the token back to the client
-                    res.json({ msg: 'Login successful', token }); // Added msg field for consistency with signup response
+                    // Return token, username, and success message
+                    res.json({ 
+                        msg: 'Login successful', 
+                        token,
+                        username: user.name 
+                    });
                 }
             );
 
         } catch (err) {
             console.error('Backend ERROR: Login route handler error:', err.message);
-            res.status(500).json({ msg: 'Server error' }); // Send JSON error
+            res.status(500).json({ msg: 'Server error' });
         }
     }
 );
 
-// --- Global Error Handler (Optional but Recommended) ---
+// @route   POST /api/auth/logout
+// @desc    Logout user (client-side token invalidation)
+// @access  Private
+app.post('/api/auth/logout', authMiddleware, (req, res) => {
+    // Note: JWT tokens are stateless, so actual invalidation must be handled client-side
+    res.json({ msg: 'Logout successful. Please remove the token on the client side.' });
+});
+
+// --- Global Error Handler ---
 app.use((err, req, res, next) => {
     console.error('Backend GLOBAL ERROR HANDLER:', err.stack);
     res.status(500).json({ msg: 'Something went wrong on the server.' });
 });
 
-
 // --- Start Server ---
-const PORT = process.env.PORT || 5000; // Use port from .env or default to 5000
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => console.log(`Backend DEBUG: Server started on port ${PORT}`));
