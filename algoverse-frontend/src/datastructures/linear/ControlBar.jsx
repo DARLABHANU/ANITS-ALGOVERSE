@@ -1,9 +1,9 @@
 import React from 'react';
 import { Play, Pause } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import PlaybackSpeed from '../linear/PlaybackSpeed.jsx';
-import RestartButton from '../linear/RestartButton.jsx';
-import FullScreenButton from '../linear/FullScreenButton.jsx';
+import PlaybackSpeed from '@/datastructures/linear/PlaybackSpeed.jsx';
+import RestartButton from '@/datastructures/linear/RestartButton.jsx';
+import FullScreenButton from '@/datastructures/linear/FullScreenButton.jsx';
 
 const ControlBar = ({
   isPlaying,

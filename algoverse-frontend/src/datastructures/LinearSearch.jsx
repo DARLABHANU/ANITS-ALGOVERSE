@@ -25,8 +25,8 @@ import {
 
 const LinearSearch = () => {
   const [currentStep, setCurrentStep] = useState(0);
-  const [completedSteps, setCompletedSteps] = useState<number[]>([]);
-  const [sidebarOpen, setSidebarOpen] = useState(true); // Changed to true for default visibility
+  const [completedSteps, setCompletedSteps] = useState([]);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
   const [isFullscreen, setIsFullscreen] = useState(false);
 
   const steps = [
@@ -47,7 +47,6 @@ const LinearSearch = () => {
     if (!completedSteps.includes(currentStep)) {
       setCompletedSteps([...completedSteps, currentStep]);
     }
-    // Auto-advance to next step if not at the end
     if (currentStep < steps.length - 1) {
       setCurrentStep(currentStep + 1);
     }
@@ -89,10 +88,8 @@ const LinearSearch = () => {
 
   return (
     <div className={`min-h-screen bg-gradient-to-br from-background via-primary/5 to-secondary/10 dark:from-background dark:via-primary/10 dark:to-secondary/15 ${isFullscreen ? 'fixed inset-0 z-50' : ''}`}>
-      {/* Watermark */}
       <div className="watermark">AlgoVerse</div>
       
-      {/* Mobile-Optimized Navbar */}
       {!isFullscreen && (
         <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-primary/20">
           <div className="px-3 sm:px-4 py-2 sm:py-3">
@@ -128,10 +125,8 @@ const LinearSearch = () => {
       )}
 
       <div className={`flex ${!isFullscreen ? 'pt-12 sm:pt-16' : ''} h-screen`}>
-        {/* Mobile-Optimized Sidebar */}
         {sidebarOpen && !isFullscreen && (
           <>
-            {/* Mobile overlay */}
             <div 
               className="fixed inset-0 bg-black/50 z-30 md:hidden"
               onClick={toggleSidebar}
@@ -172,7 +167,6 @@ const LinearSearch = () => {
                         key={step.id}
                         onClick={() => {
                           setCurrentStep(step.id);
-                          // Close sidebar on mobile after selection
                           if (window.innerWidth < 768) {
                             setSidebarOpen(false);
                           }
@@ -211,7 +205,6 @@ const LinearSearch = () => {
           </>
         )}
 
-        {/* Main Content */}
         <div className={`flex-1 ${sidebarOpen && !isFullscreen ? 'md:ml-80' : ''} ${isFullscreen ? 'p-4 sm:p-8' : 'p-3 sm:p-6'} relative h-full`}>
           <div className={`${isFullscreen ? 'h-full' : 'max-w-6xl mx-auto h-full'}`}>
             <div className="h-full pb-20">
@@ -219,9 +212,7 @@ const LinearSearch = () => {
             </div>
           </div>
           
-          {/* Mobile-Optimized Fixed Action Buttons */}
           <div className="fixed bottom-4 right-4 z-40 flex flex-col gap-2 sm:gap-3">
-            {/* Fullscreen Toggle Button */}
             <Button 
               onClick={toggleFullscreen}
               variant="secondary"
@@ -235,7 +226,6 @@ const LinearSearch = () => {
               )}
             </Button>
             
-            {/* Mark as Complete Button */}
             {currentStep < 7 && (
               <Button 
                 onClick={markAsComplete}
@@ -263,7 +253,6 @@ const LinearSearch = () => {
   );
 };
 
-// Section Components
 const DescriptionSection = () => (
   <Card className="h-full algo-card">
     <CardContent className="p-4 sm:p-8 h-full">
@@ -538,7 +527,7 @@ const SimulationSection = () => (
   </>
 );
 
-const ChallengesSection = ({ onComplete }: { onComplete: () => void }) => (
+const ChallengesSection = ({ onComplete }) => (
   <Card className="h-full algo-card">
     <CardContent className="p-4 sm:p-8 h-full flex flex-col">
       <h1 className="section-title gradient-text">Practice Challenges</h1>

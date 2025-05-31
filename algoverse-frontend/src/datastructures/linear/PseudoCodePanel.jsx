@@ -23,14 +23,12 @@ const PseudoCodePanel = ({ currentStep, className }) => {
       const stepData = getCurrentStepData();
       const newVars = stepData.variables || {};
 
-      // Detect change in 'i'
       const currentI = newVars.i;
       const prevI = prevIRef.current;
 
       if (currentI !== prevI) {
         prevIRef.current = currentI;
 
-        // Highlight 'i' for 1 second
         setHighlightedVars({ i: true });
         setTimeout(() => setHighlightedVars({}), 1000);
       }
@@ -51,7 +49,6 @@ const PseudoCodePanel = ({ currentStep, className }) => {
     let substituted = code;
 
     Object.entries(vars).forEach(([key, value]) => {
-      // Escape [] in key for regex
       const escapedKey = key.replace(/[\[\]]/g, '\\$&');
       const regex = new RegExp(`\\b${escapedKey}\\b`, 'g');
       substituted = substituted.replace(regex, String(value));

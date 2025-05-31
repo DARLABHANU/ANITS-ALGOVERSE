@@ -1,5 +1,5 @@
 import React from 'react';
-import './linear.css';
+import '@/datastructures/linear/linear.css';
 const SearchValueInput = ({ searchValue, setSearchValue }) => {
   return (
     <div className="controls">

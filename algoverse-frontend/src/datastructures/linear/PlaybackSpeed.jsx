@@ -28,7 +28,6 @@ const PlaybackSpeed = ({ value, onChange }) => {
           className="relative"
         />
 
-        {/* Speed markers */}
         <div className="flex justify-between mt-2 px-1">
           {speedOptions.map((speed) => (
             <div

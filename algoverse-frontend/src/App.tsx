@@ -11,7 +11,7 @@ import NotFound from "./pages/NotFound";
 import SignUpPage from "./components/SignUpPage";
 import DataStructures from "./components/DataStructures";
 import Algorithms from "./components/Algorithms";
-import LinearSearch from "./datastructures/LinearSearch";
+import LinearSearch from "./datastructures/LinearSearch.jsx";
 import AlgoCode from "./components/AlgoCode";
 import Contact from "./components/Contact";
 import About from "./components/About";

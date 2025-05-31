@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Play, Pause, RotateCcw, Maximize, Minimize, Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import PlaybackSpeed from '../linear/PlaybackSpeed';
+import PlaybackSpeed from '@/datastructures/linear/PlaybackSpeed';
 
 const EnhancedControlBar = ({
   isPlaying,
@@ -41,9 +41,7 @@ const EnhancedControlBar = ({
     <div className="bg-gradient-to-r from-gray-800/95 to-gray-700/95 backdrop-blur-md border-b border-gray-600/50">
       <div className="px-8 py-6">
         <div className="flex items-center justify-between">
-          {/* Left side - Main controls */}
           <div className="flex items-center gap-6">
-            {/* Play/Pause Button */}
             <Button
               onClick={isPlaying ? onPause : onPlay}
               className="relative group bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white rounded-full w-16 h-16 p-0 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 border-2 border-blue-400/30"
@@ -57,7 +55,6 @@ const EnhancedControlBar = ({
               )}
             </Button>
 
-            {/* Restart Button */}
             <Button
               onClick={onRestart}
               disabled={!isAnimationComplete && currentStep === 0}
@@ -67,7 +64,6 @@ const EnhancedControlBar = ({
               <RotateCcw size={24} className="relative z-10" />
             </Button>
 
-            {/* Create Button with Hover Input */}
             <div className="relative">
               <Button
                 onClick={() => setShowCreateInput(!showCreateInput)}
@@ -77,7 +73,6 @@ const EnhancedControlBar = ({
                 <Plus size={24} className="relative z-10" />
               </Button>
 
-              {/* Sliding Input */}
               <div
                 className={`absolute left-16 top-0 h-14 transition-all duration-300 ${
                   showCreateInput ? 'w-80 opacity-100' : 'w-0 opacity-0'
@@ -104,12 +99,10 @@ const EnhancedControlBar = ({
             </div>
           </div>
 
-          {/* Center - Speed Control */}
           <div className="flex-1 max-w-md mx-8">
             <PlaybackSpeed value={playbackSpeed} onChange={onSpeedChange} />
           </div>
 
-          {/* Right side - Fullscreen */}
           <div className="flex items-center">
             <Button
               onClick={onFullScreenToggle}

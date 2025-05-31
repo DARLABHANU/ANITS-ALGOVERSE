@@ -1,7 +1,7 @@
-import React, { useState, useEffect,useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import LinearSearchVisualizer from '../linear/linear.jsx';
-import PseudoCodePanel from '../linear/PseudoCodePanel';
-import EnhancedControlBar from '../linear/EnhancedControlBar';
+import PseudoCodePanel from '@/datastructures/linear/PseudoCodePanel';
+import EnhancedControlBar from '@/datastructures/linear/EnhancedControlBar';
 
 const VisualizationPlayback = () => {
   const [currentStep, setCurrentStep] = useState(0);
@@ -10,7 +10,7 @@ const VisualizationPlayback = () => {
   const [userInput, setUserInput] = useState('');
   const [isAnimationComplete, setIsAnimationComplete] = useState(false);
   const [isFullScreen, setIsFullScreen] = useState(false);
-   const linearVisualizerRef = useRef(null);
+  const linearVisualizerRef = useRef(null);
 
   const handlePlay = () => {
     setIsPlaying(true);
@@ -20,18 +20,15 @@ const VisualizationPlayback = () => {
     setIsPlaying(false);
   };
 
-const handleRestart = () => {
-  setIsPlaying(false);
-  setCurrentStep(0);
-  setIsAnimationComplete(false);
+  const handleRestart = () => {
+    setIsPlaying(false);
+    setCurrentStep(0);
+    setIsAnimationComplete(false);
 
-  if (linearVisualizerRef.current?.reset) {
-    linearVisualizerRef.current.reset(); // This should clear all highlights
-  }
-};
-
-
-
+    if (linearVisualizerRef.current?.reset) {
+      linearVisualizerRef.current.reset();
+    }
+  };
 
   const handleExampleSubmit = (input) => {
     console.log('User submitted example:', input);
@@ -50,19 +47,16 @@ const handleRestart = () => {
     setIsFullScreen(!isFullScreen);
 
     if (!isFullScreen) {
-      // Enter fullscreen
       if (document.documentElement.requestFullscreen) {
         document.documentElement.requestFullscreen();
       }
     } else {
-      // Exit fullscreen
       if (document.exitFullscreen) {
         document.exitFullscreen();
       }
     }
   };
 
-  // Listen for fullscreen changes
   useEffect(() => {
     const handleFullscreenChange = () => {
       setIsFullScreen(!!document.fullscreenElement);
@@ -72,8 +66,6 @@ const handleRestart = () => {
     return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
   }, []);
 
-
-  
   return (
     <div
       className={`bg-gray-900/95 backdrop-blur-sm rounded-2xl shadow-2xl border border-gray-700/50 overflow-hidden transition-all duration-300 ${
@@ -83,7 +75,6 @@ const handleRestart = () => {
       }`}
     >
       <div className="flex flex-col h-full">
-        {/* Enhanced Control Bar */}
         <EnhancedControlBar
           isPlaying={isPlaying}
           onPlay={handlePlay}
@@ -98,9 +89,7 @@ const handleRestart = () => {
           currentStep={currentStep}
         />
 
-        {/* Main content area - side by side */}
         <div className="flex-1 p-6 flex gap-6">
-          {/* Visualization Panel */}
           <div className="flex-1">
             <LinearSearchVisualizer
               ref={linearVisualizerRef}
@@ -116,7 +105,6 @@ const handleRestart = () => {
             />
           </div>
 
-          {/* Pseudocode Panel */}
           <div className={`${isFullScreen ? 'w-96' : 'w-80'} transition-all duration-300`}>
             <PseudoCodePanel currentStep={currentStep} className="h-full" />
           </div>
