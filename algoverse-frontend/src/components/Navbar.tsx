@@ -137,7 +137,7 @@ const Navbar: React.FC<NavbarProps> = ({ hideSignUpButton = false }) => {
                   <Button
                     variant="outline"
                     size="sm"
-                    className="rounded-full border-red-500/50 hover:border-red-500 hover:bg-red-500/10"
+                    className="rounded-full border-blue-500/50 hover:border-blue-500 hover:bg-blue-500/10"
                     onClick={handleLogout}
                   >
                     <LogOut className="h-4 w-4 mr-1" />
