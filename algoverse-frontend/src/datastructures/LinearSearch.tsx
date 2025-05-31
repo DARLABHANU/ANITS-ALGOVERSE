@@ -364,7 +364,7 @@ const AdvantagesSection = () => (
           <ul className="space-y-3">
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Simple to understand and implement</span>
+              <span className="text-sm sm:text-base">Simple to Understand and implement</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
