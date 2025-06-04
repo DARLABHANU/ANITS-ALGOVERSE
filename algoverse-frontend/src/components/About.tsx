@@ -2,6 +2,16 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Link } from 'react-router-dom';
+import meghanaImage from "@/components/assets/meghana.jpg";
+import HODImage from "@/components/assets/HOD.jpg";
+import bhuvanaImage from "@/components/assets/bhuvana.jpg";
+import BhanuImage from "@/components/assets/155470619.jfif";
+import kalyanImage from "@/components/assets/kalyan.png";
+import akkhashImage from "@/components/assets/akkhash.jpg";
+import WhatsAppImage from "@/components/assets/WhatsApp Image 2025-05-29 at 3.41.30 PM.jpeg";
+import januImage from "@/components/assets/janu.jpg";
+import pavanImage from "@/components/assets/pavan.jpg";
+import varunImage from "@/components/assets/varun.jpg";
 import { 
   ArrowLeft,
   GraduationCap,
@@ -22,18 +32,18 @@ import {
 const About = () => {
   const faculty = [
     {
-      name: "Dr. Rajesh Kumar",
+      name: "Dr Selvani Deepthi Kavila",
       designation: "Head of Department, Professor",
       department: "Computer Science & Engineering",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
+      image:HODImage,
       experience: "15+ years",
       specialization: "Algorithms & Data Structures"
     },
     {
-      name: "Prof. Priya Sharma",
+      name: "Prof.M.V.Bhuvaneswari",
       designation: "Assistant Professor",
       department: "Computer Science & Engineering",
-      image: "https://images.unsplash.com/photo-1494790108755-2616b612b830?w=400&h=400&fit=crop&crop=face",
+      image:bhuvanaImage,
       experience: "8+ years",
       specialization: "Software Engineering & Web Development"
     }
@@ -41,74 +51,84 @@ const About = () => {
 
   const students = [
     {
-      name: "Arjun Reddy",
+      name: "Bhanu Murthy",
       role: "Full Stack Developer",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
-      github: "https://github.com/arjunreddy",
-      linkedin: "https://linkedin.com/in/arjunreddy",
-      email: "arjun.reddy@student.anits.edu.in",
+      image: BhanuImage,
+      github: "https://github.com/DARLABHANU",
+      linkedin: "https://in.linkedin.com/in/darla-bhanumurthy",
+      email: "darlabhanumurthy.le23.csm@anits.edu.in",
       skills: ["React", "Node.js", "MongoDB"],
       icon: <Code className="w-5 h-5" />
     },
     {
-      name: "Sneha Patel",
-      role: "UI/UX Designer",
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face",
-      github: "https://github.com/snehapatel",
-      linkedin: "https://linkedin.com/in/snehapatel",
-      email: "sneha.patel@student.anits.edu.in",
-      skills: ["Figma", "Adobe XD", "React"],
+      name: "Akkhash",
+      role: "Frontend Developer",
+      image: akkhashImage,
+      github: "https://github.com/akkhash2",
+      linkedin: "https://www.linkedin.com/in/akkhash-pilla-6b68a2275",
+      email: "pillaakkhash205@gmail.com",
+      skills: ["HTML", "CSS", "JavaScript"],
       icon: <Palette className="w-5 h-5" />
     },
     {
-      name: "Vikram Singh",
+      name: "Kalyan",
       role: "Backend Developer",
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face",
+      image: kalyanImage,
       github: "https://github.com/vikramsingh",
-      linkedin: "https://linkedin.com/in/vikramsingh",
-      email: "vikram.singh@student.anits.edu.in",
+      linkedin: "https://www.linkedin.com/in/kalyan-janu-335307310",
+      email: "",
       skills: ["Python", "Django", "PostgreSQL"],
       icon: <Database className="w-5 h-5" />
     },
     {
-      name: "Ananya Joshi",
+      name: "Pavan Rishi",
       role: "Frontend Developer",
-      image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=400&h=400&fit=crop&crop=face",
-      github: "https://github.com/ananyajoshi",
-      linkedin: "https://linkedin.com/in/ananyajoshi",
-      email: "ananya.joshi@student.anits.edu.in",
-      skills: ["Vue.js", "TypeScript", "CSS"],
+      image: pavanImage,
+      github: "",
+      linkedin: "https://www.linkedin.com/in/pavan-rishi-dimili-a1770430a",
+      email: "dimilipavanrishi.le23.csm@anits.edu.in",
+      skills: ["HTML", "CSS", "JavaScript"],
       icon: <Globe className="w-5 h-5" />
     },
     {
-      name: "Rohit Kumar",
-      role: "Mobile App Developer",
-      image: "https://images.unsplash.com/photo-1507591064344-4c6ce005b128?w=400&h=400&fit=crop&crop=face",
-      github: "https://github.com/rohitkumar",
-      linkedin: "https://linkedin.com/in/rohitkumar",
-      email: "rohit.kumar@student.anits.edu.in",
-      skills: ["React Native", "Flutter", "Kotlin"],
+      name: "Jahnavi",
+      role: "AI & Prompt Engineer",
+      image: januImage,
+      github: "",
+      linkedin: "https://www.linkedin.com/in/jahnavibudi",
+      email: "budijahnavi.le23.csm@anits.edu.in",
+      skills: ["Python", "Node.js", "Figma"],
       icon: <Smartphone className="w-5 h-5" />
     },
     {
-      name: "Kavya Nair",
-      role: "Data Scientist",
-      image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&crop=face",
-      github: "https://github.com/kavyanair",
-      linkedin: "https://linkedin.com/in/kavyanair",
-      email: "kavya.nair@student.anits.edu.in",
-      skills: ["Python", "Machine Learning", "TensorFlow"],
+      name: "Bhargav",
+      role: "UI & UX Designer",
+      image: WhatsAppImage,
+      github: "",
+      linkedin: "https://www.linkedin.com/in/bhargav-vasupilli-980b59320?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+      email: "vasupillibhargav.le23.csm@anits.edu.in",
+      skills: ["Html", "Css", "React"],
       icon: <BookOpen className="w-5 h-5" />
     },
     {
-      name: "Aditya Gupta",
-      role: "DevOps Engineer",
-      image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=400&fit=crop&crop=face",
-      github: "https://github.com/adityagupta",
-      linkedin: "https://linkedin.com/in/adityagupta",
-      email: "aditya.gupta@student.anits.edu.in",
-      skills: ["Docker", "Kubernetes", "AWS"],
+      name: "Meghana",
+      role: "Animator",
+      image: meghanaImage,
+      github: "",
+      linkedin: "https://in.linkedin.com/in/meghana-surisetti-622586342?trk=public_profile_samename-profile",
+      email: "surisettimeghana.le23.cse@anits.edu.in",
+      skills: ["React", "TYpeScript", "Tailwind"],
       icon: <Award className="w-5 h-5" />
+    },
+    {
+      name: "Varun",
+      role: "Animator",
+      image: varunImage,
+      github: "https://github.com/BotchaVarun",
+      linkedin: "https://in.linkedin.com/in/varun-botcha-b35937275",
+      email: "varunbotcha77@gmail.com",
+      skills: ["React", "TYpeScript", "Tailwind"],
+      icon: <Star className="w-5 h-5" />
     },
     {
       name: "Meera Reddy",
