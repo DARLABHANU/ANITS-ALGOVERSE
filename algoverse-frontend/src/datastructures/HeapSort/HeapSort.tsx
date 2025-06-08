@@ -41,7 +41,7 @@ const HeapSort = () => {
     { id: 8, title: 'Try Out Challenges', icon: Trophy, component: 'ChallengesSection' }
   ];
 
-  const progressPercentage = Math.round((completedSteps.length / steps.length) * 100);
+  const progressPercentage = Math.round((completedSteps.length / (steps.length-1)) * 100);
 
   const markAsComplete = () => {
     if (!completedSteps.includes(currentStep)) {
