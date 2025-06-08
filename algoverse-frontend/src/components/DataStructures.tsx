@@ -40,8 +40,8 @@ const DataStructures = () => {
       ]
     },
     {
-      id: 'bubble-sort',
-      title: 'Bubble Sort',
+      id: 'HeapSort',
+      title: 'HeapSort',
       description: 'A simple sorting algorithm that repeatedly compares adjacent elements and swaps them if they are in the wrong order.',
       timeComplexity: 'O(n²)',
       spaceComplexity: 'O(1)',
@@ -198,7 +198,7 @@ const DataStructures = () => {
 
                     <div>
                       <div className="flex justify-between mb-1">
-                        <span className="text-sm font-medium">Bubble Sort</span>
+                        <span className="text-sm font-medium">HeapSort</span>
                         <span className="text-sm text-muted-foreground">O(n²)</span>
                       </div>
                       <div className="h-2 bg-muted rounded-full overflow-hidden">

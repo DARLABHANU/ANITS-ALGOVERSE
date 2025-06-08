@@ -15,6 +15,7 @@ import LinearSearch from "./datastructures/LinearSearch";
 import AlgoCode from "./components/AlgoCode";
 import Contact from "./components/Contact";
 import About from "./components/About";
+import HeapSort from "./datastructures/HeapSort/HeapSort";
 
 const queryClient = new QueryClient();
 
@@ -35,6 +36,7 @@ const App = () => (
           <Route path="/AlgoCode" element={<AlgoCode />} />
           <Route path="/Contact" element={<Contact/>} />
           <Route path="/About" element={<About/>} />
+          <Route path="/HeapSort" element={<HeapSort/>} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
