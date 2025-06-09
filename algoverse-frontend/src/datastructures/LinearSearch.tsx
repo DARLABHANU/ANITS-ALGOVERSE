@@ -294,7 +294,7 @@ const DescriptionSection = () => (
         </ul>
         <p className="leading-relaxed">
           Linear search is also known as sequential search because it searches elements in sequence, 
-          one after another, until the desired element is found or the search is exhausted.
+          one after another.
         </p>
       </div>
     </CardContent>
