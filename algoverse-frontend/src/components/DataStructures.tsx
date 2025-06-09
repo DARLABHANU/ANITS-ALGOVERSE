@@ -22,7 +22,7 @@ const DataStructures = () => {
 
   const treeExamples = [
     {
-      id: '2-3Tree',
+      id: 'TwoThreeTrees',
       title: '2-3 Tree',
       description: 'A self-balancing search tree where every node has either two children and one data element, or three children and two data elements. All leaves are at the same depth, ensuring balance.',
       timeComplexity: 'O(log n)',
@@ -47,7 +47,7 @@ const DataStructures = () => {
       ]
     },
     {
-      id: 'AVLTree',
+      id: 'AvlTree',
       title: 'AVL Tree',
       description: 'A self-balancing binary search tree where the difference between the heights of left and right subtrees (balance factor) cannot be more than one for all nodes.',
       timeComplexity: 'O(log n)',
@@ -304,6 +304,30 @@ const DataStructures = () => {
       ]
     },
     {
+      id: 'LinearSearch',
+      title: 'Linear Search',
+      description: 'A simple searching algorithm that sequentially checks each element in the list until a match is found or the whole list has been searched.',
+      timeComplexity: 'O(n) worst, O(1) best',
+      spaceComplexity: 'O(1)',
+      pseudoCode: [
+        'function linearSearch(array, target):',
+        '  n = length(array)',
+        '  for i from 0 to n - 1:',
+        '    if array[i] equals target:',
+        '      return i',
+        '  return -1 // Target not found'
+      ],
+      steps: [
+        'Start from the first element of the array (index 0).',
+        'Compare the current element with the target value.',
+        'If the current element matches the target, return its index.',
+        'If not, move to the next element.',
+        'Repeat steps 2-4 until the target is found or the end of the array is reached.',
+        'If the end of the array is reached and the target is not found, return -1.'
+      ]
+    }
+    ,
+    {
       id: 'SkipList',
       title: 'Skip List',
       description: 'A probabilistic data structure that allows O(log n) average time complexity for search, insertion, and deletion operations. It consists of multiple layers of sorted linked lists, where each successive list links fewer elements than the previous one, creating "express lanes".',
@@ -332,7 +356,7 @@ const DataStructures = () => {
 
   const algorithmExamples = [
     {
-      id: 'PrimsAlgorithm',
+      id: 'Prims',
       title: 'Prim\'s Algorithm',
       description: 'A greedy algorithm that finds a minimum spanning tree (MST) for a weighted undirected graph. It starts from an arbitrary vertex and grows the MST by adding the nearest vertex not yet in the MST. It is suitable for dense graphs.',
       timeComplexity: 'O(E log V) with binary heap, O(E + V log V) with Fibonacci heap',
@@ -369,7 +393,7 @@ const DataStructures = () => {
       ]
     },
     {
-      id: 'KruskalsAlgorithm',
+      id: 'Kruskals',
       title: 'Kruskal\'s Algorithm',
       description: 'A greedy algorithm that finds a minimum spanning tree (MST) for a connected weighted undirected graph. It sorts all edges in non-decreasing order of their weights and adds the smallest edges that do not form a cycle. It is suitable for sparse graphs.',
       timeComplexity: 'O(E log E) or O(E log V) (due to sorting edges)',
@@ -397,7 +421,7 @@ const DataStructures = () => {
       ]
     },
     {
-      id: 'AStarSearch',
+      id: 'AStar',
       title: 'A* Search Algorithm',
       description: 'A pathfinding algorithm that finds the shortest path between a starting and a goal node in a graph, using a heuristic function to estimate the cost from the current node to the goal. It combines Dijkstra\'s algorithm with greedy best-first search.',
       timeComplexity: 'Exponential in worst case (O(b^d)), polynomial if heuristic is accurate',
@@ -440,7 +464,7 @@ const DataStructures = () => {
       ]
     },
     {
-      id: 'JohnsonTrotter',
+      id: 'Jhonson',
       title: 'Johnson Trotter Algorithm',
       description: 'An algorithm for generating all permutations of a set of elements by only swapping two adjacent elements at each step. It is often visualized using Steinhaus-Johnson-Trotter algorithm with adjacent transpositions, providing a simple way to generate permutations lexicographically.',
       timeComplexity: 'O(n! * n)',
@@ -474,7 +498,7 @@ const DataStructures = () => {
       ]
     },
     {
-      id: 'HuffmanCoding',
+      id: 'Huffman',
       title: 'Huffman Coding',
       description: 'A lossless data compression algorithm. It assigns variable-length codes to input characters, with shorter codes assigned to more frequent characters and longer codes to less frequent ones, to minimize the total length of the encoded message. It builds a binary tree based on character frequencies.',
       timeComplexity: 'O(n log n) where n is the number of unique characters',
