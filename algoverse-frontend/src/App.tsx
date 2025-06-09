@@ -15,6 +15,13 @@ import AlgoCode from "./components/AlgoCode";
 import Contact from "./components/Contact";
 import About from "./components/About";
 import HeapSort from "./datastructures/HeapSort/HeapSort";
+import TwoThreeTrees from "./datastructures/twothreetrees/TwoThree";
+import AStar from "./datastructures/Astar/AStar";
+import AvlTree from "./datastructures/Avltrees/Avl";
+import BinarySearch from "./datastructures/Binarysearch/BinarySearch";
+import BubbleSort from "./datastructures/bubblesort/BubbleSort";
+import Huffman from "./datastructures/Huffmancoding/Huffman";
+import InsertionSort from "./datastructures/insertionsort/Insertion";
 const queryClient = new QueryClient();
 
 const App = () => {
@@ -40,6 +47,14 @@ const App = () => {
             <Route path="/About" element={<About />} />
             <Route path="*" element={<NotFound />} />
             <Route path="/HeapSort" element={<HeapSort/>} />
+            <Route path="/TwoThreeTrees" element={<TwoThreeTrees/>} />
+            <Route path="/AStar" element={<AStar/>} />
+            <Route path="/AvlTree" element={<AvlTree/>} />
+            <Route path="/BinarySearch" element={<BinarySearch/>} />
+            <Route path="/BubbleSort" element={<BubbleSort/>} />
+            <Route path="/Huffman" element={<Huffman/>} />
+            <Route path="/InsertionSort" element={<InsertionSort/>} />
+            
           </Routes>
         </BrowserRouter>
       </TooltipProvider>
