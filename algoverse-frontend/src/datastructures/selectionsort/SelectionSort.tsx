@@ -269,8 +269,7 @@ const DescriptionSection = () => (
       <h1 className="section-title gradient-text">Selection Sort Description</h1>
       <div className="prose max-w-none h-full overflow-y-auto">
         <p className="text-base sm:text-lg mb-4 leading-relaxed">
-          Selection Sort is a simple searching algorithm that finds the position of a target value within a list. 
-          It sequentially checks each element of the list until a match is found or the whole list has been searched.
+          Selection Sort is a simple comparison-based sorting algorithm. It repeatedly selects the minimum element from the unsorted part of the array and moves it to the sorted part. It is intuitive and easy to implement but not very efficient for large datasets.
         </p>
         <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">How it Works:</h3>
         <ul className="space-y-3 mb-6">
@@ -280,25 +279,25 @@ const DescriptionSection = () => (
           </li>
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span>Compare each element with the target value</span>
+            <span>Find the smallest element in the unsorted portion of the array</span>
           </li>
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span>If a match is found, return the index</span>
+            <span>Swap it with the first unsorted element</span>
           </li>
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span>If no match is found after checking all elements, return -1</span>
+            <span>Repeat the process for the next position until the entire array is sorted</span>
           </li>
         </ul>
         <p className="leading-relaxed">
-          Selection Sort is also known as sequential search because it searches elements in sequence, 
-          one after another, until the desired element is found or the search is exhausted.
+          Selection Sort is inefficient on large lists but works well for small datasets and educational purposes. It performs sorting in-place and does not require additional memory.
         </p>
       </div>
     </CardContent>
   </Card>
 );
+
 
 const PseudocodeSection = () => (
   <Card className="h-full algo-card">
@@ -307,26 +306,24 @@ const PseudocodeSection = () => (
       <Card className="bg-gray-900 text-green-400 flex-1 border border-primary/20">
         <CardContent className="p-4 sm:p-6 font-mono h-full overflow-y-auto">
           <pre className="whitespace-pre-wrap text-sm sm:text-base">
-{`function SelectionSort(array, target):
-    for i from 0 to length(array) - 1:
-        if array[i] equals target:
-            return i
-    return -1
+{`function SelectionSort(array):
+    n = length(array)
+    for i from 0 to n - 1:
+        minIndex = i
+        for j from i + 1 to n - 1:
+            if array[j] < array[minIndex]:
+                minIndex = j
+        if minIndex != i:
+            swap array[i] and array[minIndex]
 
-// Alternative implementation with while loop
-function SelectionSortWhile(array, target):
-    i = 0
-    while i < length(array):
-        if array[i] equals target:
-            return i
-        i = i + 1
-    return -1`}
+`}
           </pre>
         </CardContent>
       </Card>
     </CardContent>
   </Card>
 );
+
 
 const FlowchartSection = () => (
   <Card className="h-full algo-card">
@@ -363,19 +360,19 @@ const AdvantagesSection = () => (
           <ul className="space-y-3">
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Simple to understand and implement</span>
+              <span className="text-sm sm:text-base">Easy to understand and implement</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Works on both sorted and unsorted arrays</span>
+              <span className="text-sm sm:text-base">Performs well on small arrays</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">No additional memory required (in-place)</span>
+              <span className="text-sm sm:text-base">In-place algorithm (requires no extra memory)</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Works well for small datasets</span>
+              <span className="text-sm sm:text-base">Performs well when memory write operations are expensive</span>
             </li>
           </ul>
         </div>
@@ -389,15 +386,15 @@ const AdvantagesSection = () => (
           <ul className="space-y-3">
             <li className="flex items-start gap-3 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
               <X className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Inefficient for large datasets</span>
+              <span className="text-sm sm:text-base">Inefficient on large datasets</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
               <X className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Time complexity is O(n) in worst case</span>
+              <span className="text-sm sm:text-base">Time complexity is O(n²) in all cases</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
               <X className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Not suitable for real-time applications with large data</span>
+              <span className="text-sm sm:text-base">Does not adapt or take advantage of partially sorted arrays</span>
             </li>
           </ul>
         </div>
@@ -416,13 +413,20 @@ const ExamplesSection = () => (
             <div className="feature-icon p-2">
               <Target className="w-4 h-4" />
             </div>
-            Example 1: Finding a number
+            Example 1: Sorting an array step-by-step
           </h3>
-          <p className="mb-3 text-sm sm:text-base font-medium">Array: [4, 2, 7, 1, 9, 3], Target: 7</p>
+          <p className="mb-3 text-sm sm:text-base font-medium">Array: [4, 2, 7, 1, 9, 3]</p>
           <div className="bg-muted/50 p-4 rounded-lg font-mono text-xs sm:text-sm border border-primary/10">
-            <div className="text-blue-600 dark:text-blue-400">Step 1: Check array[0] = 4, not equal to 7</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 2: Check array[1] = 2, not equal to 7</div>
-            <div className="text-green-600 dark:text-green-400 font-semibold">Step 3: Check array[2] = 7, equal to 7! Return index 2</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 1: Find the minimum from array[0..5], which is 1 at index 3, swap with array[0]</div>
+            <div className="text-blue-600 dark:text-blue-400">Array now: [1, 2, 7, 4, 9, 3]</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 2: Find minimum from array[1..5], which is 2 at index 1, swap with array[1]</div>
+            <div className="text-blue-600 dark:text-blue-400">Array now: [1, 2, 7, 4, 9, 3]</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 3: Find minimum from array[2..5], which is 3 at index 5, swap with array[2]</div>
+            <div className="text-blue-600 dark:text-blue-400">Array now: [1, 2, 3, 4, 9, 7]</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 4: Find minimum from array[3..5], which is 4 at index 3, swap with array[3]</div>
+            <div className="text-blue-600 dark:text-blue-400">Array now: [1, 2, 3, 4, 9, 7]</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 5: Find minimum from array[4..5], which is 7 at index 5, swap with array[4]</div>
+            <div className="text-green-600 dark:text-green-400 font-semibold">Array now sorted: [1, 2, 3, 4, 7, 9]</div>
           </div>
         </div>
         
@@ -431,23 +435,25 @@ const ExamplesSection = () => (
             <div className="feature-icon p-2">
               <Target className="w-4 h-4" />
             </div>
-            Example 2: Element not found
+            Example 2: Sorting a nearly sorted array
           </h3>
-          <p className="mb-3 text-sm sm:text-base font-medium">Array: [4, 2, 7, 1, 9, 3], Target: 5</p>
+          <p className="mb-3 text-sm sm:text-base font-medium">Array: [1, 3, 2, 4, 5]</p>
           <div className="bg-muted/50 p-4 rounded-lg font-mono text-xs sm:text-sm border border-primary/10">
-            <div className="text-blue-600 dark:text-blue-400">Step 1: Check array[0] = 4, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 2: Check array[1] = 2, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 3: Check array[2] = 7, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 4: Check array[3] = 1, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 5: Check array[4] = 9, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 6: Check array[5] = 3, not equal to 5</div>
-            <div className="text-red-600 dark:text-red-400 font-semibold">End of array reached. Return -1 (not found)</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 1: Minimum from array[0..4] is 1 at index 0, swap with array[0]</div>
+            <div className="text-blue-600 dark:text-blue-400">Array now: [1, 3, 2, 4, 5]</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 2: Minimum from array[1..4] is 2 at index 2, swap with array[1]</div>
+            <div className="text-blue-600 dark:text-blue-400">Array now: [1, 2, 3, 4, 5]</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 3: Minimum from array[2..4] is 3 at index 2, swap with array[2]</div>
+            <div className="text-blue-600 dark:text-blue-400">Array now: [1, 2, 3, 4, 5]</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 4: Minimum from array[3..4] is 4 at index 3, swap with array[3]</div>
+            <div className="text-green-600 dark:text-green-400 font-semibold">Array sorted: [1, 2, 3, 4, 5]</div>
           </div>
         </div>
       </div>
     </CardContent>
   </Card>
 );
+
 
 const TimeComplexitySection = () => (
   <Card className="h-full algo-card">
@@ -457,24 +463,24 @@ const TimeComplexitySection = () => (
         <Card className="glass-card border border-green-200 dark:border-green-800">
           <CardContent className="p-4 sm:p-6 text-center">
             <h3 className="text-base sm:text-lg font-semibold mb-2 text-green-600">Best Case</h3>
-            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(1)</div>
-            <p className="text-xs sm:text-sm text-muted-foreground">Element found at first position</p>
+            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(n²)</div>
+            <p className="text-xs sm:text-sm text-muted-foreground">Array already sorted, but comparisons still needed</p>
           </CardContent>
         </Card>
         
         <Card className="glass-card border border-yellow-200 dark:border-yellow-800">
           <CardContent className="p-4 sm:p-6 text-center">
             <h3 className="text-base sm:text-lg font-semibold mb-2 text-yellow-600">Average Case</h3>
-            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(n)</div>
-            <p className="text-xs sm:text-sm text-muted-foreground">Element found at middle position</p>
+            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(n²)</div>
+            <p className="text-xs sm:text-sm text-muted-foreground">Typical unordered array requiring full passes</p>
           </CardContent>
         </Card>
         
         <Card className="glass-card border border-red-200 dark:border-red-800">
           <CardContent className="p-4 sm:p-6 text-center">
             <h3 className="text-base sm:text-lg font-semibold mb-2 text-red-600">Worst Case</h3>
-            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(n)</div>
-            <p className="text-xs sm:text-sm text-muted-foreground">Element at last position or not found</p>
+            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(n²)</div>
+            <p className="text-xs sm:text-sm text-muted-foreground">Array in reverse order</p>
           </CardContent>
         </Card>
       </div>
@@ -482,15 +488,14 @@ const TimeComplexitySection = () => (
       <div className="flex-1 overflow-y-auto">
         <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">Explanation</h3>
         <p className="text-sm sm:text-base leading-relaxed">
-          In Selection Sort, we may need to check every element in the worst case. 
-          If the array has n elements, we might need to perform n comparisons. 
-          Therefore, the time complexity is O(n), which means the algorithm's 
-          performance scales linearly with the input size.
+          Selection Sort always scans the unsorted portion of the array to find the minimum element and swap it with the first unsorted element.
+          This results in roughly <code>n * (n-1) / 2</code> comparisons regardless of initial ordering, leading to a time complexity of <strong>O(n²)</strong> in best, average, and worst cases.
         </p>
       </div>
     </CardContent>
   </Card>
 );
+
 
 const SpaceComplexitySection = () => (
   <Card className="h-full algo-card">
@@ -506,30 +511,30 @@ const SpaceComplexitySection = () => (
         <ul className="space-y-3">
           <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span className="text-sm sm:text-base">Selection Sort only uses a fixed amount of extra space</span>
+            <span className="text-sm sm:text-base">Selection Sort sorts the array <strong>in-place</strong>, using only a fixed amount of extra space.</span>
           </li>
           <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span className="text-sm sm:text-base">We only need variables for the loop counter and comparison</span>
+            <span className="text-sm sm:text-base">Only a few variables are needed for loop counters and temporary swaps.</span>
           </li>
           <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span className="text-sm sm:text-base">The space used doesn't grow with the input size</span>
+            <span className="text-sm sm:text-base">No additional data structures or memory allocations are required.</span>
           </li>
           <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span className="text-sm sm:text-base">No additional data structures are required</span>
+            <span className="text-sm sm:text-base">Thus, the space used remains constant regardless of input size.</span>
           </li>
         </ul>
         
         <p className="mt-4 text-sm sm:text-base leading-relaxed">
-          This makes Selection Sort very memory-efficient, as it doesn't require 
-          any additional space proportional to the input size.
+          This makes Selection Sort very memory-efficient and suitable for environments where memory is limited.
         </p>
       </div>
     </CardContent>
   </Card>
 );
+
 
 const SimulationSection = ({ onComplete }: { onComplete: () => void }) => (
   <Card className="h-full algo-card">

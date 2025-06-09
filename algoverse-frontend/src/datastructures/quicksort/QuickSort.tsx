@@ -269,31 +269,32 @@ const DescriptionSection = () => (
       <h1 className="section-title gradient-text">QuickSort Description</h1>
       <div className="prose max-w-none h-full overflow-y-auto">
         <p className="text-base sm:text-lg mb-4 leading-relaxed">
-          QuickSort is a simple searching algorithm that finds the position of a target value within a list. 
-          It sequentially checks each element of the list until a match is found or the whole list has been searched.
+          QuickSort is a popular, efficient, divide-and-conquer sorting algorithm.
+          It works by selecting a 'pivot' element from the array and partitioning the other elements
+          into two sub-arrays, according to whether they are less than or greater than the pivot.
+          The sub-arrays are then sorted recursively.
         </p>
         <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">How it Works:</h3>
         <ul className="space-y-3 mb-6">
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span>Start from the first element of the array</span>
+            <span>Choose a pivot element from the array</span>
           </li>
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span>Compare each element with the target value</span>
+            <span>Partition the array so elements less than pivot come before it, greater come after</span>
           </li>
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span>If a match is found, return the index</span>
+            <span>Recursively apply the above steps to sub-arrays on left and right of pivot</span>
           </li>
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span>If no match is found after checking all elements, return -1</span>
+            <span>Combine the sorted sub-arrays and the pivot to get the sorted array</span>
           </li>
         </ul>
         <p className="leading-relaxed">
-          QuickSort is also known as sequential search because it searches elements in sequence, 
-          one after another, until the desired element is found or the search is exhausted.
+          QuickSort is efficient for large datasets and commonly used due to its average-case time complexity of O(n log n).
         </p>
       </div>
     </CardContent>
@@ -307,26 +308,28 @@ const PseudocodeSection = () => (
       <Card className="bg-gray-900 text-green-400 flex-1 border border-primary/20">
         <CardContent className="p-4 sm:p-6 font-mono h-full overflow-y-auto">
           <pre className="whitespace-pre-wrap text-sm sm:text-base">
-{`function QuickSort(array, target):
-    for i from 0 to length(array) - 1:
-        if array[i] equals target:
-            return i
-    return -1
+{`function QuickSort(array, low, high):
+    if low < high:
+        pivotIndex = Partition(array, low, high)
+        QuickSort(array, low, pivotIndex - 1)
+        QuickSort(array, pivotIndex + 1, high)
 
-// Alternative implementation with while loop
-function QuickSortWhile(array, target):
-    i = 0
-    while i < length(array):
-        if array[i] equals target:
-            return i
-        i = i + 1
-    return -1`}
+function Partition(array, low, high):
+    pivot = array[high]
+    i = low - 1
+    for j from low to high - 1:
+        if array[j] <= pivot:
+            i = i + 1
+            swap array[i] and array[j]
+    swap array[i + 1] and array[high]
+    return i + 1`}
           </pre>
         </CardContent>
       </Card>
     </CardContent>
   </Card>
 );
+
 
 const FlowchartSection = () => (
   <Card className="h-full algo-card">
@@ -363,19 +366,19 @@ const AdvantagesSection = () => (
           <ul className="space-y-3">
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Simple to understand and implement</span>
+              <span className="text-sm sm:text-base">Efficient average-case time complexity: O(n log n)</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Works on both sorted and unsorted arrays</span>
+              <span className="text-sm sm:text-base">In-place sorting algorithm (requires little extra memory)</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">No additional memory required (in-place)</span>
+              <span className="text-sm sm:text-base">Performs well for large datasets</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Works well for small datasets</span>
+              <span className="text-sm sm:text-base">Divide-and-conquer approach simplifies complex sorting tasks</span>
             </li>
           </ul>
         </div>
@@ -389,15 +392,15 @@ const AdvantagesSection = () => (
           <ul className="space-y-3">
             <li className="flex items-start gap-3 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
               <X className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Inefficient for large datasets</span>
+              <span className="text-sm sm:text-base">Worst-case time complexity is O(n²), e.g., when array is already sorted or nearly sorted</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
               <X className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Time complexity is O(n) in worst case</span>
+              <span className="text-sm sm:text-base">Recursive calls may lead to high stack usage (can cause stack overflow on large inputs without optimization)</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
               <X className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Not suitable for real-time applications with large data</span>
+              <span className="text-sm sm:text-base">Performance depends heavily on pivot selection strategy</span>
             </li>
           </ul>
         </div>
@@ -416,38 +419,39 @@ const ExamplesSection = () => (
             <div className="feature-icon p-2">
               <Target className="w-4 h-4" />
             </div>
-            Example 1: Finding a number
+            Example 1: Sorting an array
           </h3>
-          <p className="mb-3 text-sm sm:text-base font-medium">Array: [4, 2, 7, 1, 9, 3], Target: 7</p>
+          <p className="mb-3 text-sm sm:text-base font-medium">Array: [4, 2, 7, 1, 9, 3]</p>
           <div className="bg-muted/50 p-4 rounded-lg font-mono text-xs sm:text-sm border border-primary/10">
-            <div className="text-blue-600 dark:text-blue-400">Step 1: Check array[0] = 4, not equal to 7</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 2: Check array[1] = 2, not equal to 7</div>
-            <div className="text-green-600 dark:text-green-400 font-semibold">Step 3: Check array[2] = 7, equal to 7! Return index 2</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 1: Choose pivot (e.g., last element: 3)</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 2: Partition array into [2,1] and [4,7,9]</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 3: Recursively apply QuickSort to left part [2,1]</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 4: Recursively apply QuickSort to right part [4,7,9]</div>
+            <div className="text-green-600 dark:text-green-400 font-semibold">Step 5: Combine partitions to get sorted array: [1,2,3,4,7,9]</div>
           </div>
         </div>
-        
+
         <div className="glass-card p-4 sm:p-6 rounded-xl border border-primary/20">
           <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary flex items-center gap-2">
             <div className="feature-icon p-2">
               <Target className="w-4 h-4" />
             </div>
-            Example 2: Element not found
+            Example 2: Sorting an already sorted array
           </h3>
-          <p className="mb-3 text-sm sm:text-base font-medium">Array: [4, 2, 7, 1, 9, 3], Target: 5</p>
+          <p className="mb-3 text-sm sm:text-base font-medium">Array: [1, 2, 3, 4, 5]</p>
           <div className="bg-muted/50 p-4 rounded-lg font-mono text-xs sm:text-sm border border-primary/10">
-            <div className="text-blue-600 dark:text-blue-400">Step 1: Check array[0] = 4, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 2: Check array[1] = 2, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 3: Check array[2] = 7, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 4: Check array[3] = 1, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 5: Check array[4] = 9, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 6: Check array[5] = 3, not equal to 5</div>
-            <div className="text-red-600 dark:text-red-400 font-semibold">End of array reached. Return -1 (not found)</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 1: Choose pivot (e.g., last element: 5)</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 2: Partition array — left part contains [1,2,3,4], right part empty</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 3: Recursively QuickSort left part [1,2,3,4]</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 4: Continue partitioning until single-element arrays reached</div>
+            <div className="text-green-600 dark:text-green-400 font-semibold">Step 5: Final sorted array remains [1,2,3,4,5]</div>
           </div>
         </div>
       </div>
     </CardContent>
   </Card>
 );
+
 
 const TimeComplexitySection = () => (
   <Card className="h-full algo-card">
@@ -457,24 +461,24 @@ const TimeComplexitySection = () => (
         <Card className="glass-card border border-green-200 dark:border-green-800">
           <CardContent className="p-4 sm:p-6 text-center">
             <h3 className="text-base sm:text-lg font-semibold mb-2 text-green-600">Best Case</h3>
-            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(1)</div>
-            <p className="text-xs sm:text-sm text-muted-foreground">Element found at first position</p>
+            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(n log n)</div>
+            <p className="text-xs sm:text-sm text-muted-foreground">Pivot divides array evenly each time</p>
           </CardContent>
         </Card>
         
         <Card className="glass-card border border-yellow-200 dark:border-yellow-800">
           <CardContent className="p-4 sm:p-6 text-center">
             <h3 className="text-base sm:text-lg font-semibold mb-2 text-yellow-600">Average Case</h3>
-            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(n)</div>
-            <p className="text-xs sm:text-sm text-muted-foreground">Element found at middle position</p>
+            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(n log n)</div>
+            <p className="text-xs sm:text-sm text-muted-foreground">Balanced partitions on average</p>
           </CardContent>
         </Card>
         
         <Card className="glass-card border border-red-200 dark:border-red-800">
           <CardContent className="p-4 sm:p-6 text-center">
             <h3 className="text-base sm:text-lg font-semibold mb-2 text-red-600">Worst Case</h3>
-            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(n)</div>
-            <p className="text-xs sm:text-sm text-muted-foreground">Element at last position or not found</p>
+            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(n²)</div>
+            <p className="text-xs sm:text-sm text-muted-foreground">Pivot is smallest or largest element repeatedly</p>
           </CardContent>
         </Card>
       </div>
@@ -482,10 +486,11 @@ const TimeComplexitySection = () => (
       <div className="flex-1 overflow-y-auto">
         <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">Explanation</h3>
         <p className="text-sm sm:text-base leading-relaxed">
-          In QuickSort, we may need to check every element in the worst case. 
-          If the array has n elements, we might need to perform n comparisons. 
-          Therefore, the time complexity is O(n), which means the algorithm's 
-          performance scales linearly with the input size.
+          QuickSort divides the array by choosing a pivot and partitioning elements into 
+          those less than and greater than the pivot. In the best and average cases, this 
+          partitioning is balanced, leading to a time complexity of O(n log n). 
+          However, if the pivot is poorly chosen (smallest or largest element every time), 
+          QuickSort degrades to O(n²) time.
         </p>
       </div>
     </CardContent>
@@ -497,44 +502,47 @@ const SpaceComplexitySection = () => (
     <CardContent className="p-4 sm:p-8 h-full flex flex-col">
       <h1 className="section-title gradient-text">Space Complexity Analysis</h1>
       <div className="text-center mb-6">
-        <div className="text-4xl sm:text-6xl font-bold gradient-text mb-4">O(1)</div>
-        <p className="text-lg sm:text-xl text-primary font-semibold">Constant Space Complexity</p>
+        <div className="text-4xl sm:text-6xl font-bold gradient-text mb-4">O(log n)</div>
+        <p className="text-lg sm:text-xl text-primary font-semibold">Average Space Complexity</p>
       </div>
       
       <div className="prose max-w-none flex-1 overflow-y-auto">
-        <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">Why O(1)?</h3>
+        <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">Why O(log n)?</h3>
         <ul className="space-y-3">
           <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span className="text-sm sm:text-base">QuickSort only uses a fixed amount of extra space</span>
+            <span className="text-sm sm:text-base">QuickSort uses recursion which requires stack space</span>
           </li>
           <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span className="text-sm sm:text-base">We only need variables for the loop counter and comparison</span>
+            <span className="text-sm sm:text-base">On average, the depth of recursion is O(log n)</span>
           </li>
           <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span className="text-sm sm:text-base">The space used doesn't grow with the input size</span>
+            <span className="text-sm sm:text-base">Worst case recursion depth can be O(n), causing O(n) space</span>
           </li>
           <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span className="text-sm sm:text-base">No additional data structures are required</span>
+            <span className="text-sm sm:text-base">No additional data structures needed apart from recursion stack</span>
           </li>
         </ul>
         
         <p className="mt-4 text-sm sm:text-base leading-relaxed">
-          This makes QuickSort very memory-efficient, as it doesn't require 
-          any additional space proportional to the input size.
+          QuickSort is generally memory efficient due to its limited use of extra space, 
+          but its space use depends on the recursion stack depth.
         </p>
       </div>
     </CardContent>
   </Card>
 );
 
+
+
 const SimulationSection = () => (
   <>
   <VisualizationPlayback />
   </>
+
 );
 
 const ChallengesSection = ({ onComplete }: { onComplete: () => void }) => (
