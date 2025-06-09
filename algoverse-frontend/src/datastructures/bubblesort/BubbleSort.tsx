@@ -269,36 +269,35 @@ const DescriptionSection = () => (
       <h1 className="section-title gradient-text">Bubble Sort Description</h1>
       <div className="prose max-w-none h-full overflow-y-auto">
         <p className="text-base sm:text-lg mb-4 leading-relaxed">
-          Bubble Sort is a simple searching algorithm that finds the position of a target value within a list. 
-          It sequentially checks each element of the list until a match is found or the whole list has been searched.
+          Bubble Sort is a simple comparison-based sorting algorithm. It repeatedly steps through the list, compares adjacent elements, and swaps them if they are in the wrong order. This process continues until the list is sorted.
         </p>
         <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">How it Works:</h3>
         <ul className="space-y-3 mb-6">
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span>Start from the first element of the array</span>
+            <span>Start from the beginning of the array</span>
           </li>
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span>Compare each element with the target value</span>
+            <span>Compare each pair of adjacent elements</span>
           </li>
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span>If a match is found, return the index</span>
+            <span>If the elements are in the wrong order, swap them</span>
           </li>
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span>If no match is found after checking all elements, return -1</span>
+            <span>Repeat the process until the array is fully sorted</span>
           </li>
         </ul>
         <p className="leading-relaxed">
-          Bubble Sort is also known as sequential search because it searches elements in sequence, 
-          one after another, until the desired element is found or the search is exhausted.
+          Bubble Sort gets its name because smaller elements "bubble" to the top of the list with each pass. It is simple to implement but inefficient on large datasets compared to more advanced algorithms.
         </p>
       </div>
     </CardContent>
   </Card>
 );
+
 
 const PseudocodeSection = () => (
   <Card className="h-full algo-card">
@@ -307,20 +306,15 @@ const PseudocodeSection = () => (
       <Card className="bg-gray-900 text-green-400 flex-1 border border-primary/20">
         <CardContent className="p-4 sm:p-6 font-mono h-full overflow-y-auto">
           <pre className="whitespace-pre-wrap text-sm sm:text-base">
-{`function BubbleSort(array, target):
-    for i from 0 to length(array) - 1:
-        if array[i] equals target:
-            return i
-    return -1
+{`function BubbleSort(array):
+    n = length(array)
+    for i from 0 to n - 1:
+        for j from 0 to n - i - 1:
+            if array[j] > array[j + 1]:
+                swap array[j] and array[j + 1]
+    return array
 
-// Alternative implementation with while loop
-function BubbleSortWhile(array, target):
-    i = 0
-    while i < length(array):
-        if array[i] equals target:
-            return i
-        i = i + 1
-    return -1`}
+`}
           </pre>
         </CardContent>
       </Card>
@@ -363,19 +357,19 @@ const AdvantagesSection = () => (
           <ul className="space-y-3">
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Simple to understand and implement</span>
+              <span className="text-sm sm:text-base">Simple to understand and easy to implement</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Works on both sorted and unsorted arrays</span>
+              <span className="text-sm sm:text-base">No extra memory required (in-place sorting)</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">No additional memory required (in-place)</span>
+              <span className="text-sm sm:text-base">Can detect already sorted array with optimization</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Works well for small datasets</span>
+              <span className="text-sm sm:text-base">Good for educational purposes and small datasets</span>
             </li>
           </ul>
         </div>
@@ -389,15 +383,15 @@ const AdvantagesSection = () => (
           <ul className="space-y-3">
             <li className="flex items-start gap-3 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
               <X className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Inefficient for large datasets</span>
+              <span className="text-sm sm:text-base">Very inefficient for large datasets</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
               <X className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Time complexity is O(n) in worst case</span>
+              <span className="text-sm sm:text-base">Has a worst-case and average time complexity of O(n²)</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
               <X className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Not suitable for real-time applications with large data</span>
+              <span className="text-sm sm:text-base">Not practical for large or performance-critical applications</span>
             </li>
           </ul>
         </div>
@@ -405,6 +399,7 @@ const AdvantagesSection = () => (
     </CardContent>
   </Card>
 );
+
 
 const ExamplesSection = () => (
   <Card className="h-full algo-card">
@@ -416,13 +411,14 @@ const ExamplesSection = () => (
             <div className="feature-icon p-2">
               <Target className="w-4 h-4" />
             </div>
-            Example 1: Finding a number
+            Example 1: Sorting an unsorted array
           </h3>
-          <p className="mb-3 text-sm sm:text-base font-medium">Array: [4, 2, 7, 1, 9, 3], Target: 7</p>
+          <p className="mb-3 text-sm sm:text-base font-medium">Initial Array: [5, 1, 4, 2, 8]</p>
           <div className="bg-muted/50 p-4 rounded-lg font-mono text-xs sm:text-sm border border-primary/10">
-            <div className="text-blue-600 dark:text-blue-400">Step 1: Check array[0] = 4, not equal to 7</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 2: Check array[1] = 2, not equal to 7</div>
-            <div className="text-green-600 dark:text-green-400 font-semibold">Step 3: Check array[2] = 7, equal to 7! Return index 2</div>
+            <div className="text-blue-600 dark:text-blue-400">Pass 1: [1, 4, 2, 5, 8]</div>
+            <div className="text-blue-600 dark:text-blue-400">Pass 2: [1, 2, 4, 5, 8]</div>
+            <div className="text-blue-600 dark:text-blue-400">Pass 3: [1, 2, 4, 5, 8]</div>
+            <div className="text-green-600 dark:text-green-400 font-semibold">Sorted Array: [1, 2, 4, 5, 8]</div>
           </div>
         </div>
         
@@ -431,23 +427,20 @@ const ExamplesSection = () => (
             <div className="feature-icon p-2">
               <Target className="w-4 h-4" />
             </div>
-            Example 2: Element not found
+            Example 2: Already sorted array
           </h3>
-          <p className="mb-3 text-sm sm:text-base font-medium">Array: [4, 2, 7, 1, 9, 3], Target: 5</p>
+          <p className="mb-3 text-sm sm:text-base font-medium">Initial Array: [1, 2, 3, 4, 5]</p>
           <div className="bg-muted/50 p-4 rounded-lg font-mono text-xs sm:text-sm border border-primary/10">
-            <div className="text-blue-600 dark:text-blue-400">Step 1: Check array[0] = 4, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 2: Check array[1] = 2, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 3: Check array[2] = 7, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 4: Check array[3] = 1, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 5: Check array[4] = 9, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 6: Check array[5] = 3, not equal to 5</div>
-            <div className="text-red-600 dark:text-red-400 font-semibold">End of array reached. Return -1 (not found)</div>
+            <div className="text-blue-600 dark:text-blue-400">Pass 1: [1, 2, 3, 4, 5]</div>
+            <div className="text-blue-600 dark:text-blue-400">No swaps performed</div>
+            <div className="text-green-600 dark:text-green-400 font-semibold">Array is already sorted. Optimization stops early.</div>
           </div>
         </div>
       </div>
     </CardContent>
   </Card>
 );
+
 
 const TimeComplexitySection = () => (
   <Card className="h-full algo-card">
@@ -457,24 +450,24 @@ const TimeComplexitySection = () => (
         <Card className="glass-card border border-green-200 dark:border-green-800">
           <CardContent className="p-4 sm:p-6 text-center">
             <h3 className="text-base sm:text-lg font-semibold mb-2 text-green-600">Best Case</h3>
-            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(1)</div>
-            <p className="text-xs sm:text-sm text-muted-foreground">Element found at first position</p>
+            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(n)</div>
+            <p className="text-xs sm:text-sm text-muted-foreground">Already sorted array (one pass, no swaps)</p>
           </CardContent>
         </Card>
         
         <Card className="glass-card border border-yellow-200 dark:border-yellow-800">
           <CardContent className="p-4 sm:p-6 text-center">
             <h3 className="text-base sm:text-lg font-semibold mb-2 text-yellow-600">Average Case</h3>
-            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(n)</div>
-            <p className="text-xs sm:text-sm text-muted-foreground">Element found at middle position</p>
+            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(n²)</div>
+            <p className="text-xs sm:text-sm text-muted-foreground">Random order array, moderate swaps</p>
           </CardContent>
         </Card>
         
         <Card className="glass-card border border-red-200 dark:border-red-800">
           <CardContent className="p-4 sm:p-6 text-center">
             <h3 className="text-base sm:text-lg font-semibold mb-2 text-red-600">Worst Case</h3>
-            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(n)</div>
-            <p className="text-xs sm:text-sm text-muted-foreground">Element at last position or not found</p>
+            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(n²)</div>
+            <p className="text-xs sm:text-sm text-muted-foreground">Reverse sorted array (maximum swaps)</p>
           </CardContent>
         </Card>
       </div>
@@ -482,15 +475,17 @@ const TimeComplexitySection = () => (
       <div className="flex-1 overflow-y-auto">
         <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">Explanation</h3>
         <p className="text-sm sm:text-base leading-relaxed">
-          In Bubble Sort, we may need to check every element in the worst case. 
-          If the array has n elements, we might need to perform n comparisons. 
-          Therefore, the time complexity is O(n), which means the algorithm's 
-          performance scales linearly with the input size.
+          In Bubble Sort, adjacent elements are compared and swapped if they are in the wrong order.
+          This process is repeated for all elements in multiple passes. In the best case, if the array 
+          is already sorted, Bubble Sort only makes one pass, leading to O(n) time. However, in both 
+          average and worst cases, it performs nested iterations, resulting in O(n²) time complexity.
+          This makes Bubble Sort inefficient on large lists.
         </p>
       </div>
     </CardContent>
   </Card>
 );
+
 
 const SpaceComplexitySection = () => (
   <Card className="h-full algo-card">
@@ -502,34 +497,35 @@ const SpaceComplexitySection = () => (
       </div>
       
       <div className="prose max-w-none flex-1 overflow-y-auto">
-        <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">Why O(1)?</h3>
+        <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">Why O(1) in Bubble Sort?</h3>
         <ul className="space-y-3">
           <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span className="text-sm sm:text-base">Bubble Sort only uses a fixed amount of extra space</span>
+            <span className="text-sm sm:text-base">Bubble Sort performs sorting by swapping elements in-place</span>
           </li>
           <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span className="text-sm sm:text-base">We only need variables for the loop counter and comparison</span>
+            <span className="text-sm sm:text-base">Only a few variables are used: loop counters and a temporary variable for swapping</span>
           </li>
           <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span className="text-sm sm:text-base">The space used doesn't grow with the input size</span>
+            <span className="text-sm sm:text-base">No additional data structures like arrays or lists are needed</span>
           </li>
           <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span className="text-sm sm:text-base">No additional data structures are required</span>
+            <span className="text-sm sm:text-base">The memory usage does not increase with the input size</span>
           </li>
         </ul>
         
         <p className="mt-4 text-sm sm:text-base leading-relaxed">
-          This makes Bubble Sort very memory-efficient, as it doesn't require 
-          any additional space proportional to the input size.
+          This makes Bubble Sort highly space-efficient. It’s an in-place sorting algorithm, 
+          meaning it doesn't require any extra space regardless of the size of the array being sorted.
         </p>
       </div>
     </CardContent>
   </Card>
 );
+
 
 const SimulationSection = ({ onComplete }: { onComplete: () => void }) => (
   <Card className="h-full algo-card">
@@ -537,7 +533,8 @@ const SimulationSection = ({ onComplete }: { onComplete: () => void }) => (
       <h1 className="section-title gradient-text">Interactive Simulation</h1>
       <div className="glass-card p-8 sm:p-12 rounded-2xl text-center flex-1 flex flex-col items-center justify-center min-h-[400px] border border-primary/20">
         <div className="feature-icon mx-auto mb-6">
-          <Target className="w-12 h-12 sm:w-16 sm:h-16" />
+          <Target className="w-12 h-12 sm:w-16 sm:h-16" /
+          >
         </div>
         <p className="text-base sm:text-lg text-muted-foreground mb-6 max-w-md leading-relaxed">
           Interactive simulation component would be implemented here with step-by-step visualization
