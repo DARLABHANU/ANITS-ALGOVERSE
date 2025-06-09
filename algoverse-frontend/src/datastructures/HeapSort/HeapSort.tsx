@@ -270,36 +270,38 @@ const DescriptionSection = () => (
       <h1 className="section-title gradient-text">Heap Sort Description</h1>
       <div className="prose max-w-none h-full overflow-y-auto">
         <p className="text-base sm:text-lg mb-4 leading-relaxed">
-          Heap Sort is a simple searching algorithm that finds the position of a target value within a list. 
-          It sequentially checks each element of the list until a match is found or the whole list has been searched.
+          Heap Sort is a comparison-based sorting algorithm that uses a binary heap data structure.
+          It sorts an array by first building a max-heap from the input data, then repeatedly extracting
+          the maximum element and placing it at the end of the array.
         </p>
         <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">How it Works:</h3>
         <ul className="space-y-3 mb-6">
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span>Start from the first element of the array</span>
+            <span>Build a max heap from the input array</span>
           </li>
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span>Compare each element with the target value</span>
+            <span>Swap the root (maximum value) with the last element in the heap</span>
           </li>
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span>If a match is found, return the index</span>
+            <span>Reduce the heap size by one and heapify the root again</span>
           </li>
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span>If no match is found after checking all elements, return -1</span>
+            <span>Repeat the process until the heap size is 1</span>
           </li>
         </ul>
         <p className="leading-relaxed">
-          Heap Sort is also known as sequential search because it searches elements in sequence, 
-          one after another, until the desired element is found or the search is exhausted.
+          Heap Sort efficiently sorts the array in-place and guarantees O(n log n) time complexity
+          in all cases, making it a reliable sorting algorithm for large datasets.
         </p>
       </div>
     </CardContent>
   </Card>
 );
+
 
 const PseudocodeSection = () => (
   <Card className="h-full algo-card">
@@ -308,20 +310,22 @@ const PseudocodeSection = () => (
       <Card className="bg-gray-900 text-green-400 flex-1 border border-primary/20">
         <CardContent className="p-4 sm:p-6 font-mono h-full overflow-y-auto">
           <pre className="whitespace-pre-wrap text-sm sm:text-base">
-{`function linearSearch(array, target):
-    for i from 0 to length(array) - 1:
-        if array[i] equals target:
-            return i
-    return -1
-
-// Alternative implementation with while loop
-function linearSearchWhile(array, target):
-    i = 0
-    while i < length(array):
-        if array[i] equals target:
-            return i
-        i = i + 1
-    return -1`}
+{`function heapSort(array):
+    n = length(array)
+    for i from floor(n/2) - 1 down to 0:// Build max heap from array
+        heapify(array, n, i)
+    for end from n - 1 down to 1:// Extract elements from heap and reduce heap size
+        swap array[0], array[end]
+        heapify(array, end, 0)
+function heapify(array, heapSize, root):
+    largest = root
+    left = 2 * root + 1
+    right = 2 * root + 2
+    if left < heapSize and array[left] > array[largest]:largest = left
+    if right < heapSize and array[right] > array[largest]:largest = right
+    if largest != root:
+        swap array[root], array[largest]
+        heapify(array, heapSize, largest)`}
           </pre>
         </CardContent>
       </Card>
@@ -352,7 +356,7 @@ const FlowchartSection = () => (
 const AdvantagesSection = () => (
   <Card className="h-full algo-card">
     <CardContent className="p-4 sm:p-8 h-full flex flex-col">
-      <h1 className="section-title gradient-text">Advantages of Heap Sort</h1>
+      <h1 className="section-title gradient-text">Advantages and Disadvantages of Heap Sort</h1>
       <div className="grid md:grid-cols-2 gap-6 flex-1">
         <div className="space-y-4">
           <h3 className="text-lg sm:text-xl font-semibold mb-3 text-green-600 flex items-center gap-2">
@@ -364,19 +368,19 @@ const AdvantagesSection = () => (
           <ul className="space-y-3">
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Simple to understand and implement</span>
+              <span className="text-sm sm:text-base">In-place sorting algorithm; requires only a constant amount of extra space</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Works on both sorted and unsorted arrays</span>
+              <span className="text-sm sm:text-base">Has a guaranteed time complexity of O(n log n) for all cases</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">No additional memory required (in-place)</span>
+              <span className="text-sm sm:text-base">Good for large data sets and does not degrade to O(n²)</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Works well for small datasets</span>
+              <span className="text-sm sm:text-base">Not sensitive to initial ordering of elements</span>
             </li>
           </ul>
         </div>
@@ -390,15 +394,15 @@ const AdvantagesSection = () => (
           <ul className="space-y-3">
             <li className="flex items-start gap-3 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
               <X className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Inefficient for large datasets</span>
+              <span className="text-sm sm:text-base">Typically slower in practice compared to QuickSort and MergeSort</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
               <X className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Time complexity is O(n) in worst case</span>
+              <span className="text-sm sm:text-base">Not a stable sorting algorithm (relative order of equal elements may change)</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
               <X className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Not suitable for real-time applications with large data</span>
+              <span className="text-sm sm:text-base">More complex to implement correctly than some other sorting algorithms</span>
             </li>
           </ul>
         </div>
@@ -406,6 +410,7 @@ const AdvantagesSection = () => (
     </CardContent>
   </Card>
 );
+
 
 const ExamplesSection = () => (
   <Card className="h-full algo-card">
@@ -417,38 +422,39 @@ const ExamplesSection = () => (
             <div className="feature-icon p-2">
               <Target className="w-4 h-4" />
             </div>
-            Example 1: Finding a number
+            Example 1: Building a Max Heap
           </h3>
-          <p className="mb-3 text-sm sm:text-base font-medium">Array: [4, 2, 7, 1, 9, 3], Target: 7</p>
+          <p className="mb-3 text-sm sm:text-base font-medium">Array: [4, 10, 3, 5, 1]</p>
           <div className="bg-muted/50 p-4 rounded-lg font-mono text-xs sm:text-sm border border-primary/10">
-            <div className="text-blue-600 dark:text-blue-400">Step 1: Check array[0] = 4, not equal to 7</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 2: Check array[1] = 2, not equal to 7</div>
-            <div className="text-green-600 dark:text-green-400 font-semibold">Step 3: Check array[2] = 7, equal to 7! Return index 2</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 1: Heapify subtree rooted at index 1 (value 10)</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 2: Heapify subtree rooted at index 0 (value 4)</div>
+            <div className="text-green-600 dark:text-green-400 font-semibold">Resulting Max Heap: [10, 5, 3, 4, 1]</div>
           </div>
         </div>
-        
+
         <div className="glass-card p-4 sm:p-6 rounded-xl border border-primary/20">
           <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary flex items-center gap-2">
             <div className="feature-icon p-2">
               <Target className="w-4 h-4" />
             </div>
-            Example 2: Element not found
+            Example 2: Extracting the Max Element and Sorting
           </h3>
-          <p className="mb-3 text-sm sm:text-base font-medium">Array: [4, 2, 7, 1, 9, 3], Target: 5</p>
+          <p className="mb-3 text-sm sm:text-base font-medium">Initial Max Heap: [10, 5, 3, 4, 1]</p>
           <div className="bg-muted/50 p-4 rounded-lg font-mono text-xs sm:text-sm border border-primary/10">
-            <div className="text-blue-600 dark:text-blue-400">Step 1: Check array[0] = 4, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 2: Check array[1] = 2, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 3: Check array[2] = 7, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 4: Check array[3] = 1, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 5: Check array[4] = 9, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 6: Check array[5] = 3, not equal to 5</div>
-            <div className="text-red-600 dark:text-red-400 font-semibold">End of array reached. Return -1 (not found)</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 1: Swap root (10) with last element (1)</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 2: Reduce heap size and heapify root</div>
+            <div className="text-blue-600 dark:text-blue-400">Heap after heapify: [5, 4, 3, 1]</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 3: Swap root (5) with last element (1)</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 4: Heapify root</div>
+            <div className="text-blue-600 dark:text-blue-400">Heap after heapify: [4, 1, 3]</div>
+            <div className="text-green-600 dark:text-green-400 font-semibold">Sorted array: [1, 3, 4, 5, 10]</div>
           </div>
         </div>
       </div>
     </CardContent>
   </Card>
 );
+
 
 const TimeComplexitySection = () => (
   <Card className="h-full algo-card">
@@ -458,24 +464,30 @@ const TimeComplexitySection = () => (
         <Card className="glass-card border border-green-200 dark:border-green-800">
           <CardContent className="p-4 sm:p-6 text-center">
             <h3 className="text-base sm:text-lg font-semibold mb-2 text-green-600">Best Case</h3>
-            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(1)</div>
-            <p className="text-xs sm:text-sm text-muted-foreground">Element found at first position</p>
+            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(n log n)</div>
+            <p className="text-xs sm:text-sm text-muted-foreground">
+              Heap construction + sorting even if array is sorted
+            </p>
           </CardContent>
         </Card>
         
         <Card className="glass-card border border-yellow-200 dark:border-yellow-800">
           <CardContent className="p-4 sm:p-6 text-center">
             <h3 className="text-base sm:text-lg font-semibold mb-2 text-yellow-600">Average Case</h3>
-            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(n)</div>
-            <p className="text-xs sm:text-sm text-muted-foreground">Element found at middle position</p>
+            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(n log n)</div>
+            <p className="text-xs sm:text-sm text-muted-foreground">
+              Average case time for building and sorting heap
+            </p>
           </CardContent>
         </Card>
         
         <Card className="glass-card border border-red-200 dark:border-red-800">
           <CardContent className="p-4 sm:p-6 text-center">
             <h3 className="text-base sm:text-lg font-semibold mb-2 text-red-600">Worst Case</h3>
-            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(n)</div>
-            <p className="text-xs sm:text-sm text-muted-foreground">Element at last position or not found</p>
+            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(n log n)</div>
+            <p className="text-xs sm:text-sm text-muted-foreground">
+              Even worst case requires heapifying all elements
+            </p>
           </CardContent>
         </Card>
       </div>
@@ -483,10 +495,10 @@ const TimeComplexitySection = () => (
       <div className="flex-1 overflow-y-auto">
         <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">Explanation</h3>
         <p className="text-sm sm:text-base leading-relaxed">
-          In Heap Sort, we may need to check every element in the worst case. 
-          If the array has n elements, we might need to perform n comparisons. 
-          Therefore, the time complexity is O(n), which means the algorithm's 
-          performance scales linearly with the input size.
+          Heap Sort first builds a max heap from the input array in O(n) time, then 
+          repeatedly extracts the maximum element and re-heapifies the heap, which 
+          takes O(log n) time for each of the n elements. This results in an overall 
+          time complexity of O(n log n) for all cases, making it efficient and predictable.
         </p>
       </div>
     </CardContent>
@@ -507,30 +519,31 @@ const SpaceComplexitySection = () => (
         <ul className="space-y-3">
           <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span className="text-sm sm:text-base">Heap Sort only uses a fixed amount of extra space</span>
+            <span className="text-sm sm:text-base">Heap Sort sorts the array in-place without needing extra arrays.</span>
           </li>
           <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span className="text-sm sm:text-base">We only need variables for the loop counter and comparison</span>
+            <span className="text-sm sm:text-base">Only a small, fixed number of variables for swaps and indices are used.</span>
           </li>
           <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span className="text-sm sm:text-base">The space used doesn't grow with the input size</span>
+            <span className="text-sm sm:text-base">Memory usage does not grow with input size.</span>
           </li>
           <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span className="text-sm sm:text-base">No additional data structures are required</span>
+            <span className="text-sm sm:text-base">No additional data structures like arrays or heaps outside the input array are required.</span>
           </li>
         </ul>
         
         <p className="mt-4 text-sm sm:text-base leading-relaxed">
-          This makes Heap Sort very memory-efficient, as it doesn't require 
-          any additional space proportional to the input size.
+          This constant space usage makes Heap Sort very efficient in terms of memory,
+          suitable for memory-constrained environments.
         </p>
       </div>
     </CardContent>
   </Card>
 );
+
 
 const SimulationSection = () => (
   <>
