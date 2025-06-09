@@ -36,7 +36,7 @@ const HeroSection: React.FC = () => {
 
               <div className="flex flex-wrap gap-4">
                 {/* Wrap the Button with Link to scroll to the 'learning-paths' ID */}
-                <Link to="/#learning-paths">
+                <Link to="/Curriculum">
                   <Button size="lg" className="cta-button">
                     View curriculum
                     <ArrowRight className="ml-1 h-4 w-4" />

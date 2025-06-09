@@ -4,7 +4,6 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { Link } from 'react-router-dom';
-import VisualizationPlayback from '../datastructures/linear/VisualizationPlayback';
 import { 
   ChevronLeft,
   User,
@@ -12,7 +11,7 @@ import {
   Play,
   Code,
   GitBranch,
-  Clock,  
+  Clock,
   Database,
   Target,
   Trophy,
@@ -23,7 +22,7 @@ import {
   Minimize
 } from 'lucide-react';
 
-const LinearSearch = () => {
+const BubbleSort = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
   const [sidebarOpen, setSidebarOpen] = useState(true); // Changed to true for default visibility
@@ -41,7 +40,7 @@ const LinearSearch = () => {
     { id: 8, title: 'Try Out Challenges', icon: Trophy, component: 'ChallengesSection' }
   ];
 
-  const progressPercentage = Math.round((completedSteps.length / (steps.length-1)) * 100);
+  const progressPercentage = Math.round((completedSteps.length / steps.length) * 100);
 
   const markAsComplete = () => {
     if (!completedSteps.includes(currentStep)) {
@@ -79,7 +78,7 @@ const LinearSearch = () => {
       case 'SpaceComplexitySection':
         return <SpaceComplexitySection />;
       case 'SimulationSection':
-        return <SimulationSection/>;
+        return <SimulationSection onComplete={() => markAsComplete()} />;
       case 'ChallengesSection':
         return <ChallengesSection onComplete={() => markAsComplete()} />;
       default:
@@ -110,7 +109,7 @@ const LinearSearch = () => {
                   <ChevronLeft className="w-4 h-4" />
                   <span>Back </span>
                 </Link>
-                <div className="text-sm sm:text-lg font-semibold gradient-text truncate">Linear Search</div>
+                <div className="text-sm sm:text-lg font-semibold gradient-text truncate">Bubble Sort</div>
               </div>
               
               <div className="flex items-center gap-2 sm:gap-3">
@@ -267,10 +266,10 @@ const LinearSearch = () => {
 const DescriptionSection = () => (
   <Card className="h-full algo-card">
     <CardContent className="p-4 sm:p-8 h-full">
-      <h1 className="section-title gradient-text">Linear Search Description</h1>
+      <h1 className="section-title gradient-text">Bubble Sort Description</h1>
       <div className="prose max-w-none h-full overflow-y-auto">
         <p className="text-base sm:text-lg mb-4 leading-relaxed">
-          Linear search is a simple searching algorithm that finds the position of a target value within a list. 
+          Bubble Sort is a simple searching algorithm that finds the position of a target value within a list. 
           It sequentially checks each element of the list until a match is found or the whole list has been searched.
         </p>
         <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">How it Works:</h3>
@@ -293,8 +292,8 @@ const DescriptionSection = () => (
           </li>
         </ul>
         <p className="leading-relaxed">
-          Linear search is also known as sequential search because it searches elements in sequence, 
-          one after another.
+          Bubble Sort is also known as sequential search because it searches elements in sequence, 
+          one after another, until the desired element is found or the search is exhausted.
         </p>
       </div>
     </CardContent>
@@ -304,18 +303,18 @@ const DescriptionSection = () => (
 const PseudocodeSection = () => (
   <Card className="h-full algo-card">
     <CardContent className="p-4 sm:p-8 h-full flex flex-col">
-      <h1 className="section-title gradient-text">Linear Search Pseudocode</h1>
+      <h1 className="section-title gradient-text">Bubble Sort Pseudocode</h1>
       <Card className="bg-gray-900 text-green-400 flex-1 border border-primary/20">
         <CardContent className="p-4 sm:p-6 font-mono h-full overflow-y-auto">
           <pre className="whitespace-pre-wrap text-sm sm:text-base">
-{`function linearSearch(array, target):
+{`function BubbleSort(array, target):
     for i from 0 to length(array) - 1:
         if array[i] equals target:
             return i
     return -1
 
 // Alternative implementation with while loop
-function linearSearchWhile(array, target):
+function BubbleSortWhile(array, target):
     i = 0
     while i < length(array):
         if array[i] equals target:
@@ -332,7 +331,7 @@ function linearSearchWhile(array, target):
 const FlowchartSection = () => (
   <Card className="h-full algo-card">
     <CardContent className="p-4 sm:p-8 h-full flex flex-col">
-      <h1 className="section-title gradient-text">Linear Search Flowchart</h1>
+      <h1 className="section-title gradient-text">Bubble Sort Flowchart</h1>
       <div className="flex justify-center items-center flex-1">
         <div className="glass-card p-8 rounded-2xl w-full h-full flex items-center justify-center min-h-[400px] border border-primary/20">
           <div className="text-center">
@@ -352,7 +351,7 @@ const FlowchartSection = () => (
 const AdvantagesSection = () => (
   <Card className="h-full algo-card">
     <CardContent className="p-4 sm:p-8 h-full flex flex-col">
-      <h1 className="section-title gradient-text">Advantages of Linear Search</h1>
+      <h1 className="section-title gradient-text">Advantages of Bubble Sort</h1>
       <div className="grid md:grid-cols-2 gap-6 flex-1">
         <div className="space-y-4">
           <h3 className="text-lg sm:text-xl font-semibold mb-3 text-green-600 flex items-center gap-2">
@@ -364,7 +363,7 @@ const AdvantagesSection = () => (
           <ul className="space-y-3">
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Simple to Understand and implement</span>
+              <span className="text-sm sm:text-base">Simple to understand and implement</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
@@ -410,7 +409,7 @@ const AdvantagesSection = () => (
 const ExamplesSection = () => (
   <Card className="h-full algo-card">
     <CardContent className="p-4 sm:p-8 h-full flex flex-col">
-      <h1 className="section-title gradient-text">Linear Search Examples</h1>
+      <h1 className="section-title gradient-text">Bubble Sort Examples</h1>
       <div className="space-y-6 flex-1 overflow-y-auto">
         <div className="glass-card p-4 sm:p-6 rounded-xl border border-primary/20">
           <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary flex items-center gap-2">
@@ -483,7 +482,7 @@ const TimeComplexitySection = () => (
       <div className="flex-1 overflow-y-auto">
         <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">Explanation</h3>
         <p className="text-sm sm:text-base leading-relaxed">
-          In linear search, we may need to check every element in the worst case. 
+          In Bubble Sort, we may need to check every element in the worst case. 
           If the array has n elements, we might need to perform n comparisons. 
           Therefore, the time complexity is O(n), which means the algorithm's 
           performance scales linearly with the input size.
@@ -507,7 +506,7 @@ const SpaceComplexitySection = () => (
         <ul className="space-y-3">
           <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span className="text-sm sm:text-base">Linear search only uses a fixed amount of extra space</span>
+            <span className="text-sm sm:text-base">Bubble Sort only uses a fixed amount of extra space</span>
           </li>
           <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
@@ -524,7 +523,7 @@ const SpaceComplexitySection = () => (
         </ul>
         
         <p className="mt-4 text-sm sm:text-base leading-relaxed">
-          This makes linear search very memory-efficient, as it doesn't require 
+          This makes Bubble Sort very memory-efficient, as it doesn't require 
           any additional space proportional to the input size.
         </p>
       </div>
@@ -532,10 +531,23 @@ const SpaceComplexitySection = () => (
   </Card>
 );
 
-const SimulationSection = () => (
-  <>
-  <VisualizationPlayback />
-  </>
+const SimulationSection = ({ onComplete }: { onComplete: () => void }) => (
+  <Card className="h-full algo-card">
+    <CardContent className="p-4 sm:p-8 h-full flex flex-col">
+      <h1 className="section-title gradient-text">Interactive Simulation</h1>
+      <div className="glass-card p-8 sm:p-12 rounded-2xl text-center flex-1 flex flex-col items-center justify-center min-h-[400px] border border-primary/20">
+        <div className="feature-icon mx-auto mb-6">
+          <Target className="w-12 h-12 sm:w-16 sm:h-16" />
+        </div>
+        <p className="text-base sm:text-lg text-muted-foreground mb-6 max-w-md leading-relaxed">
+          Interactive simulation component would be implemented here with step-by-step visualization
+        </p>
+        <Button onClick={onComplete} className="cta-button">
+          Complete Simulation
+        </Button>
+      </div>
+    </CardContent>
+  </Card>
 );
 
 const ChallengesSection = ({ onComplete }: { onComplete: () => void }) => (
@@ -557,4 +569,4 @@ const ChallengesSection = ({ onComplete }: { onComplete: () => void }) => (
   </Card>
 );
 
-export default LinearSearch;
+export default BubbleSort;

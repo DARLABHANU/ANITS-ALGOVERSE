@@ -1,10 +1,9 @@
-
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { ArrowRight, DatabaseIcon, Brain } from "lucide-react";
+import { ArrowRight, DatabaseIcon } from "lucide-react"; // Removed Brain icon as it's no longer needed
 import { Link } from "react-router-dom";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils"; // cn is likely used for class utility, keeping it in case it's used elsewhere
 
 const ExploreSection: React.FC = () => {
   return (
@@ -32,10 +31,11 @@ const ExploreSection: React.FC = () => {
           </p>
         </motion.div>
         
-        <div className="grid md:grid-cols-2 gap-8 lg:gap-16 max-w-5xl mx-auto">
+        {/* Adjusted grid to display only one card, centered */}
+        <div className="grid md:grid-cols-1 place-items-center gap-8 lg:gap-16 max-w-5xl mx-auto">
           {/* Data Structures Card */}
           <motion.div 
-            className="glass-card rounded-2xl p-8 shadow-xl relative overflow-hidden border border-primary/20"
+            className="glass-card rounded-2xl p-8 shadow-xl relative overflow-hidden border border-primary/20 w-full md:max-w-md" /* Added max-w-md for better centering on larger screens */
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -47,7 +47,7 @@ const ExploreSection: React.FC = () => {
               <DatabaseIcon className="h-6 w-6 text-primary" />
             </div>
             
-            <h3 className="text-2xl font-bold mb-4">Data Structures</h3>
+            <h3 className="text-2xl font-bold mb-4">DSA & DAA</h3>
             <p className="text-foreground/70 mb-6">
               Master the fundamental building blocks that power efficient software. Learn how to organize and manipulate data for optimal performance.
             </p>
@@ -72,15 +72,15 @@ const ExploreSection: React.FC = () => {
               <div className="flex items-start gap-3">
                 <span className="text-primary font-bold mt-1">•</span>
                 <div>
-                  <h4 className="font-medium">time& space Complexity</h4>
-                  <p className="text-sm text-foreground/60">Analyzing timeand space complexity of the algorithms</p>
+                  <h4 className="font-medium">Time & Space Complexity</h4>
+                  <p className="text-sm text-foreground/60">Analyzing time and space complexity of the algorithms</p>
                 </div>
               </div>
               
               <div className="flex items-start gap-3">
                 <span className="text-primary font-bold mt-1">•</span>
                 <div>
-                  <h4 className="font-medium">Advanced data structures</h4>
+                  <h4 className="font-medium">Advanced Data Structures</h4>
                   <p className="text-sm text-foreground/60"> optimal data structures</p>
                 </div>
               </div>
@@ -89,66 +89,6 @@ const ExploreSection: React.FC = () => {
             <Link to="/DataStructures">
             <Button className="w-full rounded-xl group bg-secondary hover:bg-secondary/90" >
               <span>Explore Data Structures</span>
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Button>
-            </Link>
-          </motion.div>
-          
-          {/* Algorithms Card */}
-          <motion.div 
-            className="glass-card rounded-2xl p-8 shadow-xl relative overflow-hidden border border-secondary/20"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            <div className="absolute -left-16 -top-16 w-32 h-32 bg-secondary/10 rounded-full blur-2xl"></div>
-            
-            <div className="bg-secondary/10 dark:bg-secondary/20 p-3 rounded-xl inline-flex items-center justify-center mb-6">
-              <Brain className="h-6 w-6 text-secondary" />
-            </div>
-            
-            <h3 className="text-2xl font-bold mb-4">Algorithms</h3>
-            <p className="text-foreground/70 mb-6">
-              Learn systematic approaches to problem-solving that power everything from search engines to artificial intelligence.
-            </p>
-            
-            <div className="space-y-4 mb-8">
-              <div className="flex items-start gap-3">
-                <span className="text-secondary font-bold mt-1">•</span>
-                <div>
-                  <h4 className="font-medium">Sorting & Searching</h4>
-                  <p className="text-sm text-foreground/60">Organizing and finding data efficiently</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start gap-3">
-                <span className="text-secondary font-bold mt-1">•</span>
-                <div>
-                  <h4 className="font-medium">Graph Algorithms</h4>
-                  <p className="text-sm text-foreground/60">Network analysis and pathfinding</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start gap-3">
-                <span className="text-secondary font-bold mt-1">•</span>
-                <div>
-                  <h4 className="font-medium">Dynamic Programming</h4>
-                  <p className="text-sm text-foreground/60">Optimization through subproblem solutions</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start gap-3">
-                <span className="text-secondary font-bold mt-1">•</span>
-                <div>
-                  <h4 className="font-medium">Greedy Algorithms</h4>
-                  <p className="text-sm text-foreground/60">Making locally optimal choices</p>
-                </div>
-              </div>
-            </div>
-            <Link to="/Algorithms">
-            <Button className="w-full rounded-xl bg-secondary hover:bg-secondary/90 group">
-              <span>Explore Algorithms</span>
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Button>
             </Link>
