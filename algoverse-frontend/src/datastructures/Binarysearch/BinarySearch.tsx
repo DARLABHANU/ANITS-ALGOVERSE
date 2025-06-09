@@ -269,36 +269,41 @@ const DescriptionSection = () => (
       <h1 className="section-title gradient-text">Binary Search Description</h1>
       <div className="prose max-w-none h-full overflow-y-auto">
         <p className="text-base sm:text-lg mb-4 leading-relaxed">
-          Binary Search is a simple searching algorithm that finds the position of a target value within a list. 
-          It sequentially checks each element of the list until a match is found or the whole list has been searched.
+          Binary Search is an efficient algorithm for finding an item from a **sorted** list of elements.
+          It works by repeatedly dividing the search interval in half, significantly reducing the number of comparisons needed.
         </p>
         <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">How it Works:</h3>
         <ul className="space-y-3 mb-6">
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span>Start from the first element of the array</span>
+            <span>Start with the entire sorted array (or the defined start and end indexes).</span>
           </li>
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span>Compare each element with the target value</span>
+            <span>Find the middle element of the current range.</span>
           </li>
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span>If a match is found, return the index</span>
+            <span>If the middle element matches the target, return its index.</span>
           </li>
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span>If no match is found after checking all elements, return -1</span>
+            <span>If the target is smaller, repeat the search on the left half.</span>
+          </li>
+          <li className="flex items-start gap-3">
+            <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
+            <span>If the target is larger, repeat the search on the right half.</span>
           </li>
         </ul>
         <p className="leading-relaxed">
-          Binary Search is also known as sequential search because it searches elements in sequence, 
-          one after another, until the desired element is found or the search is exhausted.
+          Binary Search has a time complexity of <strong>O(log n)</strong>, making it much faster than linear search for large sorted datasets.
+          It is commonly used in search engines, databases, and anywhere fast lookup is required.
         </p>
       </div>
     </CardContent>
   </Card>
 );
+
 
 const PseudocodeSection = () => (
   <Card className="h-full algo-card">
@@ -308,18 +313,17 @@ const PseudocodeSection = () => (
         <CardContent className="p-4 sm:p-6 font-mono h-full overflow-y-auto">
           <pre className="whitespace-pre-wrap text-sm sm:text-base">
 {`function BinarySearch(array, target):
-    for i from 0 to length(array) - 1:
-        if array[i] equals target:
-            return i
-    return -1
+    low = 0
+    high = length(array) - 1
 
-// Alternative implementation with while loop
-function BinarySearchWhile(array, target):
-    i = 0
-    while i < length(array):
-        if array[i] equals target:
-            return i
-        i = i + 1
+    while low <= high:
+        mid = floor((low + high) / 2)
+        if array[mid] == target:
+            return mid
+        else if array[mid] < target:
+            low = mid + 1
+        else:
+            high = mid - 1
     return -1`}
           </pre>
         </CardContent>
@@ -327,6 +331,7 @@ function BinarySearchWhile(array, target):
     </CardContent>
   </Card>
 );
+
 
 const FlowchartSection = () => (
   <Card className="h-full algo-card">
@@ -363,19 +368,19 @@ const AdvantagesSection = () => (
           <ul className="space-y-3">
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Simple to understand and implement</span>
+              <span className="text-sm sm:text-base">Much faster than linear search for large datasets</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Works on both sorted and unsorted arrays</span>
+              <span className="text-sm sm:text-base">Time complexity is O(log n), making it very efficient</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">No additional memory required (in-place)</span>
+              <span className="text-sm sm:text-base">Requires minimal memory (in-place search)</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Works well for small datasets</span>
+              <span className="text-sm sm:text-base">Ideal for static, sorted datasets</span>
             </li>
           </ul>
         </div>
@@ -389,15 +394,15 @@ const AdvantagesSection = () => (
           <ul className="space-y-3">
             <li className="flex items-start gap-3 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
               <X className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Inefficient for large datasets</span>
+              <span className="text-sm sm:text-base">Requires the array to be sorted beforehand</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
               <X className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Time complexity is O(n) in worst case</span>
+              <span className="text-sm sm:text-base">Not suitable for dynamic datasets with frequent updates</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
               <X className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Not suitable for real-time applications with large data</span>
+              <span className="text-sm sm:text-base">Less efficient than hash-based methods for random access</span>
             </li>
           </ul>
         </div>
@@ -405,6 +410,7 @@ const AdvantagesSection = () => (
     </CardContent>
   </Card>
 );
+
 
 const ExamplesSection = () => (
   <Card className="h-full algo-card">
@@ -418,11 +424,11 @@ const ExamplesSection = () => (
             </div>
             Example 1: Finding a number
           </h3>
-          <p className="mb-3 text-sm sm:text-base font-medium">Array: [4, 2, 7, 1, 9, 3], Target: 7</p>
+          <p className="mb-3 text-sm sm:text-base font-medium">Array: [1, 2, 3, 4, 7, 9], Target: 7</p>
           <div className="bg-muted/50 p-4 rounded-lg font-mono text-xs sm:text-sm border border-primary/10">
-            <div className="text-blue-600 dark:text-blue-400">Step 1: Check array[0] = 4, not equal to 7</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 2: Check array[1] = 2, not equal to 7</div>
-            <div className="text-green-600 dark:text-green-400 font-semibold">Step 3: Check array[2] = 7, equal to 7! Return index 2</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 1: Check middle element array[2] = 3, not equal to 7</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 2: Target &gt; 3, search right half</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 3: Check middle element of right half array[4] = 7, equal to 7! Return index 4</div>
           </div>
         </div>
         
@@ -433,21 +439,21 @@ const ExamplesSection = () => (
             </div>
             Example 2: Element not found
           </h3>
-          <p className="mb-3 text-sm sm:text-base font-medium">Array: [4, 2, 7, 1, 9, 3], Target: 5</p>
+          <p className="mb-3 text-sm sm:text-base font-medium">Array: [1, 2, 3, 4, 7, 9], Target: 5</p>
           <div className="bg-muted/50 p-4 rounded-lg font-mono text-xs sm:text-sm border border-primary/10">
-            <div className="text-blue-600 dark:text-blue-400">Step 1: Check array[0] = 4, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 2: Check array[1] = 2, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 3: Check array[2] = 7, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 4: Check array[3] = 1, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 5: Check array[4] = 9, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 6: Check array[5] = 3, not equal to 5</div>
-            <div className="text-red-600 dark:text-red-400 font-semibold">End of array reached. Return -1 (not found)</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 1: Check middle element array[2] = 3, not equal to 5</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 2: Target &gt; 3, search right half</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 3: Check middle element of right half array[4] = 7, not equal to 5</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 4: Target &lt; 7, search left half of this segment</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 5: Check element array[3] = 4, not equal to 5</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 6: No elements left to check. Return -1 (not found)</div>
           </div>
         </div>
       </div>
     </CardContent>
   </Card>
 );
+
 
 const TimeComplexitySection = () => (
   <Card className="h-full algo-card">
@@ -458,23 +464,23 @@ const TimeComplexitySection = () => (
           <CardContent className="p-4 sm:p-6 text-center">
             <h3 className="text-base sm:text-lg font-semibold mb-2 text-green-600">Best Case</h3>
             <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(1)</div>
-            <p className="text-xs sm:text-sm text-muted-foreground">Element found at first position</p>
+            <p className="text-xs sm:text-sm text-muted-foreground">Element found at the middle position immediately</p>
           </CardContent>
         </Card>
         
         <Card className="glass-card border border-yellow-200 dark:border-yellow-800">
           <CardContent className="p-4 sm:p-6 text-center">
             <h3 className="text-base sm:text-lg font-semibold mb-2 text-yellow-600">Average Case</h3>
-            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(n)</div>
-            <p className="text-xs sm:text-sm text-muted-foreground">Element found at middle position</p>
+            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(log n)</div>
+            <p className="text-xs sm:text-sm text-muted-foreground">Element found after multiple divisions of search space</p>
           </CardContent>
         </Card>
         
         <Card className="glass-card border border-red-200 dark:border-red-800">
           <CardContent className="p-4 sm:p-6 text-center">
             <h3 className="text-base sm:text-lg font-semibold mb-2 text-red-600">Worst Case</h3>
-            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(n)</div>
-            <p className="text-xs sm:text-sm text-muted-foreground">Element at last position or not found</p>
+            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(log n)</div>
+            <p className="text-xs sm:text-sm text-muted-foreground">Element not found or at extreme ends after all divisions</p>
           </CardContent>
         </Card>
       </div>
@@ -482,15 +488,18 @@ const TimeComplexitySection = () => (
       <div className="flex-1 overflow-y-auto">
         <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">Explanation</h3>
         <p className="text-sm sm:text-base leading-relaxed">
-          In Binary Search, we may need to check every element in the worst case. 
-          If the array has n elements, we might need to perform n comparisons. 
-          Therefore, the time complexity is O(n), which means the algorithm's 
-          performance scales linearly with the input size.
+          Binary Search efficiently finds an element in a sorted array by repeatedly 
+          dividing the search interval in half. At each step, it compares the target 
+          with the middle element and decides which half to continue searching. This 
+          halving process results in a logarithmic time complexity, O(log n), for average 
+          and worst cases. The best case occurs when the middle element itself is the target, 
+          requiring only one comparison, O(1).
         </p>
       </div>
     </CardContent>
   </Card>
 );
+
 
 const SpaceComplexitySection = () => (
   <Card className="h-full algo-card">

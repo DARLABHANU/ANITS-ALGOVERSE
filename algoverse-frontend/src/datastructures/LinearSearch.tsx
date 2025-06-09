@@ -270,22 +270,22 @@ const DescriptionSection = () => (
       <h1 className="section-title gradient-text">Linear Search Description</h1>
       <div className="prose max-w-none h-full overflow-y-auto">
         <p className="text-base sm:text-lg mb-4 leading-relaxed">
-          Linear search is a simple searching algorithm that finds the position of a target value within a list. 
-          It sequentially checks each element of the list until a match is found or the whole list has been searched.
+          Linear search, also known as sequential search, is a straightforward algorithm used to locate a target value within a list. 
+          It operates by checking each element in the list one by one until the target is found or the entire list has been searched.
         </p>
         <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">How it Works:</h3>
         <ul className="space-y-3 mb-6">
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span>Start from the first element of the array</span>
+            <span>Begin with the first element of the array</span>
           </li>
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span>Compare each element with the target value</span>
+            <span>Compare the current element with the target value</span>
           </li>
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span>If a match is found, return the index</span>
+            <span>If a match is found, return the index of the element</span>
           </li>
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
@@ -293,8 +293,7 @@ const DescriptionSection = () => (
           </li>
         </ul>
         <p className="leading-relaxed">
-          Linear search is also known as sequential search because it searches elements in sequence, 
-          one after another, until the desired element is found or the search is exhausted.
+          Linear search is particularly useful for small datasets or unsorted lists, as it does not require any prior arrangement of the data.
         </p>
       </div>
     </CardContent>
@@ -314,7 +313,7 @@ const PseudocodeSection = () => (
             return i
     return -1
 
-// Alternative implementation with while loop
+// Alternative implementation using a while loop
 function linearSearchWhile(array, target):
     i = 0
     while i < length(array):
@@ -364,19 +363,19 @@ const AdvantagesSection = () => (
           <ul className="space-y-3">
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Simple to Understand and implement</span>
+              <span className="text-sm sm:text-base">Easy to understand and implement</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Works on both sorted and unsorted arrays</span>
+              <span className="text-sm sm:text-base">Applicable to both sorted and unsorted arrays</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">No additional memory required (in-place)</span>
+              <span className="text-sm sm:text-base">Requires no additional memory (in-place search)</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Works well for small datasets</span>
+              <span className="text-sm sm:text-base">Effective for small datasets</span>
             </li>
           </ul>
         </div>
@@ -394,7 +393,7 @@ const AdvantagesSection = () => (
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
               <X className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Time complexity is O(n) in worst case</span>
+              <span className="text-sm sm:text-base">Time complexity is O(n) in the worst case</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
               <X className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
@@ -459,7 +458,7 @@ const TimeComplexitySection = () => (
           <CardContent className="p-4 sm:p-6 text-center">
             <h3 className="text-base sm:text-lg font-semibold mb-2 text-green-600">Best Case</h3>
             <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(1)</div>
-            <p className="text-xs sm:text-sm text-muted-foreground">Element found at first position</p>
+            <p className="text-xs sm:text-sm text-muted-foreground">Element found at the first position</p>
           </CardContent>
         </Card>
         
@@ -467,7 +466,7 @@ const TimeComplexitySection = () => (
           <CardContent className="p-4 sm:p-6 text-center">
             <h3 className="text-base sm:text-lg font-semibold mb-2 text-yellow-600">Average Case</h3>
             <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(n)</div>
-            <p className="text-xs sm:text-sm text-muted-foreground">Element found at middle position</p>
+            <p className="text-xs sm:text-sm text-muted-foreground">Element found at a random position</p>
           </CardContent>
         </Card>
         
@@ -475,7 +474,7 @@ const TimeComplexitySection = () => (
           <CardContent className="p-4 sm:p-6 text-center">
             <h3 className="text-base sm:text-lg font-semibold mb-2 text-red-600">Worst Case</h3>
             <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(n)</div>
-            <p className="text-xs sm:text-sm text-muted-foreground">Element at last position or not found</p>
+            <p className="text-xs sm:text-sm text-muted-foreground">Element at the last position or not found</p>
           </CardContent>
         </Card>
       </div>
@@ -483,9 +482,9 @@ const TimeComplexitySection = () => (
       <div className="flex-1 overflow-y-auto">
         <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">Explanation</h3>
         <p className="text-sm sm:text-base leading-relaxed">
-          In linear search, we may need to check every element in the worst case. 
-          If the array has n elements, we might need to perform n comparisons. 
-          Therefore, the time complexity is O(n), which means the algorithm's 
+          In linear search, the algorithm may need to check every element in the worst case. 
+          If the array has n elements, it might require n comparisons. 
+          Thus, the time complexity is O(n), indicating that the algorithm's 
           performance scales linearly with the input size.
         </p>
       </div>
@@ -507,15 +506,15 @@ const SpaceComplexitySection = () => (
         <ul className="space-y-3">
           <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span className="text-sm sm:text-base">Linear search only uses a fixed amount of extra space</span>
+            <span className="text-sm sm:text-base">Linear search only requires a fixed amount of extra space</span>
           </li>
           <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span className="text-sm sm:text-base">We only need variables for the loop counter and comparison</span>
+            <span className="text-sm sm:text-base">Only variables for the loop counter and comparison are needed</span>
           </li>
           <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span className="text-sm sm:text-base">The space used doesn't grow with the input size</span>
+            <span className="text-sm sm:text-base">The space used does not grow with the input size</span>
           </li>
           <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
@@ -524,7 +523,7 @@ const SpaceComplexitySection = () => (
         </ul>
         
         <p className="mt-4 text-sm sm:text-base leading-relaxed">
-          This makes linear search very memory-efficient, as it doesn't require 
+          This makes linear search very memory-efficient, as it does not require 
           any additional space proportional to the input size.
         </p>
       </div>
@@ -558,3 +557,4 @@ const ChallengesSection = ({ onComplete }: { onComplete: () => void }) => (
 );
 
 export default LinearSearch;
+
