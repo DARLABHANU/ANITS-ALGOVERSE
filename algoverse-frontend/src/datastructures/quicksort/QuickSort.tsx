@@ -109,7 +109,7 @@ const QuickSort = () => {
                   <ChevronLeft className="w-4 h-4" />
                   <span>Back </span>
                 </Link>
-                <div className="text-sm sm:text-lg font-semibold gradient-text truncate">Linear Search</div>
+                <div className="text-sm sm:text-lg font-semibold gradient-text truncate">QuickSort</div>
               </div>
               
               <div className="flex items-center gap-2 sm:gap-3">
@@ -266,10 +266,10 @@ const QuickSort = () => {
 const DescriptionSection = () => (
   <Card className="h-full algo-card">
     <CardContent className="p-4 sm:p-8 h-full">
-      <h1 className="section-title gradient-text">Linear Search Description</h1>
+      <h1 className="section-title gradient-text">QuickSort Description</h1>
       <div className="prose max-w-none h-full overflow-y-auto">
         <p className="text-base sm:text-lg mb-4 leading-relaxed">
-          Linear search is a simple searching algorithm that finds the position of a target value within a list. 
+          QuickSort is a simple searching algorithm that finds the position of a target value within a list. 
           It sequentially checks each element of the list until a match is found or the whole list has been searched.
         </p>
         <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">How it Works:</h3>
@@ -292,7 +292,7 @@ const DescriptionSection = () => (
           </li>
         </ul>
         <p className="leading-relaxed">
-          Linear search is also known as sequential search because it searches elements in sequence, 
+          QuickSort is also known as sequential search because it searches elements in sequence, 
           one after another, until the desired element is found or the search is exhausted.
         </p>
       </div>
@@ -303,7 +303,7 @@ const DescriptionSection = () => (
 const PseudocodeSection = () => (
   <Card className="h-full algo-card">
     <CardContent className="p-4 sm:p-8 h-full flex flex-col">
-      <h1 className="section-title gradient-text">Linear Search Pseudocode</h1>
+      <h1 className="section-title gradient-text">QuickSort Pseudocode</h1>
       <Card className="bg-gray-900 text-green-400 flex-1 border border-primary/20">
         <CardContent className="p-4 sm:p-6 font-mono h-full overflow-y-auto">
           <pre className="whitespace-pre-wrap text-sm sm:text-base">
@@ -331,7 +331,7 @@ function QuickSortWhile(array, target):
 const FlowchartSection = () => (
   <Card className="h-full algo-card">
     <CardContent className="p-4 sm:p-8 h-full flex flex-col">
-      <h1 className="section-title gradient-text">Linear Search Flowchart</h1>
+      <h1 className="section-title gradient-text">QuickSort Flowchart</h1>
       <div className="flex justify-center items-center flex-1">
         <div className="glass-card p-8 rounded-2xl w-full h-full flex items-center justify-center min-h-[400px] border border-primary/20">
           <div className="text-center">
@@ -351,7 +351,7 @@ const FlowchartSection = () => (
 const AdvantagesSection = () => (
   <Card className="h-full algo-card">
     <CardContent className="p-4 sm:p-8 h-full flex flex-col">
-      <h1 className="section-title gradient-text">Advantages of Linear Search</h1>
+      <h1 className="section-title gradient-text">Advantages of QuickSort</h1>
       <div className="grid md:grid-cols-2 gap-6 flex-1">
         <div className="space-y-4">
           <h3 className="text-lg sm:text-xl font-semibold mb-3 text-green-600 flex items-center gap-2">
@@ -409,7 +409,7 @@ const AdvantagesSection = () => (
 const ExamplesSection = () => (
   <Card className="h-full algo-card">
     <CardContent className="p-4 sm:p-8 h-full flex flex-col">
-      <h1 className="section-title gradient-text">Linear Search Examples</h1>
+      <h1 className="section-title gradient-text">QuickSort Examples</h1>
       <div className="space-y-6 flex-1 overflow-y-auto">
         <div className="glass-card p-4 sm:p-6 rounded-xl border border-primary/20">
           <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary flex items-center gap-2">
@@ -482,7 +482,7 @@ const TimeComplexitySection = () => (
       <div className="flex-1 overflow-y-auto">
         <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">Explanation</h3>
         <p className="text-sm sm:text-base leading-relaxed">
-          In linear search, we may need to check every element in the worst case. 
+          In QuickSort, we may need to check every element in the worst case. 
           If the array has n elements, we might need to perform n comparisons. 
           Therefore, the time complexity is O(n), which means the algorithm's 
           performance scales linearly with the input size.
@@ -506,7 +506,7 @@ const SpaceComplexitySection = () => (
         <ul className="space-y-3">
           <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span className="text-sm sm:text-base">Linear search only uses a fixed amount of extra space</span>
+            <span className="text-sm sm:text-base">QuickSort only uses a fixed amount of extra space</span>
           </li>
           <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
@@ -523,7 +523,7 @@ const SpaceComplexitySection = () => (
         </ul>
         
         <p className="mt-4 text-sm sm:text-base leading-relaxed">
-          This makes linear search very memory-efficient, as it doesn't require 
+          This makes QuickSort very memory-efficient, as it doesn't require 
           any additional space proportional to the input size.
         </p>
       </div>
