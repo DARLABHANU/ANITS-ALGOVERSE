@@ -28,6 +28,7 @@ import Prims from "./datastructures/Prims/Prims";
 import QuickSort from "./datastructures/quicksort/QuickSort";
 import SelectionSort from "./datastructures/selectionsort/SelectionSort";
 import SkipList from "./datastructures/SkipList/SkipList";
+import Curriculum from "./components/Curriculum";
 const queryClient = new QueryClient();
 
 const App = () => {
@@ -66,6 +67,7 @@ const App = () => {
             <Route path="/QuickSort" element={<QuickSort/>} />
             <Route path="/SelectionSort" element={<SelectionSort/>} />
             <Route path="/SkipList" element={<SkipList/>} />
+            <Route path="/Curriculum" element={<Curriculum/>} />
             
             
           </Routes>
