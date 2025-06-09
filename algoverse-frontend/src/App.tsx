@@ -22,6 +22,12 @@ import BinarySearch from "./datastructures/Binarysearch/BinarySearch";
 import BubbleSort from "./datastructures/bubblesort/BubbleSort";
 import Huffman from "./datastructures/Huffmancoding/Huffman";
 import InsertionSort from "./datastructures/insertionsort/Insertion";
+import Jhonson from "./datastructures/johnsontrotter/Jhonson";
+import Kruskals from "./datastructures/Kruskals/Kruskals";
+import Prims from "./datastructures/Prims/Prims";
+import QuickSort from "./datastructures/quicksort/QuickSort";
+import SelectionSort from "./datastructures/selectionsort/SelectionSort";
+import SkipList from "./datastructures/SkipList/SkipList";
 const queryClient = new QueryClient();
 
 const App = () => {
@@ -54,6 +60,13 @@ const App = () => {
             <Route path="/BubbleSort" element={<BubbleSort/>} />
             <Route path="/Huffman" element={<Huffman/>} />
             <Route path="/InsertionSort" element={<InsertionSort/>} />
+            <Route path="/Jhonson" element={<Jhonson/>} />
+            <Route path="/Kruskals" element={<Kruskals/>} />
+            <Route path="/Prims" element={<Prims/>} />
+            <Route path="/QuickSort" element={<QuickSort/>} />
+            <Route path="/SelectionSort" element={<SelectionSort/>} />
+            <Route path="/SkipList" element={<SkipList/>} />
+            
             
           </Routes>
         </BrowserRouter>
