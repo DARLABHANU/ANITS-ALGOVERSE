@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import QuickSortVisualizer from '@/components/Quick Sort/Quick';
+import QuickSortVisualizer from '../Quick Sort/Quick';
 import PseudoCodePanel from './PseudoCodePanel';
 import EnhancedControlBar from './EnhancedControlBar';
 

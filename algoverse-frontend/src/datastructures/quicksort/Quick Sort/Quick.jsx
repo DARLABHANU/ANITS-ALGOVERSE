@@ -5,7 +5,7 @@ import React, {
   forwardRef,
   useImperativeHandle,
 } from 'react';
-import '@/assets/quick.css';
+import './quick.css';
 
 const quickSortCode = [
   { lineNumber: 1, code: "void quickSort(int arr[], int low, int high) {", action: "function_start" },
