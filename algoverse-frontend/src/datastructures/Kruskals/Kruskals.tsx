@@ -269,31 +269,30 @@ const DescriptionSection = () => (
       <h1 className="section-title gradient-text">Kruskals Description</h1>
       <div className="prose max-w-none h-full overflow-y-auto">
         <p className="text-base sm:text-lg mb-4 leading-relaxed">
-          Kruskals is a simple searching algorithm that finds the position of a target value within a list. 
-          It sequentially checks each element of the list until a match is found or the whole list has been searched.
+          Kruskal's Algorithm is a greedy algorithm used to find the Minimum Spanning Tree (MST) of a connected, undirected, and weighted graph. 
+          It focuses on adding the smallest weight edges while avoiding cycles, thereby connecting all vertices with the minimum possible total edge weight.
         </p>
         <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">How it Works:</h3>
         <ul className="space-y-3 mb-6">
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span>Start from the first element of the array</span>
+            <span>Sort all edges in the graph by their weights in ascending order</span>
           </li>
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span>Compare each element with the target value</span>
+            <span>Start with an empty spanning tree</span>
           </li>
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span>If a match is found, return the index</span>
+            <span>Iterate through the sorted edge list and add the edge if it doesn't form a cycle</span>
           </li>
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span>If no match is found after checking all elements, return -1</span>
+            <span>Use Union-Find (Disjoint Set Union) to check for cycles efficiently</span>
           </li>
         </ul>
         <p className="leading-relaxed">
-          Kruskals is also known as sequential search because it searches elements in sequence, 
-          one after another, until the desired element is found or the search is exhausted.
+          Kruskal’s algorithm is especially effective for sparse graphs. It builds the MST by always choosing the smallest available edge that doesn’t violate MST properties.
         </p>
       </div>
     </CardContent>
@@ -307,20 +306,17 @@ const PseudocodeSection = () => (
       <Card className="bg-gray-900 text-green-400 flex-1 border border-primary/20">
         <CardContent className="p-4 sm:p-6 font-mono h-full overflow-y-auto">
           <pre className="whitespace-pre-wrap text-sm sm:text-base">
-{`function Kruskals(array, target):
-    for i from 0 to length(array) - 1:
-        if array[i] equals target:
-            return i
-    return -1
+{`function Kruskals(graph):
+    result = []  // Stores the MST
+    sort all edges in graph by increasing weight
+    initialize disjoint sets for all vertices
 
-// Alternative implementation with while loop
-function KruskalsWhile(array, target):
-    i = 0
-    while i < length(array):
-        if array[i] equals target:
-            return i
-        i = i + 1
-    return -1`}
+    for edge in sorted edges:
+        if adding edge does not form a cycle:
+            add edge to result
+            union the sets of the edge’s vertices
+
+    return result`}
           </pre>
         </CardContent>
       </Card>
@@ -363,19 +359,19 @@ const AdvantagesSection = () => (
           <ul className="space-y-3">
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Simple to understand and implement</span>
+              <span className="text-sm sm:text-base">Efficient for sparse graphs</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Works on both sorted and unsorted arrays</span>
+              <span className="text-sm sm:text-base">Greedy approach ensures globally optimal MST</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">No additional memory required (in-place)</span>
+              <span className="text-sm sm:text-base">Can handle disconnected graphs (builds forest)</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Works well for small datasets</span>
+              <span className="text-sm sm:text-base">Works well when edges are already sorted</span>
             </li>
           </ul>
         </div>
@@ -389,15 +385,15 @@ const AdvantagesSection = () => (
           <ul className="space-y-3">
             <li className="flex items-start gap-3 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
               <X className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Inefficient for large datasets</span>
+              <span className="text-sm sm:text-base">Requires sorting of all edges which can be time-consuming</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
               <X className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Time complexity is O(n) in worst case</span>
+              <span className="text-sm sm:text-base">Not as efficient as Prim’s for dense graphs</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
               <X className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Not suitable for real-time applications with large data</span>
+              <span className="text-sm sm:text-base">Requires use of disjoint-set data structure for cycle detection</span>
             </li>
           </ul>
         </div>
@@ -405,6 +401,7 @@ const AdvantagesSection = () => (
     </CardContent>
   </Card>
 );
+
 
 const ExamplesSection = () => (
   <Card className="h-full algo-card">
@@ -416,32 +413,39 @@ const ExamplesSection = () => (
             <div className="feature-icon p-2">
               <Target className="w-4 h-4" />
             </div>
-            Example 1: Finding a number
+            Example 1: Building a Minimum Spanning Tree
           </h3>
-          <p className="mb-3 text-sm sm:text-base font-medium">Array: [4, 2, 7, 1, 9, 3], Target: 7</p>
+          <p className="mb-3 text-sm sm:text-base font-medium">
+            Graph with vertices: A, B, C, D, E<br />
+            Edges: (A-B, 1), (A-C, 5), (B-C, 3), (B-D, 4), (C-D, 2), (D-E, 7)
+          </p>
           <div className="bg-muted/50 p-4 rounded-lg font-mono text-xs sm:text-sm border border-primary/10">
-            <div className="text-blue-600 dark:text-blue-400">Step 1: Check array[0] = 4, not equal to 7</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 2: Check array[1] = 2, not equal to 7</div>
-            <div className="text-green-600 dark:text-green-400 font-semibold">Step 3: Check array[2] = 7, equal to 7! Return index 2</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 1: Sort all edges by weight: (A-B,1), (C-D,2), (B-C,3), (B-D,4), (A-C,5), (D-E,7)</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 2: Add (A-B), no cycle</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 3: Add (C-D), no cycle</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 4: Add (B-C), connects components, no cycle</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 5: Add (D-E), no cycle</div>
+            <div className="text-green-600 dark:text-green-400 font-semibold">MST completed with edges: (A-B), (C-D), (B-C), (D-E)</div>
           </div>
         </div>
-        
+
         <div className="glass-card p-4 sm:p-6 rounded-xl border border-primary/20">
           <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary flex items-center gap-2">
             <div className="feature-icon p-2">
               <Target className="w-4 h-4" />
             </div>
-            Example 2: Element not found
+            Example 2: Skipping edges to avoid cycles
           </h3>
-          <p className="mb-3 text-sm sm:text-base font-medium">Array: [4, 2, 7, 1, 9, 3], Target: 5</p>
+          <p className="mb-3 text-sm sm:text-base font-medium">
+            Graph: Vertices = [1, 2, 3, 4], Edges = (1-2, 1), (2-3, 2), (3-4, 3), (1-3, 4)
+          </p>
           <div className="bg-muted/50 p-4 rounded-lg font-mono text-xs sm:text-sm border border-primary/10">
-            <div className="text-blue-600 dark:text-blue-400">Step 1: Check array[0] = 4, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 2: Check array[1] = 2, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 3: Check array[2] = 7, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 4: Check array[3] = 1, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 5: Check array[4] = 9, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 6: Check array[5] = 3, not equal to 5</div>
-            <div className="text-red-600 dark:text-red-400 font-semibold">End of array reached. Return -1 (not found)</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 1: Sort edges: (1-2,1), (2-3,2), (3-4,3), (1-3,4)</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 2: Add (1-2), no cycle</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 3: Add (2-3), no cycle</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 4: Add (3-4), no cycle</div>
+            <div className="text-red-600 dark:text-red-400 font-semibold">Step 5: Skip (1-3), it would form a cycle</div>
+            <div className="text-green-600 dark:text-green-400 font-semibold">MST: (1-2), (2-3), (3-4)</div>
           </div>
         </div>
       </div>
@@ -457,79 +461,77 @@ const TimeComplexitySection = () => (
         <Card className="glass-card border border-green-200 dark:border-green-800">
           <CardContent className="p-4 sm:p-6 text-center">
             <h3 className="text-base sm:text-lg font-semibold mb-2 text-green-600">Best Case</h3>
-            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(1)</div>
-            <p className="text-xs sm:text-sm text-muted-foreground">Element found at first position</p>
+            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(E log E)</div>
+            <p className="text-xs sm:text-sm text-muted-foreground">All edges can be added without forming cycles</p>
           </CardContent>
         </Card>
-        
+
         <Card className="glass-card border border-yellow-200 dark:border-yellow-800">
           <CardContent className="p-4 sm:p-6 text-center">
             <h3 className="text-base sm:text-lg font-semibold mb-2 text-yellow-600">Average Case</h3>
-            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(n)</div>
-            <p className="text-xs sm:text-sm text-muted-foreground">Element found at middle position</p>
+            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(E log E)</div>
+            <p className="text-xs sm:text-sm text-muted-foreground">Requires sorting and union-find operations</p>
           </CardContent>
         </Card>
-        
+
         <Card className="glass-card border border-red-200 dark:border-red-800">
           <CardContent className="p-4 sm:p-6 text-center">
             <h3 className="text-base sm:text-lg font-semibold mb-2 text-red-600">Worst Case</h3>
-            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(n)</div>
-            <p className="text-xs sm:text-sm text-muted-foreground">Element at last position or not found</p>
+            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(E log E)</div>
+            <p className="text-xs sm:text-sm text-muted-foreground">Sorting dominates the complexity</p>
           </CardContent>
         </Card>
       </div>
-      
+
       <div className="flex-1 overflow-y-auto">
         <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">Explanation</h3>
         <p className="text-sm sm:text-base leading-relaxed">
-          In Kruskals, we may need to check every element in the worst case. 
-          If the array has n elements, we might need to perform n comparisons. 
-          Therefore, the time complexity is O(n), which means the algorithm's 
-          performance scales linearly with the input size.
+          Kruskal’s algorithm first sorts all the edges by weight, which takes O(E log E) time. Then, it processes each edge and uses
+          union-find (disjoint sets) to determine whether to include it in the MST. Each union/find operation is nearly constant time
+          with path compression (inverse Ackermann function), resulting in total complexity of O(E log E), where E is the number of edges.
+        </p>
+      </div>
+    </CardContent>
+  </Card>
+);
+const SpaceComplexitySection = () => (
+  <Card className="h-full algo-card">
+    <CardContent className="p-4 sm:p-8 h-full flex flex-col">
+      <h1 className="section-title gradient-text">Space Complexity Analysis</h1>
+      <div className="text-center mb-6">
+        <div className="text-4xl sm:text-6xl font-bold gradient-text mb-4">O(V)</div>
+        <p className="text-lg sm:text-xl text-primary font-semibold">Linear Space Complexity</p>
+      </div>
+
+      <div className="prose max-w-none flex-1 overflow-y-auto">
+        <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">Why O(V)?</h3>
+        <ul className="space-y-3">
+          <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
+            <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
+            <span className="text-sm sm:text-base">Kruskal’s algorithm uses a disjoint set (union-find) structure</span>
+          </li>
+          <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
+            <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
+            <span className="text-sm sm:text-base">We store a parent and rank array of size equal to number of vertices</span>
+          </li>
+          <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
+            <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
+            <span className="text-sm sm:text-base">No adjacency matrix or list is required for MST construction</span>
+          </li>
+          <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
+            <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
+            <span className="text-sm sm:text-base">The extra space grows linearly with number of vertices</span>
+          </li>
+        </ul>
+
+        <p className="mt-4 text-sm sm:text-base leading-relaxed">
+          Thus, Kruskal’s algorithm is memory efficient and only requires O(V) extra space to keep track of disjoint sets.
         </p>
       </div>
     </CardContent>
   </Card>
 );
 
-const SpaceComplexitySection = () => (
-  <Card className="h-full algo-card">
-    <CardContent className="p-4 sm:p-8 h-full flex flex-col">
-      <h1 className="section-title gradient-text">Space Complexity Analysis</h1>
-      <div className="text-center mb-6">
-        <div className="text-4xl sm:text-6xl font-bold gradient-text mb-4">O(1)</div>
-        <p className="text-lg sm:text-xl text-primary font-semibold">Constant Space Complexity</p>
-      </div>
-      
-      <div className="prose max-w-none flex-1 overflow-y-auto">
-        <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">Why O(1)?</h3>
-        <ul className="space-y-3">
-          <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
-            <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span className="text-sm sm:text-base">Kruskals only uses a fixed amount of extra space</span>
-          </li>
-          <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
-            <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span className="text-sm sm:text-base">We only need variables for the loop counter and comparison</span>
-          </li>
-          <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
-            <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span className="text-sm sm:text-base">The space used doesn't grow with the input size</span>
-          </li>
-          <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
-            <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span className="text-sm sm:text-base">No additional data structures are required</span>
-          </li>
-        </ul>
-        
-        <p className="mt-4 text-sm sm:text-base leading-relaxed">
-          This makes Kruskals very memory-efficient, as it doesn't require 
-          any additional space proportional to the input size.
-        </p>
-      </div>
-    </CardContent>
-  </Card>
-);
 
 const SimulationSection = ({ onComplete }: { onComplete: () => void }) => (
   <Card className="h-full algo-card">
