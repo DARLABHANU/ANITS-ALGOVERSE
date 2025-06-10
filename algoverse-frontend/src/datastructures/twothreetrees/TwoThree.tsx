@@ -269,31 +269,33 @@ const DescriptionSection = () => (
       <h1 className="section-title gradient-text">2-3 Trees Description</h1>
       <div className="prose max-w-none h-full overflow-y-auto">
         <p className="text-base sm:text-lg mb-4 leading-relaxed">
-          2-3 Trees is a simple searching algorithm that finds the position of a target value within a list. 
-          It sequentially checks each element of the list until a match is found or the whole list has been searched.
+          A 2-3 tree is a self-balancing search tree where each node can hold either one or two keys and two or three children.
+          It maintains balance automatically by ensuring that all leaf nodes are at the same depth, making searches efficient.
         </p>
-        <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">How it Works:</h3>
+
+        <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">How It Works:</h3>
         <ul className="space-y-3 mb-6">
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span>Start from the first element of the array</span>
+            <span>Each node contains either one or two keys and links to child nodes</span>
           </li>
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span>Compare each element with the target value</span>
+            <span>Search, insert, and delete operations follow binary search principles</span>
           </li>
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span>If a match is found, return the index</span>
+            <span>Insertion can cause node splits, propagating upward to maintain balance</span>
           </li>
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span>If no match is found after checking all elements, return -1</span>
+            <span>Ensures O(log n) search, insertion, and deletion operations</span>
           </li>
         </ul>
+
         <p className="leading-relaxed">
-          2-3 Trees is also known as sequential search because it searches elements in sequence, 
-          one after another, until the desired element is found or the search is exhausted.
+          2-3 trees are widely used in database indexing and file systems because they efficiently handle dynamic data 
+          while keeping operations fast and balanced.
         </p>
       </div>
     </CardContent>
@@ -363,19 +365,19 @@ const AdvantagesSection = () => (
           <ul className="space-y-3">
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Simple to understand and implement</span>
+              <span className="text-sm sm:text-base">Self-balancing, ensuring efficient search operations</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Works on both sorted and unsorted arrays</span>
+              <span className="text-sm sm:text-base">Provides O(log n) complexity for search, insert, and delete operations</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">No additional memory required (in-place)</span>
+              <span className="text-sm sm:text-base">Prevents tree degeneration compared to binary search trees</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Works well for small datasets</span>
+              <span className="text-sm sm:text-base">Used in databases and file systems for efficient indexing</span>
             </li>
           </ul>
         </div>
@@ -389,15 +391,15 @@ const AdvantagesSection = () => (
           <ul className="space-y-3">
             <li className="flex items-start gap-3 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
               <X className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Inefficient for large datasets</span>
+              <span className="text-sm sm:text-base">Insertion and deletion require multiple tree adjustments</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
               <X className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Time complexity is O(n) in worst case</span>
+              <span className="text-sm sm:text-base">Extra memory overhead for maintaining multiple keys per node</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
               <X className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Not suitable for real-time applications with large data</span>
+              <span className="text-sm sm:text-base">Not as commonly used as AVL or B-trees for large-scale systems</span>
             </li>
           </ul>
         </div>
@@ -416,39 +418,34 @@ const ExamplesSection = () => (
             <div className="feature-icon p-2">
               <Target className="w-4 h-4" />
             </div>
-            Example 1: Finding a number
+            Example 1: Inserting values into a 2-3 tree
           </h3>
-          <p className="mb-3 text-sm sm:text-base font-medium">Array: [4, 2, 7, 1, 9, 3], Target: 7</p>
+          <p className="mb-3 text-sm sm:text-base font-medium">Insert: [10, 20, 30]</p>
           <div className="bg-muted/50 p-4 rounded-lg font-mono text-xs sm:text-sm border border-primary/10">
-            <div className="text-blue-600 dark:text-blue-400">Step 1: Check array[0] = 4, not equal to 7</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 2: Check array[1] = 2, not equal to 7</div>
-            <div className="text-green-600 dark:text-green-400 font-semibold">Step 3: Check array[2] = 7, equal to 7! Return index 2</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 1: Insert 10 (root node)</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 2: Insert 20 → Node expands, storing [10, 20]</div>
+            <div className="text-green-600 dark:text-green-400 font-semibold">Step 3: Insert 30 → Node splits into [10] and [20, 30]</div>
           </div>
         </div>
-        
+
         <div className="glass-card p-4 sm:p-6 rounded-xl border border-primary/20">
           <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary flex items-center gap-2">
             <div className="feature-icon p-2">
               <Target className="w-4 h-4" />
             </div>
-            Example 2: Element not found
+            Example 2: Searching for a value in a 2-3 tree
           </h3>
-          <p className="mb-3 text-sm sm:text-base font-medium">Array: [4, 2, 7, 1, 9, 3], Target: 5</p>
+          <p className="mb-3 text-sm sm:text-base font-medium">Search: Find 20 in tree [10, 20, 30]</p>
           <div className="bg-muted/50 p-4 rounded-lg font-mono text-xs sm:text-sm border border-primary/10">
-            <div className="text-blue-600 dark:text-blue-400">Step 1: Check array[0] = 4, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 2: Check array[1] = 2, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 3: Check array[2] = 7, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 4: Check array[3] = 1, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 5: Check array[4] = 9, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 6: Check array[5] = 3, not equal to 5</div>
-            <div className="text-red-600 dark:text-red-400 font-semibold">End of array reached. Return -1 (not found)</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 1: Start at root (10)</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 2: Move to second key (20)</div>
+            <div className="text-green-600 dark:text-green-400 font-semibold">Step 3: Key found! Return node containing 20</div>
           </div>
         </div>
       </div>
     </CardContent>
   </Card>
 );
-
 const TimeComplexitySection = () => (
   <Card className="h-full algo-card">
     <CardContent className="p-4 sm:p-8 h-full flex flex-col">
@@ -457,35 +454,33 @@ const TimeComplexitySection = () => (
         <Card className="glass-card border border-green-200 dark:border-green-800">
           <CardContent className="p-4 sm:p-6 text-center">
             <h3 className="text-base sm:text-lg font-semibold mb-2 text-green-600">Best Case</h3>
-            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(1)</div>
-            <p className="text-xs sm:text-sm text-muted-foreground">Element found at first position</p>
+            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(log n)</div>
+            <p className="text-xs sm:text-sm text-muted-foreground">Direct access to a node without splits</p>
           </CardContent>
         </Card>
-        
+
         <Card className="glass-card border border-yellow-200 dark:border-yellow-800">
           <CardContent className="p-4 sm:p-6 text-center">
             <h3 className="text-base sm:text-lg font-semibold mb-2 text-yellow-600">Average Case</h3>
-            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(n)</div>
-            <p className="text-xs sm:text-sm text-muted-foreground">Element found at middle position</p>
+            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(log n)</div>
+            <p className="text-xs sm:text-sm text-muted-foreground">Search, insert, and delete operations remain logarithmic</p>
           </CardContent>
         </Card>
-        
+
         <Card className="glass-card border border-red-200 dark:border-red-800">
           <CardContent className="p-4 sm:p-6 text-center">
             <h3 className="text-base sm:text-lg font-semibold mb-2 text-red-600">Worst Case</h3>
-            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(n)</div>
-            <p className="text-xs sm:text-sm text-muted-foreground">Element at last position or not found</p>
+            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(log n)</div>
+            <p className="text-xs sm:text-sm text-muted-foreground">Splits propagate upward, but remains efficient</p>
           </CardContent>
         </Card>
       </div>
-      
+
       <div className="flex-1 overflow-y-auto">
         <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">Explanation</h3>
         <p className="text-sm sm:text-base leading-relaxed">
-          In 2-3 Trees, we may need to check every element in the worst case. 
-          If the array has n elements, we might need to perform n comparisons. 
-          Therefore, the time complexity is O(n), which means the algorithm's 
-          performance scales linearly with the input size.
+          2-3 trees maintain O(log n) time complexity for search, insertion, and deletion by ensuring balanced tree structures.
+          The tree’s height is logarithmic, meaning operations scale efficiently even as the number of nodes grows.
         </p>
       </div>
     </CardContent>
@@ -497,34 +492,34 @@ const SpaceComplexitySection = () => (
     <CardContent className="p-4 sm:p-8 h-full flex flex-col">
       <h1 className="section-title gradient-text">Space Complexity Analysis</h1>
       <div className="text-center mb-6">
-        <div className="text-4xl sm:text-6xl font-bold gradient-text mb-4">O(1)</div>
-        <p className="text-lg sm:text-xl text-primary font-semibold">Constant Space Complexity</p>
+        <div className="text-4xl sm:text-6xl font-bold gradient-text mb-4">O(n)</div>
+        <p className="text-lg sm:text-xl text-primary font-semibold">Memory usage scales with number of nodes</p>
       </div>
-      
+
       <div className="prose max-w-none flex-1 overflow-y-auto">
-        <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">Why O(1)?</h3>
+        <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">Why O(n)?</h3>
         <ul className="space-y-3">
           <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span className="text-sm sm:text-base">2-3 Trees only uses a fixed amount of extra space</span>
+            <span className="text-sm sm:text-base">Each node stores one or two keys along with child pointers</span>
           </li>
           <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span className="text-sm sm:text-base">We only need variables for the loop counter and comparison</span>
+            <span className="text-sm sm:text-base">Space complexity scales linearly with the number of nodes</span>
           </li>
           <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span className="text-sm sm:text-base">The space used doesn't grow with the input size</span>
+            <span className="text-sm sm:text-base">Memory overhead increases due to additional tracking of children</span>
           </li>
           <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span className="text-sm sm:text-base">No additional data structures are required</span>
+            <span className="text-sm sm:text-base">Splitting nodes may increase memory usage temporarily</span>
           </li>
         </ul>
-        
+
         <p className="mt-4 text-sm sm:text-base leading-relaxed">
-          This makes 2-3 Trees very memory-efficient, as it doesn't require 
-          any additional space proportional to the input size.
+          2-3 trees require O(n) space because they maintain keys, pointers, and balance structures.
+          Despite this overhead, they provide efficient searching while preventing tree degeneration.
         </p>
       </div>
     </CardContent>
