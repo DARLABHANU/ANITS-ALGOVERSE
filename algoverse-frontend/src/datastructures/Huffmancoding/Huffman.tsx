@@ -269,31 +269,38 @@ const DescriptionSection = () => (
       <h1 className="section-title gradient-text">Huffman Coding Description</h1>
       <div className="prose max-w-none h-full overflow-y-auto">
         <p className="text-base sm:text-lg mb-4 leading-relaxed">
-          Huffman Coding is a simple searching algorithm that finds the position of a target value within a list. 
-          It sequentially checks each element of the list until a match is found or the whole list has been searched.
+          Huffman coding is a lossless data compression algorithm that assigns variable-length codes to characters
+          based on their frequencies of occurrence. It helps reduce file sizes by using shorter codes for frequently
+          occurring characters and longer codes for less common ones.
         </p>
-        <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">How it Works:</h3>
+
+        <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">How It Works:</h3>
         <ul className="space-y-3 mb-6">
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span>Start from the first element of the array</span>
+            <span>Analyze the frequency of characters in the input data</span>
           </li>
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span>Compare each element with the target value</span>
+            <span>Create a priority queue where lower-frequency characters have higher priority</span>
           </li>
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span>If a match is found, return the index</span>
+            <span>Construct a binary tree by repeatedly merging the two lowest-frequency nodes</span>
           </li>
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span>If no match is found after checking all elements, return -1</span>
+            <span>Assign binary codes to characters based on their position in the tree</span>
+          </li>
+          <li className="flex items-start gap-3">
+            <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
+            <span>Use the generated codes to compress and decompress data efficiently</span>
           </li>
         </ul>
+
         <p className="leading-relaxed">
-          Huffman Coding is also known as sequential search because it searches elements in sequence, 
-          one after another, until the desired element is found or the search is exhausted.
+          Huffman coding is widely used in applications such as text compression, image encoding, and network transmission.
+          It ensures efficient storage and transmission of data while maintaining its original quality.
         </p>
       </div>
     </CardContent>
@@ -363,19 +370,19 @@ const AdvantagesSection = () => (
           <ul className="space-y-3">
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Simple to understand and implement</span>
+              <span className="text-sm sm:text-base">Provides efficient lossless data compression</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Works on both sorted and unsorted arrays</span>
+              <span className="text-sm sm:text-base">Uses variable-length encoding to optimize storage</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">No additional memory required (in-place)</span>
+              <span className="text-sm sm:text-base">Ensures prefix-free codes for faster decoding</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Works well for small datasets</span>
+              <span className="text-sm sm:text-base">Widely used in file compression and network transmissions</span>
             </li>
           </ul>
         </div>
@@ -389,15 +396,15 @@ const AdvantagesSection = () => (
           <ul className="space-y-3">
             <li className="flex items-start gap-3 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
               <X className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Inefficient for large datasets</span>
+              <span className="text-sm sm:text-base">Requires frequency analysis of data before encoding</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
               <X className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Time complexity is O(n) in worst case</span>
+              <span className="text-sm sm:text-base">Can be inefficient for small, uniform datasets</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
               <X className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Not suitable for real-time applications with large data</span>
+              <span className="text-sm sm:text-base">Requires additional storage for the Huffman tree</span>
             </li>
           </ul>
         </div>
@@ -405,7 +412,6 @@ const AdvantagesSection = () => (
     </CardContent>
   </Card>
 );
-
 const ExamplesSection = () => (
   <Card className="h-full algo-card">
     <CardContent className="p-4 sm:p-8 h-full flex flex-col">
@@ -416,32 +422,31 @@ const ExamplesSection = () => (
             <div className="feature-icon p-2">
               <Target className="w-4 h-4" />
             </div>
-            Example 1: Finding a number
+            Example 1: Encoding a Text String
           </h3>
-          <p className="mb-3 text-sm sm:text-base font-medium">Array: [4, 2, 7, 1, 9, 3], Target: 7</p>
+          <p className="mb-3 text-sm sm:text-base font-medium">Input: "hello"</p>
           <div className="bg-muted/50 p-4 rounded-lg font-mono text-xs sm:text-sm border border-primary/10">
-            <div className="text-blue-600 dark:text-blue-400">Step 1: Check array[0] = 4, not equal to 7</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 2: Check array[1] = 2, not equal to 7</div>
-            <div className="text-green-600 dark:text-green-400 font-semibold">Step 3: Check array[2] = 7, equal to 7! Return index 2</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 1: Calculate character frequencies</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 2: Build a priority queue based on frequency</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 3: Construct Huffman tree</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 4: Assign binary codes to characters</div>
+            <div className="text-green-600 dark:text-green-400 font-semibold">Step 5: Compress the text using generated codes</div>
           </div>
         </div>
-        
+
         <div className="glass-card p-4 sm:p-6 rounded-xl border border-primary/20">
           <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary flex items-center gap-2">
             <div className="feature-icon p-2">
               <Target className="w-4 h-4" />
             </div>
-            Example 2: Element not found
+            Example 2: Decoding a Huffman Encoded Message
           </h3>
-          <p className="mb-3 text-sm sm:text-base font-medium">Array: [4, 2, 7, 1, 9, 3], Target: 5</p>
+          <p className="mb-3 text-sm sm:text-base font-medium">Encoded Binary: "110101"</p>
           <div className="bg-muted/50 p-4 rounded-lg font-mono text-xs sm:text-sm border border-primary/10">
-            <div className="text-blue-600 dark:text-blue-400">Step 1: Check array[0] = 4, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 2: Check array[1] = 2, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 3: Check array[2] = 7, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 4: Check array[3] = 1, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 5: Check array[4] = 9, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 6: Check array[5] = 3, not equal to 5</div>
-            <div className="text-red-600 dark:text-red-400 font-semibold">End of array reached. Return -1 (not found)</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 1: Use the Huffman tree to traverse the binary sequence</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 2: Match sequences to corresponding characters</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 3: Concatenate decoded characters into original message</div>
+            <div className="text-green-600 dark:text-green-400 font-semibold">Step 4: Return the decoded string</div>
           </div>
         </div>
       </div>
@@ -457,35 +462,34 @@ const TimeComplexitySection = () => (
         <Card className="glass-card border border-green-200 dark:border-green-800">
           <CardContent className="p-4 sm:p-6 text-center">
             <h3 className="text-base sm:text-lg font-semibold mb-2 text-green-600">Best Case</h3>
-            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(1)</div>
-            <p className="text-xs sm:text-sm text-muted-foreground">Element found at first position</p>
+            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(n log n)</div>
+            <p className="text-xs sm:text-sm text-muted-foreground">Building the Huffman tree using a priority queue</p>
           </CardContent>
         </Card>
-        
+
         <Card className="glass-card border border-yellow-200 dark:border-yellow-800">
           <CardContent className="p-4 sm:p-6 text-center">
             <h3 className="text-base sm:text-lg font-semibold mb-2 text-yellow-600">Average Case</h3>
-            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(n)</div>
-            <p className="text-xs sm:text-sm text-muted-foreground">Element found at middle position</p>
+            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(n log n)</div>
+            <p className="text-xs sm:text-sm text-muted-foreground">Generating Huffman codes for unique characters</p>
           </CardContent>
         </Card>
-        
+
         <Card className="glass-card border border-red-200 dark:border-red-800">
           <CardContent className="p-4 sm:p-6 text-center">
             <h3 className="text-base sm:text-lg font-semibold mb-2 text-red-600">Worst Case</h3>
-            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(n)</div>
-            <p className="text-xs sm:text-sm text-muted-foreground">Element at last position or not found</p>
+            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(n log n)</div>
+            <p className="text-xs sm:text-sm text-muted-foreground">Encoding and decoding large datasets</p>
           </CardContent>
         </Card>
       </div>
-      
+
       <div className="flex-1 overflow-y-auto">
         <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">Explanation</h3>
         <p className="text-sm sm:text-base leading-relaxed">
-          In Huffman Coding, we may need to check every element in the worst case. 
-          If the array has n elements, we might need to perform n comparisons. 
-          Therefore, the time complexity is O(n), which means the algorithm's 
-          performance scales linearly with the input size.
+          Huffman coding has a time complexity of O(n log n) due to the priority queue operations needed to construct the Huffman tree.
+          Once built, encoding and decoding operations are performed efficiently in O(n) time.
+          The algorithm is well-suited for compressing data while ensuring minimal redundancy.
         </p>
       </div>
     </CardContent>
@@ -497,34 +501,35 @@ const SpaceComplexitySection = () => (
     <CardContent className="p-4 sm:p-8 h-full flex flex-col">
       <h1 className="section-title gradient-text">Space Complexity Analysis</h1>
       <div className="text-center mb-6">
-        <div className="text-4xl sm:text-6xl font-bold gradient-text mb-4">O(1)</div>
-        <p className="text-lg sm:text-xl text-primary font-semibold">Constant Space Complexity</p>
+        <div className="text-4xl sm:text-6xl font-bold gradient-text mb-4">O(n)</div>
+        <p className="text-lg sm:text-xl text-primary font-semibold">Memory usage scales with input size</p>
       </div>
-      
+
       <div className="prose max-w-none flex-1 overflow-y-auto">
-        <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">Why O(1)?</h3>
+        <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">Why O(n)?</h3>
         <ul className="space-y-3">
           <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span className="text-sm sm:text-base">Huffman Coding only uses a fixed amount of extra space</span>
+            <span className="text-sm sm:text-base">Each character in the input requires storage in the frequency table</span>
           </li>
           <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span className="text-sm sm:text-base">We only need variables for the loop counter and comparison</span>
+            <span className="text-sm sm:text-base">The Huffman tree structure takes additional memory</span>
           </li>
           <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span className="text-sm sm:text-base">The space used doesn't grow with the input size</span>
+            <span className="text-sm sm:text-base">Encoded binary representations require storage space</span>
           </li>
           <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span className="text-sm sm:text-base">No additional data structures are required</span>
+            <span className="text-sm sm:text-base">Space complexity scales linearly with the number of unique symbols</span>
           </li>
         </ul>
-        
+
         <p className="mt-4 text-sm sm:text-base leading-relaxed">
-          This makes Huffman Coding very memory-efficient, as it doesn't require 
-          any additional space proportional to the input size.
+          Huffman coding requires O(n) space, as each character's frequency must be stored, a Huffman tree is built,
+          and the final encoded representation is maintained for efficient compression. While this overhead increases
+          with larger inputs, it ensures optimal data storage and transmission.
         </p>
       </div>
     </CardContent>
