@@ -262,43 +262,43 @@ const SkipList = () => {
   );
 };
 
-// Section Components
 const DescriptionSection = () => (
   <Card className="h-full algo-card">
     <CardContent className="p-4 sm:p-8 h-full">
       <h1 className="section-title gradient-text">Skip List Description</h1>
       <div className="prose max-w-none h-full overflow-y-auto">
         <p className="text-base sm:text-lg mb-4 leading-relaxed">
-          Skip List is a simple searching algorithm that finds the position of a target value within a list. 
-          It sequentially checks each element of the list until a match is found or the whole list has been searched.
+          Skip List is a probabilistic data structure that allows fast search, insertion, and deletion operations. 
+          It maintains multiple layers of linked lists that allow elements to be skipped for faster traversal.
         </p>
         <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">How it Works:</h3>
         <ul className="space-y-3 mb-6">
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span>Start from the first element of the array</span>
+            <span>Start from the highest level linked list at the head</span>
           </li>
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span>Compare each element with the target value</span>
+            <span>Move forward while the next node’s value is less than the target</span>
           </li>
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span>If a match is found, return the index</span>
+            <span>If the next node is greater or equal, drop down one level</span>
           </li>
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span>If no match is found after checking all elements, return -1</span>
+            <span>Repeat until reaching level 0, then check for the target node</span>
           </li>
         </ul>
         <p className="leading-relaxed">
-          Skip List is also known as sequential search because it searches elements in sequence, 
-          one after another, until the desired element is found or the search is exhausted.
+          Skip List provides average-case logarithmic time complexity for search, insertion, and deletion 
+          by using multiple linked lists layered on top of each other, allowing it to skip over large sections efficiently.
         </p>
       </div>
     </CardContent>
   </Card>
 );
+
 
 const PseudocodeSection = () => (
   <Card className="h-full algo-card">
@@ -307,26 +307,29 @@ const PseudocodeSection = () => (
       <Card className="bg-gray-900 text-green-400 flex-1 border border-primary/20">
         <CardContent className="p-4 sm:p-6 font-mono h-full overflow-y-auto">
           <pre className="whitespace-pre-wrap text-sm sm:text-base">
-{`function SkipList(array, target):
-    for i from 0 to length(array) - 1:
-        if array[i] equals target:
-            return i
-    return -1
+{`function SkipListSearch(skipList, target):
+    currentNode = skipList.head
+    level = skipList.maxLevel
 
-// Alternative implementation with while loop
-function SkipListWhile(array, target):
-    i = 0
-    while i < length(array):
-        if array[i] equals target:
-            return i
-        i = i + 1
-    return -1`}
+    while level >= 0:
+        while currentNode.next[level] != null and currentNode.next[level].value < target:
+            currentNode = currentNode.next[level]
+        level = level - 1
+
+    currentNode = currentNode.next[0]
+    if currentNode != null and currentNode.value == target:
+        return currentNode
+    else:
+        return null
+
+// Note: skipList is a data structure with multiple levels of forward pointers.`}
           </pre>
         </CardContent>
       </Card>
     </CardContent>
   </Card>
 );
+
 
 const FlowchartSection = () => (
   <Card className="h-full algo-card">
@@ -363,19 +366,19 @@ const AdvantagesSection = () => (
           <ul className="space-y-3">
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Simple to understand and implement</span>
+              <span className="text-sm sm:text-base">Allows fast search, insertion, and deletion with average O(log n) time complexity</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Works on both sorted and unsorted arrays</span>
+              <span className="text-sm sm:text-base">Simple to implement compared to balanced trees</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">No additional memory required (in-place)</span>
+              <span className="text-sm sm:text-base">Probabilistic balancing avoids complex rotations</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Works well for small datasets</span>
+              <span className="text-sm sm:text-base">Efficient memory usage with simple node structure</span>
             </li>
           </ul>
         </div>
@@ -389,15 +392,15 @@ const AdvantagesSection = () => (
           <ul className="space-y-3">
             <li className="flex items-start gap-3 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
               <X className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Inefficient for large datasets</span>
+              <span className="text-sm sm:text-base">Worst-case time complexity can degrade to O(n)</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
               <X className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Time complexity is O(n) in worst case</span>
+              <span className="text-sm sm:text-base">Requires randomization, which can be non-deterministic</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
               <X className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Not suitable for real-time applications with large data</span>
+              <span className="text-sm sm:text-base">Higher memory overhead than basic linked lists due to multiple pointers per node</span>
             </li>
           </ul>
         </div>
@@ -458,15 +461,15 @@ const TimeComplexitySection = () => (
           <CardContent className="p-4 sm:p-6 text-center">
             <h3 className="text-base sm:text-lg font-semibold mb-2 text-green-600">Best Case</h3>
             <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(1)</div>
-            <p className="text-xs sm:text-sm text-muted-foreground">Element found at first position</p>
+            <p className="text-xs sm:text-sm text-muted-foreground">Element found at the first level</p>
           </CardContent>
         </Card>
         
         <Card className="glass-card border border-yellow-200 dark:border-yellow-800">
           <CardContent className="p-4 sm:p-6 text-center">
             <h3 className="text-base sm:text-lg font-semibold mb-2 text-yellow-600">Average Case</h3>
-            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(n)</div>
-            <p className="text-xs sm:text-sm text-muted-foreground">Element found at middle position</p>
+            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(log n)</div>
+            <p className="text-xs sm:text-sm text-muted-foreground">Typical search using multiple levels</p>
           </CardContent>
         </Card>
         
@@ -474,7 +477,7 @@ const TimeComplexitySection = () => (
           <CardContent className="p-4 sm:p-6 text-center">
             <h3 className="text-base sm:text-lg font-semibold mb-2 text-red-600">Worst Case</h3>
             <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(n)</div>
-            <p className="text-xs sm:text-sm text-muted-foreground">Element at last position or not found</p>
+            <p className="text-xs sm:text-sm text-muted-foreground">Degenerated to linked list (rare case)</p>
           </CardContent>
         </Card>
       </div>
@@ -482,54 +485,53 @@ const TimeComplexitySection = () => (
       <div className="flex-1 overflow-y-auto">
         <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">Explanation</h3>
         <p className="text-sm sm:text-base leading-relaxed">
-          In Skip List, we may need to check every element in the worst case. 
-          If the array has n elements, we might need to perform n comparisons. 
-          Therefore, the time complexity is O(n), which means the algorithm's 
-          performance scales linearly with the input size.
+          Skip List provides efficient search, insertion, and deletion with average time complexity of O(log n) by using multiple levels of linked lists. 
+          However, in the worst case, the structure can degrade to a simple linked list, resulting in O(n) time complexity.
         </p>
       </div>
     </CardContent>
   </Card>
 );
 
+
 const SpaceComplexitySection = () => (
   <Card className="h-full algo-card">
     <CardContent className="p-4 sm:p-8 h-full flex flex-col">
       <h1 className="section-title gradient-text">Space Complexity Analysis</h1>
       <div className="text-center mb-6">
-        <div className="text-4xl sm:text-6xl font-bold gradient-text mb-4">O(1)</div>
-        <p className="text-lg sm:text-xl text-primary font-semibold">Constant Space Complexity</p>
+        <div className="text-4xl sm:text-6xl font-bold gradient-text mb-4">O(n)</div>
+        <p className="text-lg sm:text-xl text-primary font-semibold">Linear Space Complexity</p>
       </div>
       
       <div className="prose max-w-none flex-1 overflow-y-auto">
-        <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">Why O(1)?</h3>
+        <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">Why O(n)?</h3>
         <ul className="space-y-3">
           <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span className="text-sm sm:text-base">Skip List only uses a fixed amount of extra space</span>
+            <span className="text-sm sm:text-base">Skip List stores multiple levels of linked lists, increasing pointers per element</span>
           </li>
           <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span className="text-sm sm:text-base">We only need variables for the loop counter and comparison</span>
+            <span className="text-sm sm:text-base">Extra pointers per node depend on the level, but total space remains proportional to n</span>
           </li>
           <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span className="text-sm sm:text-base">The space used doesn't grow with the input size</span>
+            <span className="text-sm sm:text-base">The space overhead is generally about O(n) with a small constant factor</span>
           </li>
           <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span className="text-sm sm:text-base">No additional data structures are required</span>
+            <span className="text-sm sm:text-base">This tradeoff enables faster search times compared to simple linked lists</span>
           </li>
         </ul>
         
         <p className="mt-4 text-sm sm:text-base leading-relaxed">
-          This makes Skip List very memory-efficient, as it doesn't require 
-          any additional space proportional to the input size.
+          Therefore, while Skip List requires extra space for multiple levels, its space complexity remains linear with respect to the number of elements.
         </p>
       </div>
     </CardContent>
   </Card>
 );
+
 
 const SimulationSection = ({ onComplete }: { onComplete: () => void }) => (
   <Card className="h-full algo-card">

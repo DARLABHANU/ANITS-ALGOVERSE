@@ -266,40 +266,46 @@ const Jhonson = () => {
 const DescriptionSection = () => (
   <Card className="h-full algo-card">
     <CardContent className="p-4 sm:p-8 h-full">
-      <h1 className="section-title gradient-text">Johnson Trotter Description</h1>
+      <h1 className="section-title gradient-text">Johnson-Trotter Algorithm Description</h1>
       <div className="prose max-w-none h-full overflow-y-auto">
         <p className="text-base sm:text-lg mb-4 leading-relaxed">
-          Johnson Trotter is a simple searching algorithm that finds the position of a target value within a list. 
-          It sequentially checks each element of the list until a match is found or the whole list has been searched.
+          The Johnson-Trotter algorithm is an efficient method for generating all **permutations** of a set in a specific order.
+          It works by moving elements **one step at a time** while maintaining the relative order of the rest of the sequence.
+          The algorithm is widely used in **combinatorial optimization** and **permutation generation**.
         </p>
-        <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">How it Works:</h3>
+
+        <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">How It Works:</h3>
         <ul className="space-y-3 mb-6">
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span>Start from the first element of the array</span>
+            <span>Each element has a direction (left or right) that determines movement</span>
           </li>
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span>Compare each element with the target value</span>
+            <span>Identify the largest mobile element (an element that can move in its assigned direction)</span>
           </li>
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span>If a match is found, return the index</span>
+            <span>Swap the largest mobile element with its neighboring element</span>
           </li>
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span>If no match is found after checking all elements, return -1</span>
+            <span>Reverse directions of any elements larger than the swapped element</span>
+          </li>
+          <li className="flex items-start gap-3">
+            <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
+            <span>Repeat until no mobile elements remain</span>
           </li>
         </ul>
+
         <p className="leading-relaxed">
-          Johnson Trotter is also known as sequential search because it searches elements in sequence, 
-          one after another, until the desired element is found or the search is exhausted.
+          The Johnson-Trotter algorithm ensures systematic generation of permutations, making it an efficient approach 
+          for solving problems involving order-based arrangements.
         </p>
       </div>
     </CardContent>
   </Card>
 );
-
 const PseudocodeSection = () => (
   <Card className="h-full algo-card">
     <CardContent className="p-4 sm:p-8 h-full flex flex-col">
@@ -351,7 +357,7 @@ const FlowchartSection = () => (
 const AdvantagesSection = () => (
   <Card className="h-full algo-card">
     <CardContent className="p-4 sm:p-8 h-full flex flex-col">
-      <h1 className="section-title gradient-text">Advantages of Johnson Trotter</h1>
+      <h1 className="section-title gradient-text">Advantages of Johnson-Trotter Algorithm</h1>
       <div className="grid md:grid-cols-2 gap-6 flex-1">
         <div className="space-y-4">
           <h3 className="text-lg sm:text-xl font-semibold mb-3 text-green-600 flex items-center gap-2">
@@ -363,19 +369,19 @@ const AdvantagesSection = () => (
           <ul className="space-y-3">
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Simple to understand and implement</span>
+              <span className="text-sm sm:text-base">Efficiently generates permutations in a defined sequence</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Works on both sorted and unsorted arrays</span>
+              <span className="text-sm sm:text-base">Requires minimal swaps compared to other permutation algorithms</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">No additional memory required (in-place)</span>
+              <span className="text-sm sm:text-base">Provides a systematic approach for permutation ordering</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Works well for small datasets</span>
+              <span className="text-sm sm:text-base">Used in combinatorial optimization and scheduling problems</span>
             </li>
           </ul>
         </div>
@@ -389,15 +395,15 @@ const AdvantagesSection = () => (
           <ul className="space-y-3">
             <li className="flex items-start gap-3 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
               <X className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Inefficient for large datasets</span>
+              <span className="text-sm sm:text-base">Requires tracking directions for each element</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
               <X className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Time complexity is O(n) in worst case</span>
+              <span className="text-sm sm:text-base">Becomes computationally expensive for large datasets</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
               <X className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Not suitable for real-time applications with large data</span>
+              <span className="text-sm sm:text-base">Limited practical applications outside combinatorial tasks</span>
             </li>
           </ul>
         </div>
@@ -409,39 +415,37 @@ const AdvantagesSection = () => (
 const ExamplesSection = () => (
   <Card className="h-full algo-card">
     <CardContent className="p-4 sm:p-8 h-full flex flex-col">
-      <h1 className="section-title gradient-text">Johnson Trotter Examples</h1>
+      <h1 className="section-title gradient-text">Johnson-Trotter Algorithm Examples</h1>
       <div className="space-y-6 flex-1 overflow-y-auto">
         <div className="glass-card p-4 sm:p-6 rounded-xl border border-primary/20">
           <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary flex items-center gap-2">
             <div className="feature-icon p-2">
               <Target className="w-4 h-4" />
             </div>
-            Example 1: Finding a number
+            Example 1: Generating Permutations for [1, 2, 3]
           </h3>
-          <p className="mb-3 text-sm sm:text-base font-medium">Array: [4, 2, 7, 1, 9, 3], Target: 7</p>
+          <p className="mb-3 text-sm sm:text-base font-medium">Starting order: [1, 2, 3]</p>
           <div className="bg-muted/50 p-4 rounded-lg font-mono text-xs sm:text-sm border border-primary/10">
-            <div className="text-blue-600 dark:text-blue-400">Step 1: Check array[0] = 4, not equal to 7</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 2: Check array[1] = 2, not equal to 7</div>
-            <div className="text-green-600 dark:text-green-400 font-semibold">Step 3: Check array[2] = 7, equal to 7! Return index 2</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 1: Identify largest mobile element (3) and move left</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 2: Swap 3 and 2 → New order: [1, 3, 2]</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 3: Swap 3 and 1 → New order: [3, 1, 2]</div>
+            <div className="text-green-600 dark:text-green-400 font-semibold">Continue steps until all permutations are generated</div>
           </div>
         </div>
-        
+
         <div className="glass-card p-4 sm:p-6 rounded-xl border border-primary/20">
           <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary flex items-center gap-2">
             <div className="feature-icon p-2">
               <Target className="w-4 h-4" />
             </div>
-            Example 2: Element not found
+            Example 2: Tracking Element Directions
           </h3>
-          <p className="mb-3 text-sm sm:text-base font-medium">Array: [4, 2, 7, 1, 9, 3], Target: 5</p>
+          <p className="mb-3 text-sm sm:text-base font-medium">Element directions: [1→, 2←, 3←]</p>
           <div className="bg-muted/50 p-4 rounded-lg font-mono text-xs sm:text-sm border border-primary/10">
-            <div className="text-blue-600 dark:text-blue-400">Step 1: Check array[0] = 4, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 2: Check array[1] = 2, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 3: Check array[2] = 7, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 4: Check array[3] = 1, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 5: Check array[4] = 9, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 6: Check array[5] = 3, not equal to 5</div>
-            <div className="text-red-600 dark:text-red-400 font-semibold">End of array reached. Return -1 (not found)</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 1: Identify largest mobile element (3) and move left</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 2: Swap 3 and 2 → Reverse direction of all larger elements</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 3: Identify new mobile element and continue swapping</div>
+            <div className="text-green-600 dark:text-green-400 font-semibold">Continue until no mobile elements remain</div>
           </div>
         </div>
       </div>
@@ -457,35 +461,34 @@ const TimeComplexitySection = () => (
         <Card className="glass-card border border-green-200 dark:border-green-800">
           <CardContent className="p-4 sm:p-6 text-center">
             <h3 className="text-base sm:text-lg font-semibold mb-2 text-green-600">Best Case</h3>
-            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(1)</div>
-            <p className="text-xs sm:text-sm text-muted-foreground">Element found at first position</p>
+            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(n)</div>
+            <p className="text-xs sm:text-sm text-muted-foreground">Direct access to an element with minimal swaps</p>
           </CardContent>
         </Card>
-        
+
         <Card className="glass-card border border-yellow-200 dark:border-yellow-800">
           <CardContent className="p-4 sm:p-6 text-center">
             <h3 className="text-base sm:text-lg font-semibold mb-2 text-yellow-600">Average Case</h3>
-            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(n)</div>
-            <p className="text-xs sm:text-sm text-muted-foreground">Element found at middle position</p>
+            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(n!)</div>
+            <p className="text-xs sm:text-sm text-muted-foreground">Generating all permutations with systematic swaps</p>
           </CardContent>
         </Card>
-        
+
         <Card className="glass-card border border-red-200 dark:border-red-800">
           <CardContent className="p-4 sm:p-6 text-center">
             <h3 className="text-base sm:text-lg font-semibold mb-2 text-red-600">Worst Case</h3>
-            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(n)</div>
-            <p className="text-xs sm:text-sm text-muted-foreground">Element at last position or not found</p>
+            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(n!)</div>
+            <p className="text-xs sm:text-sm text-muted-foreground">Generating all permutations in sequence</p>
           </CardContent>
         </Card>
       </div>
-      
+
       <div className="flex-1 overflow-y-auto">
         <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">Explanation</h3>
         <p className="text-sm sm:text-base leading-relaxed">
-          In Johnson Trotter, we may need to check every element in the worst case. 
-          If the array has n elements, we might need to perform n comparisons. 
-          Therefore, the time complexity is O(n), which means the algorithm's 
-          performance scales linearly with the input size.
+          The Johnson-Trotter algorithm generates n! permutations, resulting in a factorial time complexity. 
+          While each swap takes O(n) time, the total number of swaps and steps increases rapidly as n grows.
+          Despite this, the algorithm systematically creates permutations without redundancy, making it valuable in combinatorial tasks.
         </p>
       </div>
     </CardContent>
@@ -497,34 +500,35 @@ const SpaceComplexitySection = () => (
     <CardContent className="p-4 sm:p-8 h-full flex flex-col">
       <h1 className="section-title gradient-text">Space Complexity Analysis</h1>
       <div className="text-center mb-6">
-        <div className="text-4xl sm:text-6xl font-bold gradient-text mb-4">O(1)</div>
-        <p className="text-lg sm:text-xl text-primary font-semibold">Constant Space Complexity</p>
+        <div className="text-4xl sm:text-6xl font-bold gradient-text mb-4">O(n)</div>
+        <p className="text-lg sm:text-xl text-primary font-semibold">Memory usage scales with number of elements</p>
       </div>
-      
+
       <div className="prose max-w-none flex-1 overflow-y-auto">
-        <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">Why O(1)?</h3>
+        <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">Why O(n)?</h3>
         <ul className="space-y-3">
           <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span className="text-sm sm:text-base">Johnson Trotter only uses a fixed amount of extra space</span>
+            <span className="text-sm sm:text-base">Each element tracks its direction and mobility status</span>
           </li>
           <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span className="text-sm sm:text-base">We only need variables for the loop counter and comparison</span>
+            <span className="text-sm sm:text-base">Space complexity scales linearly with the number of elements</span>
           </li>
           <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span className="text-sm sm:text-base">The space used doesn't grow with the input size</span>
+            <span className="text-sm sm:text-base">Requires additional storage for managing swaps</span>
           </li>
           <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span className="text-sm sm:text-base">No additional data structures are required</span>
+            <span className="text-sm sm:text-base">Memory overhead increases for larger sets of permutations</span>
           </li>
         </ul>
-        
+
         <p className="mt-4 text-sm sm:text-base leading-relaxed">
-          This makes Johnson Trotter very memory-efficient, as it doesn't require 
-          any additional space proportional to the input size.
+          The Johnson-Trotter algorithm requires O(n) space because each element must store its movement direction, 
+          and swaps occur systematically throughout the permutation generation. 
+          While memory usage is manageable for smaller datasets, it increases as n grows.
         </p>
       </div>
     </CardContent>

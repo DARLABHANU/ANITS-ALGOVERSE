@@ -61,7 +61,7 @@ const Index: React.FC = () => {
                 >
                   <h3 className="text-xl font-semibold mb-4">Why Data Structures Matter</h3>
                   <p className="text-muted-foreground mb-4">
-                    Data structures form the building blocks of software development, enabling you to:
+                    Data structuress form the building blocks of software development, enabling you to:
                   </p>
                   <ul className="space-y-3">
                     <li className="flex items-start">

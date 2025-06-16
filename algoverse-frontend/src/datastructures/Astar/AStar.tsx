@@ -269,36 +269,49 @@ const DescriptionSection = () => (
       <h1 className="section-title gradient-text">A Star Description</h1>
       <div className="prose max-w-none h-full overflow-y-auto">
         <p className="text-base sm:text-lg mb-4 leading-relaxed">
-          A Star is a simple searching algorithm that finds the position of a target value within a list. 
-          It sequentially checks each element of the list until a match is found or the whole list has been searched.
+          A* (A-Star) is an informed search algorithm widely used in pathfinding and graph traversal. 
+          It finds the most optimal path from a start node to a goal node by combining the advantages of Dijkstra’s Algorithm and Greedy Best-First Search.
         </p>
         <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">How it Works:</h3>
         <ul className="space-y-3 mb-6">
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span>Start from the first element of the array</span>
+            <span>Start from the initial node and place it in an open list (nodes to be evaluated)</span>
           </li>
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span>Compare each element with the target value</span>
+            <span>Calculate the cost function f(n) = g(n) + h(n), where:</span>
+          </li>
+          <li className="flex items-start gap-3 pl-6">
+            <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
+            <span><strong>g(n)</strong> is the cost from the start node to the current node</span>
+          </li>
+          <li className="flex items-start gap-3 pl-6">
+            <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
+            <span><strong>h(n)</strong> is the estimated cost from the current node to the goal (heuristic)</span>
           </li>
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span>If a match is found, return the index</span>
+            <span>Select the node with the lowest f(n) from the open list and move it to the closed list (evaluated nodes)</span>
           </li>
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span>If no match is found after checking all elements, return -1</span>
+            <span>Repeat the process for neighbors, updating their costs and parents if a better path is found</span>
+          </li>
+          <li className="flex items-start gap-3">
+            <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
+            <span>Continue until the goal node is reached or the open list becomes empty</span>
           </li>
         </ul>
         <p className="leading-relaxed">
-          A Star is also known as sequential search because it searches elements in sequence, 
-          one after another, until the desired element is found or the search is exhausted.
+          A* 
+           is widely used in applications like GPS navigation, games, and robotics for efficient route planning.
         </p>
       </div>
     </CardContent>
   </Card>
 );
+
 
 const PseudocodeSection = () => (
   <Card className="h-full algo-card">
@@ -307,20 +320,22 @@ const PseudocodeSection = () => (
       <Card className="bg-gray-900 text-green-400 flex-1 border border-primary/20">
         <CardContent className="p-4 sm:p-6 font-mono h-full overflow-y-auto">
           <pre className="whitespace-pre-wrap text-sm sm:text-base">
-{`function AStar(array, target):
-    for i from 0 to length(array) - 1:
-        if array[i] equals target:
-            return i
-    return -1
-
-// Alternative implementation with while loop
-function AStarWhile(array, target):
-    i = 0
-    while i < length(array):
-        if array[i] equals target:
-            return i
-        i = i + 1
-    return -1`}
+{`function AStar(start, goal, graph):
+    openSet = {start}
+    gScore[start] = 0
+    fScore[start] = heuristic(start, goal)
+    while openSet is not empty:
+        current = node with lowest fScore
+        if current == goal: return reconstructPath(cameFrom, current)
+        remove current from openSet
+        for neighbor in graph[current]:
+            tentative_gScore = gScore[current] + distance(current, neighbor)
+            if tentative_gScore < gScore[neighbor]:
+                cameFrom[neighbor] = current
+                gScore[neighbor] = tentative_gScore
+                fScore[neighbor] = gScore[neighbor] + heuristic(neighbor, goal)
+                openSet.add(neighbor)
+    return failure`} 
           </pre>
         </CardContent>
       </Card>
@@ -363,19 +378,19 @@ const AdvantagesSection = () => (
           <ul className="space-y-3">
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Simple to understand and implement</span>
+              <span className="text-sm sm:text-base">Finds the shortest path efficiently</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Works on both sorted and unsorted arrays</span>
+              <span className="text-sm sm:text-base">Uses heuristics to optimize search</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">No additional memory required (in-place)</span>
+              <span className="text-sm sm:text-base">Works well in many applications like game AI and robotics</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Works well for small datasets</span>
+              <span className="text-sm sm:text-base">Guaranteed to find the optimal path if heuristics are admissible</span>
             </li>
           </ul>
         </div>
@@ -389,15 +404,15 @@ const AdvantagesSection = () => (
           <ul className="space-y-3">
             <li className="flex items-start gap-3 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
               <X className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Inefficient for large datasets</span>
+              <span className="text-sm sm:text-base">Can be computationally expensive for large graphs</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
               <X className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Time complexity is O(n) in worst case</span>
+              <span className="text-sm sm:text-base">Performance depends on the heuristic used</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
               <X className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Not suitable for real-time applications with large data</span>
+              <span className="text-sm sm:text-base">May consume significant memory for storing paths</span>
             </li>
           </ul>
         </div>
@@ -405,7 +420,6 @@ const AdvantagesSection = () => (
     </CardContent>
   </Card>
 );
-
 const ExamplesSection = () => (
   <Card className="h-full algo-card">
     <CardContent className="p-4 sm:p-8 h-full flex flex-col">
@@ -416,32 +430,30 @@ const ExamplesSection = () => (
             <div className="feature-icon p-2">
               <Target className="w-4 h-4" />
             </div>
-            Example 1: Finding a number
+            Example 1: Finding the shortest path on a grid
           </h3>
-          <p className="mb-3 text-sm sm:text-base font-medium">Array: [4, 2, 7, 1, 9, 3], Target: 7</p>
+          <p className="mb-3 text-sm sm:text-base font-medium">Start: (0,0), Goal: (4,4)</p>
           <div className="bg-muted/50 p-4 rounded-lg font-mono text-xs sm:text-sm border border-primary/10">
-            <div className="text-blue-600 dark:text-blue-400">Step 1: Check array[0] = 4, not equal to 7</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 2: Check array[1] = 2, not equal to 7</div>
-            <div className="text-green-600 dark:text-green-400 font-semibold">Step 3: Check array[2] = 7, equal to 7! Return index 2</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 1: Add start node (0,0) to open set</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 2: Select node with lowest f-score, expand neighbors</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 3: Update g-score and f-score of neighbors</div>
+            <div className="text-green-600 dark:text-green-400 font-semibold">Step 4: Continue until goal (4,4) is reached, reconstruct path</div>
           </div>
         </div>
-        
+
         <div className="glass-card p-4 sm:p-6 rounded-xl border border-primary/20">
           <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary flex items-center gap-2">
             <div className="feature-icon p-2">
               <Target className="w-4 h-4" />
             </div>
-            Example 2: Element not found
+            Example 2: Path blocked, finding alternative route
           </h3>
-          <p className="mb-3 text-sm sm:text-base font-medium">Array: [4, 2, 7, 1, 9, 3], Target: 5</p>
+          <p className="mb-3 text-sm sm:text-base font-medium">Start: (0,0), Goal: (4,4), Obstacle at (2,2)</p>
           <div className="bg-muted/50 p-4 rounded-lg font-mono text-xs sm:text-sm border border-primary/10">
-            <div className="text-blue-600 dark:text-blue-400">Step 1: Check array[0] = 4, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 2: Check array[1] = 2, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 3: Check array[2] = 7, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 4: Check array[3] = 1, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 5: Check array[4] = 9, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 6: Check array[5] = 3, not equal to 5</div>
-            <div className="text-red-600 dark:text-red-400 font-semibold">End of array reached. Return -1 (not found)</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 1: Add start node (0,0) to open set</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 2: Encounter obstacle (2,2), avoid it</div>
+            <div className="text-blue-600 dark:text-blue-400">Step 3: Redirect path around the obstacle</div>
+            <div className="text-green-600 dark:text-green-400 font-semibold">Step 4: Continue search until goal (4,4) is reached</div>
           </div>
         </div>
       </div>
@@ -457,74 +469,72 @@ const TimeComplexitySection = () => (
         <Card className="glass-card border border-green-200 dark:border-green-800">
           <CardContent className="p-4 sm:p-6 text-center">
             <h3 className="text-base sm:text-lg font-semibold mb-2 text-green-600">Best Case</h3>
-            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(1)</div>
-            <p className="text-xs sm:text-sm text-muted-foreground">Element found at first position</p>
+            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(b^d)</div>
+            <p className="text-xs sm:text-sm text-muted-foreground">Direct path with minimal node expansions</p>
           </CardContent>
         </Card>
-        
+
         <Card className="glass-card border border-yellow-200 dark:border-yellow-800">
           <CardContent className="p-4 sm:p-6 text-center">
             <h3 className="text-base sm:text-lg font-semibold mb-2 text-yellow-600">Average Case</h3>
-            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(n)</div>
-            <p className="text-xs sm:text-sm text-muted-foreground">Element found at middle position</p>
+            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(b^d)</div>
+            <p className="text-xs sm:text-sm text-muted-foreground">Explores nodes efficiently using heuristic</p>
           </CardContent>
         </Card>
-        
+
         <Card className="glass-card border border-red-200 dark:border-red-800">
           <CardContent className="p-4 sm:p-6 text-center">
             <h3 className="text-base sm:text-lg font-semibold mb-2 text-red-600">Worst Case</h3>
-            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(n)</div>
-            <p className="text-xs sm:text-sm text-muted-foreground">Element at last position or not found</p>
+            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(E log V)</div>
+            <p className="text-xs sm:text-sm text-muted-foreground">Expands all possible nodes before finding goal</p>
           </CardContent>
         </Card>
       </div>
-      
+
       <div className="flex-1 overflow-y-auto">
         <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">Explanation</h3>
         <p className="text-sm sm:text-base leading-relaxed">
-          In A Star, we may need to check every element in the worst case. 
-          If the array has n elements, we might need to perform n comparisons. 
-          Therefore, the time complexity is O(n), which means the algorithm's 
-          performance scales linearly with the input size.
+          The A* algorithm’s time complexity depends on the branching factor (b) and the depth (d) of the optimal path.
+          In the worst case, when many nodes are expanded, it behaves similarly to Dijkstra’s algorithm with O(E log V) complexity.
+          The efficiency of A* is highly dependent on the heuristic function used, which guides the algorithm towards the goal efficiently.
         </p>
       </div>
     </CardContent>
   </Card>
 );
-
 const SpaceComplexitySection = () => (
   <Card className="h-full algo-card">
     <CardContent className="p-4 sm:p-8 h-full flex flex-col">
       <h1 className="section-title gradient-text">Space Complexity Analysis</h1>
       <div className="text-center mb-6">
-        <div className="text-4xl sm:text-6xl font-bold gradient-text mb-4">O(1)</div>
-        <p className="text-lg sm:text-xl text-primary font-semibold">Constant Space Complexity</p>
+        <div className="text-4xl sm:text-6xl font-bold gradient-text mb-4">O(b^d)</div>
+        <p className="text-lg sm:text-xl text-primary font-semibold">Memory usage grows with explored nodes</p>
       </div>
-      
+
       <div className="prose max-w-none flex-1 overflow-y-auto">
-        <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">Why O(1)?</h3>
+        <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">Why O(b^d)?</h3>
         <ul className="space-y-3">
           <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span className="text-sm sm:text-base">A Star only uses a fixed amount of extra space</span>
+            <span className="text-sm sm:text-base">A* maintains open and closed sets, increasing space usage</span>
           </li>
           <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span className="text-sm sm:text-base">We only need variables for the loop counter and comparison</span>
+            <span className="text-sm sm:text-base">Tracks g-scores, f-scores, and previous nodes</span>
           </li>
           <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span className="text-sm sm:text-base">The space used doesn't grow with the input size</span>
+            <span className="text-sm sm:text-base">Space complexity depends on search depth and branching factor</span>
           </li>
           <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span className="text-sm sm:text-base">No additional data structures are required</span>
+            <span className="text-sm sm:text-base">Efficient heuristics reduce memory consumption</span>
           </li>
         </ul>
-        
+
         <p className="mt-4 text-sm sm:text-base leading-relaxed">
-          This makes A Star very memory-efficient, as it doesn't require 
-          any additional space proportional to the input size.
+          A* requires O(b^d) space because it stores paths and scores during exploration.
+          Optimized heuristics and data structures like priority queues help manage space effectively.
         </p>
       </div>
     </CardContent>

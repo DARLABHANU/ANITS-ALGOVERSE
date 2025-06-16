@@ -269,36 +269,37 @@ const DescriptionSection = () => (
       <h1 className="section-title gradient-text">Prims Description</h1>
       <div className="prose max-w-none h-full overflow-y-auto">
         <p className="text-base sm:text-lg mb-4 leading-relaxed">
-          Prims is a simple searching algorithm that finds the position of a target value within a list. 
-          It sequentially checks each element of the list until a match is found or the whole list has been searched.
+          Prim's Algorithm is a greedy algorithm used to find the Minimum Spanning Tree (MST) of a connected, weighted, undirected graph. 
+          It starts with a single vertex and grows the MST by adding the smallest edge that connects a vertex in the tree to a vertex outside of it.
         </p>
         <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">How it Works:</h3>
         <ul className="space-y-3 mb-6">
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span>Start from the first element of the array</span>
+            <span>Start with an arbitrary vertex and mark it as part of the MST</span>
           </li>
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span>Compare each element with the target value</span>
+            <span>Find the smallest edge that connects the MST to a vertex not in the MST</span>
           </li>
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span>If a match is found, return the index</span>
+            <span>Add the selected edge and vertex to the MST</span>
           </li>
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span>If no match is found after checking all elements, return -1</span>
+            <span>Repeat until all vertices are included in the MST</span>
           </li>
         </ul>
         <p className="leading-relaxed">
-          Prims is also known as sequential search because it searches elements in sequence, 
-          one after another, until the desired element is found or the search is exhausted.
+          Prim's Algorithm ensures that at every step, the MST remains optimal by always choosing the minimum weight edge available 
+          that connects to the growing tree.
         </p>
       </div>
     </CardContent>
   </Card>
 );
+
 
 const PseudocodeSection = () => (
   <Card className="h-full algo-card">
@@ -307,26 +308,30 @@ const PseudocodeSection = () => (
       <Card className="bg-gray-900 text-green-400 flex-1 border border-primary/20">
         <CardContent className="p-4 sm:p-6 font-mono h-full overflow-y-auto">
           <pre className="whitespace-pre-wrap text-sm sm:text-base">
-{`function Prims(array, target):
-    for i from 0 to length(array) - 1:
-        if array[i] equals target:
-            return i
-    return -1
+{`function PrimMST(graph):
+    Initialize key[] to ∞ for all vertices
+    key[0] = 0
+    mstSet[] = false for all vertices
+    parent[0] = -1
 
-// Alternative implementation with while loop
-function PrimsWhile(array, target):
-    i = 0
-    while i < length(array):
-        if array[i] equals target:
-            return i
-        i = i + 1
-    return -1`}
+    for count from 0 to V - 1:
+        u = vertex with minimum key[] not in mstSet
+        mstSet[u] = true
+
+        for each v adjacent to u:
+            if graph[u][v] is non-zero and mstSet[v] is false and graph[u][v] < key[v]:
+                parent[v] = u
+                key[v] = graph[u][v]
+
+    return parent[]  // which contains the MST
+`}
           </pre>
         </CardContent>
       </Card>
     </CardContent>
   </Card>
 );
+
 
 const FlowchartSection = () => (
   <Card className="h-full algo-card">
@@ -363,19 +368,19 @@ const AdvantagesSection = () => (
           <ul className="space-y-3">
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Simple to understand and implement</span>
+              <span className="text-sm sm:text-base">Provides a Minimum Spanning Tree with minimum total weight</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Works on both sorted and unsorted arrays</span>
+              <span className="text-sm sm:text-base">Greedy approach ensures local and global optimality</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">No additional memory required (in-place)</span>
+              <span className="text-sm sm:text-base">Efficient with priority queue and adjacency list</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
               <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Works well for small datasets</span>
+              <span className="text-sm sm:text-base">Works well on dense graphs</span>
             </li>
           </ul>
         </div>
@@ -389,15 +394,15 @@ const AdvantagesSection = () => (
           <ul className="space-y-3">
             <li className="flex items-start gap-3 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
               <X className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Inefficient for large datasets</span>
+              <span className="text-sm sm:text-base">Not suitable for disconnected graphs</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
               <X className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Time complexity is O(n) in worst case</span>
+              <span className="text-sm sm:text-base">Can be slower than Kruskal’s algorithm for sparse graphs</span>
             </li>
             <li className="flex items-start gap-3 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
               <X className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
-              <span className="text-sm sm:text-base">Not suitable for real-time applications with large data</span>
+              <span className="text-sm sm:text-base">Implementation can be complex with large graphs</span>
             </li>
           </ul>
         </div>
@@ -416,32 +421,34 @@ const ExamplesSection = () => (
             <div className="feature-icon p-2">
               <Target className="w-4 h-4" />
             </div>
-            Example 1: Finding a number
+            Example 1: MST for a connected weighted graph
           </h3>
-          <p className="mb-3 text-sm sm:text-base font-medium">Array: [4, 2, 7, 1, 9, 3], Target: 7</p>
+          <p className="mb-3 text-sm sm:text-base font-medium">
+            Graph: 5 vertices, Weighted Adjacency Matrix:
+          </p>
           <div className="bg-muted/50 p-4 rounded-lg font-mono text-xs sm:text-sm border border-primary/10">
-            <div className="text-blue-600 dark:text-blue-400">Step 1: Check array[0] = 4, not equal to 7</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 2: Check array[1] = 2, not equal to 7</div>
-            <div className="text-green-600 dark:text-green-400 font-semibold">Step 3: Check array[2] = 7, equal to 7! Return index 2</div>
+            <div className="text-blue-600 dark:text-blue-400">Start from vertex 0. Add to MST.</div>
+            <div className="text-blue-600 dark:text-blue-400">Choose minimum weight edge (0–1). Add vertex 1.</div>
+            <div className="text-blue-600 dark:text-blue-400">Next minimum edge from visited vertices is (1–3). Add vertex 3.</div>
+            <div className="text-blue-600 dark:text-blue-400">Next minimum is (0–2). Add vertex 2.</div>
+            <div className="text-green-600 dark:text-green-400 font-semibold">Final edge (2–4) added. MST complete with total minimum weight.</div>
           </div>
         </div>
-        
+
         <div className="glass-card p-4 sm:p-6 rounded-xl border border-primary/20">
           <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary flex items-center gap-2">
             <div className="feature-icon p-2">
               <Target className="w-4 h-4" />
             </div>
-            Example 2: Element not found
+            Example 2: Disconnected Graph
           </h3>
-          <p className="mb-3 text-sm sm:text-base font-medium">Array: [4, 2, 7, 1, 9, 3], Target: 5</p>
+          <p className="mb-3 text-sm sm:text-base font-medium">
+            Graph: Two disconnected components
+          </p>
           <div className="bg-muted/50 p-4 rounded-lg font-mono text-xs sm:text-sm border border-primary/10">
-            <div className="text-blue-600 dark:text-blue-400">Step 1: Check array[0] = 4, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 2: Check array[1] = 2, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 3: Check array[2] = 7, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 4: Check array[3] = 1, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 5: Check array[4] = 9, not equal to 5</div>
-            <div className="text-blue-600 dark:text-blue-400">Step 6: Check array[5] = 3, not equal to 5</div>
-            <div className="text-red-600 dark:text-red-400 font-semibold">End of array reached. Return -1 (not found)</div>
+            <div className="text-blue-600 dark:text-blue-400">Start from vertex 0. Process one component.</div>
+            <div className="text-blue-600 dark:text-blue-400">MST is formed for component containing vertex 0.</div>
+            <div className="text-red-600 dark:text-red-400 font-semibold">Second component not reachable. Prim's cannot form complete MST for disconnected graph.</div>
           </div>
         </div>
       </div>
@@ -456,80 +463,76 @@ const TimeComplexitySection = () => (
       <div className="grid md:grid-cols-3 gap-4 sm:gap-6 mb-6">
         <Card className="glass-card border border-green-200 dark:border-green-800">
           <CardContent className="p-4 sm:p-6 text-center">
-            <h3 className="text-base sm:text-lg font-semibold mb-2 text-green-600">Best Case</h3>
-            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(1)</div>
-            <p className="text-xs sm:text-sm text-muted-foreground">Element found at first position</p>
+            <h3 className="text-base sm:text-lg font-semibold mb-2 text-green-600">Using Min-Heap + Adjacency List</h3>
+            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(E log V)</div>
+            <p className="text-xs sm:text-sm text-muted-foreground">Efficient implementation with priority queue</p>
           </CardContent>
         </Card>
-        
+
         <Card className="glass-card border border-yellow-200 dark:border-yellow-800">
           <CardContent className="p-4 sm:p-6 text-center">
-            <h3 className="text-base sm:text-lg font-semibold mb-2 text-yellow-600">Average Case</h3>
-            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(n)</div>
-            <p className="text-xs sm:text-sm text-muted-foreground">Element found at middle position</p>
+            <h3 className="text-base sm:text-lg font-semibold mb-2 text-yellow-600">Using Adjacency Matrix</h3>
+            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(V²)</div>
+            <p className="text-xs sm:text-sm text-muted-foreground">Basic implementation without priority queue</p>
           </CardContent>
         </Card>
-        
+
         <Card className="glass-card border border-red-200 dark:border-red-800">
           <CardContent className="p-4 sm:p-6 text-center">
-            <h3 className="text-base sm:text-lg font-semibold mb-2 text-red-600">Worst Case</h3>
-            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(n)</div>
-            <p className="text-xs sm:text-sm text-muted-foreground">Element at last position or not found</p>
+            <h3 className="text-base sm:text-lg font-semibold mb-2 text-red-600">Dense Graphs</h3>
+            <div className="text-2xl sm:text-3xl font-bold mb-2 gradient-text">O(V²)</div>
+            <p className="text-xs sm:text-sm text-muted-foreground">Similar time for dense graphs (many edges)</p>
           </CardContent>
         </Card>
       </div>
-      
+
       <div className="flex-1 overflow-y-auto">
         <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">Explanation</h3>
         <p className="text-sm sm:text-base leading-relaxed">
-          In Prims, we may need to check every element in the worst case. 
-          If the array has n elements, we might need to perform n comparisons. 
-          Therefore, the time complexity is O(n), which means the algorithm's 
-          performance scales linearly with the input size.
+          The time complexity of Prim’s Algorithm depends on the data structures used:
+          <br /><br />
+          <strong>1. Adjacency Matrix:</strong> O(V²), where V is the number of vertices. Suitable for dense graphs.<br />
+          <strong>2. Adjacency List + Min-Heap:</strong> O(E log V), where E is the number of edges. Efficient for sparse graphs.<br /><br />
+          The algorithm always ensures a Minimum Spanning Tree by greedily selecting the lowest-weight edge that connects a new vertex.
+        </p>
+      </div>
+    </CardContent>
+  </Card>
+);
+const SpaceComplexitySection = () => (
+  <Card className="h-full algo-card">
+    <CardContent className="p-4 sm:p-8 h-full flex flex-col">
+      <h1 className="section-title gradient-text">Space Complexity Analysis</h1>
+      <div className="text-center mb-6">
+        <div className="text-4xl sm:text-6xl font-bold gradient-text mb-4">O(V + E)</div>
+        <p className="text-lg sm:text-xl text-primary font-semibold">Depends on graph representation</p>
+      </div>
+
+      <div className="prose max-w-none flex-1 overflow-y-auto">
+        <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">Why O(V + E)?</h3>
+        <ul className="space-y-3">
+          <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
+            <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
+            <span className="text-sm sm:text-base">V for arrays storing key values, parent nodes, visited flags</span>
+          </li>
+          <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
+            <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
+            <span className="text-sm sm:text-base">E for adjacency list or edge storage</span>
+          </li>
+          <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
+            <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
+            <span className="text-sm sm:text-base">Priority Queue (Min Heap) also consumes up to O(V) space</span>
+          </li>
+        </ul>
+
+        <p className="mt-4 text-sm sm:text-base leading-relaxed">
+          Prim’s Algorithm is efficient in terms of space, especially when using adjacency lists. It scales based on the size of the graph's vertex and edge sets.
         </p>
       </div>
     </CardContent>
   </Card>
 );
 
-const SpaceComplexitySection = () => (
-  <Card className="h-full algo-card">
-    <CardContent className="p-4 sm:p-8 h-full flex flex-col">
-      <h1 className="section-title gradient-text">Space Complexity Analysis</h1>
-      <div className="text-center mb-6">
-        <div className="text-4xl sm:text-6xl font-bold gradient-text mb-4">O(1)</div>
-        <p className="text-lg sm:text-xl text-primary font-semibold">Constant Space Complexity</p>
-      </div>
-      
-      <div className="prose max-w-none flex-1 overflow-y-auto">
-        <h3 className="text-lg sm:text-xl font-semibold mb-3 text-primary">Why O(1)?</h3>
-        <ul className="space-y-3">
-          <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
-            <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span className="text-sm sm:text-base">Prims only uses a fixed amount of extra space</span>
-          </li>
-          <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
-            <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span className="text-sm sm:text-base">We only need variables for the loop counter and comparison</span>
-          </li>
-          <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
-            <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span className="text-sm sm:text-base">The space used doesn't grow with the input size</span>
-          </li>
-          <li className="flex items-start gap-3 p-3 rounded-lg glass-card border border-primary/20">
-            <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-            <span className="text-sm sm:text-base">No additional data structures are required</span>
-          </li>
-        </ul>
-        
-        <p className="mt-4 text-sm sm:text-base leading-relaxed">
-          This makes Prims very memory-efficient, as it doesn't require 
-          any additional space proportional to the input size.
-        </p>
-      </div>
-    </CardContent>
-  </Card>
-);
 
 const SimulationSection = ({ onComplete }: { onComplete: () => void }) => (
   <Card className="h-full algo-card">
