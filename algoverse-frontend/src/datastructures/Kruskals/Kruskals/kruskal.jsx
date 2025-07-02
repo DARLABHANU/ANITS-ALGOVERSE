@@ -1,3 +1,4 @@
+
 import React, {
   useEffect,
   useState,
@@ -25,6 +26,7 @@ const KruskalsVisualizer = forwardRef(({
   const [rejectedEdges, setRejectedEdges] = useState([]);
   const [stepIndex, setStepIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [isInitialized, setIsInitialized] = useState(false);
 
   // Union-Find data structure state
   const [unionFind, setUnionFind] = useState({});
@@ -470,6 +472,7 @@ const KruskalsVisualizer = forwardRef(({
     };
     
     isInitializingRef.current = false;
+    setIsInitialized(true); // Mark as initialized
     console.log('Graph generation complete');
   };
 
@@ -505,11 +508,13 @@ const KruskalsVisualizer = forwardRef(({
     }
     
     isInitializingRef.current = false;
+    setIsInitialized(true); // Mark as initialized
     console.log('User input parsing complete');
   };
 
   const initializeGraph = () => {
     console.log('Initializing graph - userInput:', !!userInput);
+    setIsInitialized(false);
     
     if (userInput) {
       parseUserInput();
@@ -528,14 +533,14 @@ const KruskalsVisualizer = forwardRef(({
 
   // Enhanced Kruskal's algorithm with pause/resume support
   const runKruskals = async (resumeState = null) => {
-    // Safety checks - but removed the hasStartedAnimationRef check
+    // Safety checks
     if (isRunningRef.current && !resumeState) {
       console.log('Animation already running, skipping');
       return;
     }
     
-    if (isInitializingRef.current) {
-      console.log('Graph is still initializing, skipping animation');
+    if (isInitializingRef.current || !isInitialized) {
+      console.log('Graph is not ready, skipping animation');
       return;
     }
     
@@ -733,28 +738,28 @@ const KruskalsVisualizer = forwardRef(({
     isRunningRef.current = false;
   };
 
-  // Fixed useEffect for play/pause with better control
-  useEffect(() => {
-    console.log('Play/pause effect triggered - isPlaying:', isPlaying, 'nodes:', nodes.length, 'isInitializing:', isInitializingRef.current, 'isRunning:', isRunningRef.current, 'isPaused:', isPaused);
-    
-    if (isPlaying && nodes.length > 0 && !isInitializingRef.current) {
-      if (isPaused && animationStateRef.current) {
-        // Resume from paused state
-        console.log('Resuming animation');
-        pauseRef.current = false;
-        setIsPaused(false);
-        continueAnimation();
-      } else if (!isRunningRef.current && !isPaused) {
-        // Start fresh animation
-        console.log('Starting fresh animation');
-        runKruskals();
-      }
-    } else if (!isPlaying && isRunningRef.current) {
-      // Pause the animation
-      console.log('Pausing animation');
-      pause();
+// Fixed useEffect for play/pause with better control
+useEffect(() => {
+  console.log('Play/pause effect triggered - isPlaying:', isPlaying, 'isInitialized:', isInitialized, 'isRunning:', isRunningRef.current, 'isPaused:', isPaused, 'isInitializing:', isInitializingRef.current);
+  
+  if (isPlaying && isInitialized && !isInitializingRef.current) {
+    if (isPaused && animationStateRef.current) {
+      // Resume from paused state
+      console.log('Resuming animation');
+      pauseRef.current = false;
+      setIsPaused(false);
+      continueAnimation();
+    } else if (!isRunningRef.current) {
+      // Start fresh animation - removed the !isPaused condition here
+      console.log('Starting fresh animation');
+      runKruskals();
     }
-  }, [isPlaying, nodes, isPaused]);
+  } else if (!isPlaying && isRunningRef.current) {
+    // Pause the animation
+    console.log('Pausing animation');
+    pause();
+  }
+}, [isPlaying, isInitialized, isPaused, isInitializingRef.current]); // Added isInitializingRef.current to dependencies
 
   // Fixed useEffect for graph initialization
   useEffect(() => {
@@ -809,7 +814,6 @@ const KruskalsVisualizer = forwardRef(({
       pauseRef.current = true;
     };
   }, []);
-
 
 return (
   <div className={`relative w-full h-[700px] border-2 border-gray-300 rounded-lg overflow-hidden bg-gray-50 ${className}`}>
