@@ -324,20 +324,19 @@ const PseudocodeSection = () => (
 );
 
 
+
 const FlowchartSection = () => (
-  <Card className="h-full algo-card">
-    <CardContent className="p-4 sm:p-8 h-full flex flex-col">
+  <Card className="algo-card">
+    <CardContent className="p-4 sm:p-8 flex flex-col">
       <h1 className="section-title gradient-text">Insertion Sort Flowchart</h1>
-      <div className="flex justify-center items-center flex-1">
-        <div className="glass-card p-8 rounded-2xl w-full h-full flex items-center justify-center min-h-[400px] border border-primary/20">
-          <div className="text-center">
-            <div className="feature-icon mx-auto mb-4">
-              <GitBranch className="w-8 h-8" />
-            </div>
-            <p className="text-center text-muted-foreground text-base sm:text-lg">
-              Flowchart visualization would be implemented here using a drawing library like D3.js or a flowchart component.
-            </p>
-          </div>
+      <div className="flex justify-center items-center mt-4">
+        <div className="glass-card p-8 rounded-2xl w-full border border-primary/20">
+          <img
+            src="https://ik.imagekit.io/1aqvo9gfn/Insertion%20sort.jpg?updatedAt=1751567157493"
+            alt="Insertion Sort Flowchart"
+            className="w-full h-auto object-contain"
+            style={{ maxHeight: "500px" }} // optional cap to prevent it from overflowing huge
+          />
         </div>
       </div>
     </CardContent>
