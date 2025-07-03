@@ -34,18 +34,18 @@ const About = () => {
     {
       name: "Dr Selvani Deepthi Kavila",
       designation: "Head of Department, Professor",
-      department: "Computer Science & Engineering",
+      department: "Computer Science & Engineering(AI & ML)",
       image:HODImage,
       experience: "15+ years",
       specialization: "Algorithms & Data Structures"
     },
     {
-      name: "Prof.M.V.Bhuvaneswari",
+      name: "M.V.Bhuvaneswari",
       designation: "Assistant Professor",
-      department: "Computer Science & Engineering",
+      department: "Computer Science & Engineering(AI & ML)",
       image:bhuvanaImage,
-      experience: "8+ years",
-      specialization: "Software Engineering & Web Development"
+      experience: "7+ years",
+      specialization: "Algorithms & Data Structures"
     }
   ];
 
@@ -91,6 +91,16 @@ const About = () => {
       icon: <Globe className="w-5 h-5" />
     },
     {
+      name: "Bhargav",
+      role: "UI & UX Designer",
+      image: WhatsAppImage,
+      github: "",
+      linkedin: "https://www.linkedin.com/in/bhargav-vasupilli-980b59320?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+      email: "vasupillibhargav.le23.csm@anits.edu.in",
+      skills: ["Html", "Css", "React"],
+      icon: <BookOpen className="w-5 h-5" />
+    },
+    {
       name: "Jahnavi",
       role: "AI & Prompt Engineer",
       image: januImage,
@@ -110,16 +120,7 @@ const About = () => {
       skills: ["Python", "Node.js", "Figma"],
       icon: <Star className="w-5 h-5" />
     },
-    {
-      name: "Bhargav",
-      role: "UI & UX Designer",
-      image: WhatsAppImage,
-      github: "",
-      linkedin: "https://www.linkedin.com/in/bhargav-vasupilli-980b59320?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
-      email: "vasupillibhargav.le23.csm@anits.edu.in",
-      skills: ["Html", "Css", "React"],
-      icon: <BookOpen className="w-5 h-5" />
-    },
+
     {
       name: "Meghana",
       role: "Animator",
