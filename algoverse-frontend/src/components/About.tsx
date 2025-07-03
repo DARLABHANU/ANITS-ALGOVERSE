@@ -34,18 +34,18 @@ const About = () => {
     {
       name: "Dr Selvani Deepthi Kavila",
       designation: "Head of Department, Professor",
-      department: "Computer Science & Engineering",
+      department: "Computer Science & Engineering(AI & ML)",
       image:HODImage,
       experience: "15+ years",
       specialization: "Algorithms & Data Structures"
     },
     {
-      name: "Prof.M.V.Bhuvaneswari",
+      name: "M.V.Bhuvaneswari",
       designation: "Assistant Professor",
-      department: "Computer Science & Engineering",
+      department: "Computer Science & Engineering(AI & ML)",
       image:bhuvanaImage,
-      experience: "8+ years",
-      specialization: "Software Engineering & Web Development"
+      experience: "7+ years",
+      specialization: "Algorithms & Data Structures"
     }
   ];
 
@@ -91,6 +91,16 @@ const About = () => {
       icon: <Globe className="w-5 h-5" />
     },
     {
+      name: "Bhargav",
+      role: "UI & UX Designer",
+      image: WhatsAppImage,
+      github: "",
+      linkedin: "https://www.linkedin.com/in/bhargav-vasupilli-980b59320?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+      email: "vasupillibhargav.le23.csm@anits.edu.in",
+      skills: ["Html", "Css", "React"],
+      icon: <BookOpen className="w-5 h-5" />
+    },
+    {
       name: "Jahnavi",
       role: "AI & Prompt Engineer",
       image: januImage,
@@ -101,15 +111,16 @@ const About = () => {
       icon: <Smartphone className="w-5 h-5" />
     },
     {
-      name: "Bhargav",
-      role: "UI & UX Designer",
-      image: WhatsAppImage,
-      github: "",
-      linkedin: "https://www.linkedin.com/in/bhargav-vasupilli-980b59320?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
-      email: "vasupillibhargav.le23.csm@anits.edu.in",
-      skills: ["Html", "Css", "React"],
-      icon: <BookOpen className="w-5 h-5" />
+      name: "Venkat Teja",
+      role: "AI & Prompt Engineer",
+      image: "https://ik.imagekit.io/1aqvo9gfn/23320fa1e01de1a51c225a2bb9391982.jpg?tr=w-400,h-400,fo-face",
+      github: "https://github.com/",
+      linkedin: "https://www.linkedin.com/in/maddi-venkatateja-143425348",
+      email: "maddivenkatateja.23.csm@anits.edu.in",
+      skills: ["Python", "Node.js", "Figma"],
+      icon: <Star className="w-5 h-5" />
     },
+
     {
       name: "Meghana",
       role: "Animator",
@@ -121,6 +132,46 @@ const About = () => {
       icon: <Award className="w-5 h-5" />
     },
     {
+      name: "Dharani Anu Surya",
+      role: "Animator",
+      image: "https://ik.imagekit.io/1aqvo9gfn/maxresdefault%20(1).jpg?tr=w-400,h-400,fo-face",
+      github: "https://github.com/",
+      linkedin: "https://www.linkedin.com/in/dharani-anu-surya-405b73334/",
+      email: "yandadadharanianusurya.23.csm@anits.edu.in",
+      skills: ["HTML", "JS", "Canva"],
+      icon: <Star className="w-5 h-5" />
+    },
+    {
+      name: "Sai Nithin",
+      role: "Animator",
+      image: "https://ik.imagekit.io/1aqvo9gfn/d29c7316446e39b83adc03e34be01122.jpg?tr=w-400,h-400,fo-face",
+      github: "https://github.com/",
+      linkedin: "https://www.linkedin.com/in/ganisetty-sai-nithin-32b33a359/",
+      email: "",
+      skills: ["HTML", "JS", "Canva"],
+      icon: <Star className="w-5 h-5" />
+    },
+    {
+      name: "Charitha",
+      role: "Animator",
+      image: "https://ik.imagekit.io/1aqvo9gfn/OIP.webp?tr=w-400,h-400,fo-face",
+      github: "https://github.com/",
+      linkedin: "https://www.linkedin.com/in/varanasi-charitha-788a58357/",
+      email: "",
+      skills: ["HTML", "JS", "Canva"],
+      icon: <Star className="w-5 h-5" />
+    },
+    {
+      name: "Asrita Gupta",
+      role: "Animator",
+      image: "https://ik.imagekit.io/1aqvo9gfn/003b1db8ddd284ffbe08762c0f1c53ec.png?tr=w-400,h-400,fo-face",
+      github: "https://github.com/",
+      linkedin: "https://www.linkedin.com/in/asrita-gupta-andhavarapu/",
+      email: "",
+      skills: ["HTML", "JS", "Canva"],
+      icon: <Star className="w-5 h-5" />
+    },
+    {
       name: "Varun",
       role: "Animator",
       image: varunImage,
@@ -128,16 +179,6 @@ const About = () => {
       linkedin: "https://in.linkedin.com/in/varun-botcha-b35937275",
       email: "varunbotcha77@gmail.com",
       skills: ["React", "TYpeScript", "Tailwind"],
-      icon: <Star className="w-5 h-5" />
-    },
-    {
-      name: "Meera Reddy",
-      role: "Quality Assurance Engineer",
-      image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop&crop=face",
-      github: "https://github.com/meerareddy",
-      linkedin: "https://linkedin.com/in/meerareddy",
-      email: "meera.reddy@student.anits.edu.in",
-      skills: ["Selenium", "Jest", "Cypress"],
       icon: <Star className="w-5 h-5" />
     }
   ];
