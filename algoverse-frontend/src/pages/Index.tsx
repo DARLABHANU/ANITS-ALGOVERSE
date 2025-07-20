@@ -18,15 +18,9 @@ const Index: React.FC = () => {
     }
   }, [location.hash]);
 
-  const handleChatbotClick = () => {
-    // You'll implement the chatbot's opening logic here.
-    // This could be:
-    // 1. Toggling a state to show/hide a chatbot component.
-    // 2. Opening a new window/tab for an external chatbot.
-    // 3. Triggering a function from a chatbot SDK.
-    console.log("Chatbot icon clicked!");
-    alert("Chatbot coming soon!"); // Placeholder for now
-  };
+const handleChatbotClick = () => {
+  window.location.href = "https://algochat-five.vercel.app/";
+};
 
   return (
     <div className="min-h-screen flex flex-col">
