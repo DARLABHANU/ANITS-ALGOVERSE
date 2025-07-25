@@ -36,16 +36,16 @@ const About = () => {
       designation: "Head of Department, Professor",
       department: "Computer Science & Engineering(AI & ML)",
       image:HODImage,
-      experience: "15+ years",
-      specialization: "Algorithms & Data Structures"
+      experience: "19+ years",
+      
     },
     {
       name: "M.V.Bhuvaneswari",
       designation: "Assistant Professor",
       department: "Computer Science & Engineering(AI & ML)",
       image:bhuvanaImage,
-      experience: "7+ years",
-      specialization: "Algorithms & Data Structures"
+      experience: "6+ years",
+      
     }
   ];
 
@@ -113,7 +113,7 @@ const About = () => {
     {
       name: "Venkat Teja",
       role: "AI & Prompt Engineer",
-      image: "https://ik.imagekit.io/1aqvo9gfn/23320fa1e01de1a51c225a2bb9391982.jpg?tr=w-400,h-400,fo-face",
+      image: "https://ik.imagekit.io/1aqvo9gfn/WhatsApp%20Image%202025-07-21%20at%2014.32.39_be90d350.jpg?tr=w-400,h-400,fo-face",
       github: "https://github.com/",
       linkedin: "https://www.linkedin.com/in/maddi-venkatateja-143425348",
       email: "maddivenkatateja.23.csm@anits.edu.in",
@@ -131,46 +131,7 @@ const About = () => {
       skills: ["React", "TYpeScript", "Tailwind"],
       icon: <Award className="w-5 h-5" />
     },
-    {
-      name: "Dharani Anu Surya",
-      role: "Animator",
-      image: "https://ik.imagekit.io/1aqvo9gfn/maxresdefault%20(1).jpg?tr=w-400,h-400,fo-face",
-      github: "https://github.com/",
-      linkedin: "https://www.linkedin.com/in/dharani-anu-surya-405b73334/",
-      email: "yandadadharanianusurya.23.csm@anits.edu.in",
-      skills: ["HTML", "JS", "Canva"],
-      icon: <Star className="w-5 h-5" />
-    },
-    {
-      name: "Sai Nithin",
-      role: "Animator",
-      image: "https://ik.imagekit.io/1aqvo9gfn/d29c7316446e39b83adc03e34be01122.jpg?tr=w-400,h-400,fo-face",
-      github: "https://github.com/",
-      linkedin: "https://www.linkedin.com/in/ganisetty-sai-nithin-32b33a359/",
-      email: "",
-      skills: ["HTML", "JS", "Canva"],
-      icon: <Star className="w-5 h-5" />
-    },
-    {
-      name: "Charitha",
-      role: "Animator",
-      image: "https://ik.imagekit.io/1aqvo9gfn/OIP.webp?tr=w-400,h-400,fo-face",
-      github: "https://github.com/",
-      linkedin: "https://www.linkedin.com/in/varanasi-charitha-788a58357/",
-      email: "",
-      skills: ["HTML", "JS", "Canva"],
-      icon: <Star className="w-5 h-5" />
-    },
-    {
-      name: "Asrita Gupta",
-      role: "Animator",
-      image: "https://ik.imagekit.io/1aqvo9gfn/003b1db8ddd284ffbe08762c0f1c53ec.png?tr=w-400,h-400,fo-face",
-      github: "https://github.com/",
-      linkedin: "https://www.linkedin.com/in/asrita-gupta-andhavarapu/",
-      email: "",
-      skills: ["HTML", "JS", "Canva"],
-      icon: <Star className="w-5 h-5" />
-    },
+      
     {
       name: "Varun",
       role: "Animator",
@@ -219,7 +180,12 @@ const About = () => {
               <CardContent className="p-8">
                 <div className="flex items-center justify-center gap-4 mb-6">
                   <div className="feature-icon">
-                    <GraduationCap className="w-8 h-8" />
+                        <img
+                            src="https://ik.imagekit.io/1aqvo9gfn/logo_header1.png?updatedAt=1753421220020"
+                            alt="Graduation cap"
+                            className="w-8 h-8"
+                          />
+
                   </div>
                   <div>
                     <h2 className="text-3xl font-bold gradient-text">ANITS</h2>
@@ -228,7 +194,7 @@ const About = () => {
                 </div>
                 <p className="text-muted-foreground text-lg leading-relaxed">
                   Established with a vision to provide quality technical education, ANITS has been nurturing 
-                  innovative minds and fostering technological advancement. Our Computer Science department 
+                  innovative minds and fostering technological advancement. Our CSE(AI & ML) department 
                   encourages students to build practical projects that solve real-world problems.
                 </p>
               </CardContent>
@@ -264,10 +230,7 @@ const About = () => {
                         <Award className="w-4 h-4 text-primary" />
                         <span>{member.experience} Experience</span>
                       </div>
-                      <div className="flex items-center justify-center gap-2">
-                        <BookOpen className="w-4 h-4 text-secondary" />
-                        <span>{member.specialization}</span>
-                      </div>
+
                     </div>
                   </CardContent>
                 </Card>
