@@ -171,7 +171,7 @@ const About = () => {
               About <span className="gradient-text">AlgoVerse</span>
             </h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-              A project developed by passionate students at Anil Neerukonds Institute of Technology and Sciences, 
+              A project developed by passionate students at Anil Neerukonda Institute of Technology and Sciences, 
               dedicated to making algorithms and data structures accessible to everyone.
             </p>
             
@@ -189,7 +189,7 @@ const About = () => {
                   </div>
                   <div>
                     <h2 className="text-3xl font-bold gradient-text">ANITS</h2>
-                    <p className="text-lg text-muted-foreground">Anil Neerukonds Institute of Technology and Sciences</p>
+                    <p className="text-lg text-muted-foreground">Anil Neerukonda Institute of Technology and Sciences</p>
                   </div>
                 </div>
                 <p className="text-muted-foreground text-lg leading-relaxed">
